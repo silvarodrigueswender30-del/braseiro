@@ -20,3 +20,5 @@ screenshot-*.png
 # Editor
 .vscode/
 .idea/
+
+.vercel

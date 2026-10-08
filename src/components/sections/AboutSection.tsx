@@ -1,83 +1,143 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChamaIcon } from '@/components/icons/ChamaIcon';
-import { siteConfig } from '@/config';
-import { ArrowUpRight } from 'lucide-react';
+import { heroVideos, siteConfig } from '@/config';
+import { Volume2, VolumeX, Play } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const mediaRef = useRef<HTMLDivElement>(null);
-  const titleLinesRef = useRef<HTMLDivElement[]>([]);
-  const chamaRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const videoWrapperRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const titleLinesRef = useRef<HTMLSpanElement[]>([]);
+  const chamaRef = useRef<HTMLSpanElement>(null);
+  const copyRef = useRef<HTMLParagraphElement>(null);
 
+  const [isMuted, setIsMuted] = useState(true);
+  const [hasInteractedSound, setHasInteractedSound] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  // Detecta preferência de movimento reduzido
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
+  // Controle de reprodução e visibilidade do vídeo
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Pausa e silencia ao trocar de aba
+    const handleVisibility = () => {
+      if (document.hidden && video) {
+        video.pause();
+        video.muted = true;
+        setIsMuted(true);
+        setIsPlaying(false);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    // Autoplay apenas com pelo menos 40% visível na viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!prefersReducedMotion) {
+              video.play().then(() => setIsPlaying(true)).catch(() => {});
+            }
+          } else {
+            video.pause();
+            video.muted = true;
+            setIsMuted(true);
+            setIsPlaying(false);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(video);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, [prefersReducedMotion]);
+
+  // Alternar som do vídeo
+  const toggleSound = () => {
+    if (!videoRef.current) return;
+    const nextMuted = !isMuted;
+    videoRef.current.muted = nextMuted;
+    setIsMuted(nextMuted);
+    setHasInteractedSound(true);
+
+    if (!nextMuted && videoRef.current.paused) {
+      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+    }
+  };
+
+  // Botão manual de play para prefers-reduced-motion
+  const handleManualPlay = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  // Animações GSAP + ScrollTrigger
+  useEffect(() => {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // 1. Título: revelação linha a linha com máscara (overflow: hidden)
+      // 1. Linhas do H2 reveladas com máscara
       if (titleLinesRef.current.length > 0) {
         gsap.from(titleLinesRef.current, {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            once: true,
-          },
-          y: '110%',
-          opacity: 0,
-          duration: 1.1,
-          stagger: 0.15,
-          ease: 'power3.out',
-        });
-      }
-
-      // 2. Revelação suave do conteúdo textual
-      if (contentRef.current) {
-        gsap.from(contentRef.current, {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top 75%',
             once: true,
           },
+          yPercent: 100,
           opacity: 0,
-          y: 30,
-          duration: 1.0,
-          delay: 0.25,
-          ease: 'power2.out',
+          duration: 0.95,
+          stagger: 0.12,
+          ease: 'power3.out',
         });
       }
 
-      // 3. Parallax sutil na mídia da esquerda
-      if (mediaRef.current) {
-        gsap.to(mediaRef.current, {
+      // 2. Animação da Chama presa ao texto "mesa"
+      if (chamaRef.current) {
+        // Entrada com leve pop após a revelação da palavra "mesa"
+        gsap.from(chamaRef.current, {
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1.4,
+            start: 'top 75%',
+            once: true,
           },
-          y: -36,
-          ease: 'none',
+          scale: 0.6,
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.35,
+          ease: 'back.out(1.7)',
         });
-      }
 
-      // 4. Animação da Chama (efeito mascote vivo):
-      // - Corpo respira (scale 1 a 1.03)
-      // - Faíscas sobem e piscam em loop com durações desencontradas
-      if (chamaRef.current) {
+        // Corpo respirando em loop
         const bodyEl = chamaRef.current.querySelector('.icon-body');
-        const sparks = chamaRef.current.querySelectorAll('.icon-spark');
-
         if (bodyEl) {
           gsap.to(bodyEl, {
-            scale: 1.035,
+            scale: 1.03,
             transformOrigin: '50% 100%',
             duration: 2.4,
             repeat: -1,
@@ -86,23 +146,45 @@ export const AboutSection: React.FC = () => {
           });
         }
 
+        // Faíscas subindo com durações e delays desencontrados (1.2s, 1.7s, 2.3s)
+        const sparks = chamaRef.current.querySelectorAll('.icon-spark');
+        const sparkDurations = [1.2, 1.7, 2.3];
+        const sparkDelays = [0, 0.45, 0.9];
         sparks.forEach((spark, idx) => {
           gsap.to(spark, {
-            y: -35 - idx * 12,
+            y: -30 - idx * 8,
             opacity: 0,
-            duration: 1.8 + idx * 0.6,
+            duration: sparkDurations[idx % sparkDurations.length],
+            delay: sparkDelays[idx % sparkDelays.length],
             repeat: -1,
             ease: 'power1.out',
-            delay: idx * 0.5,
           });
         });
+      }
+
+      // 3. Efeito sutil de scale no vídeo conforme entra na viewport
+      if (videoRef.current) {
+        gsap.fromTo(
+          videoRef.current,
+          { scale: 1.06 },
+          {
+            scale: 1,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1,
+            },
+            ease: 'none',
+          }
+        );
       }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
-  const addToTitleRefs = (el: HTMLDivElement | null) => {
+  const addToLinesRef = (el: HTMLSpanElement | null) => {
     if (el && !titleLinesRef.current.includes(el)) {
       titleLinesRef.current.push(el);
     }
@@ -113,149 +195,190 @@ export const AboutSection: React.FC = () => {
       ref={sectionRef}
       id="casa"
       aria-labelledby="quem-somos-heading"
-      className="relative bg-[#F5E6D0] text-[#14100D] grao overflow-hidden pt-32 sm:pt-40 lg:pt-44 pb-24 sm:pb-32 lg:pb-36 border-t border-[#14100D]/15 scroll-mt-24"
+      className="relative flex flex-col lg:flex-row items-stretch bg-[#F5E6D0] text-[#14100D] grao overflow-hidden border-t border-[#14100D]/15 scroll-mt-24"
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* ============================================================== */}
-          {/* COLUNA ESQUERDA: Mídia vertical com bordas orgânicas e parallax */}
-          {/* ============================================================== */}
-          <div className="lg:col-span-5 order-1">
-            <div
-              ref={mediaRef}
-              className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] rounded-[32px] sm:rounded-[40px] overflow-hidden shadow-[0_24px_50px_rgba(20,16,13,0.18)] bg-[#14100D]/10"
+      {/* ============================================================== */}
+      {/* COLUNA ESQUERDA: Vídeo como Parede da Seção (Full-Bleed 9:16)  */}
+      {/* ============================================================== */}
+      <div
+        ref={videoWrapperRef}
+        className="w-full lg:w-[clamp(340px,31vw,460px)] shrink-0 relative aspect-[9/16] lg:aspect-auto max-h-[75svh] lg:max-h-none overflow-hidden bg-[#14100D]"
+        style={{
+          // Garante proporção 9:16 rigorosa no desktop
+          aspectRatio: '9 / 16',
+        }}
+      >
+        <video
+          ref={videoRef}
+          src={heroVideos[1]}
+          poster="/images/hero/poster2.webp"
+          muted={isMuted}
+          loop
+          playsInline
+          preload="metadata"
+          className="w-full h-full object-cover select-none pointer-events-none"
+        />
+
+        {/* Gradiente sutil no rodapé do vídeo para o botão de som destacar */}
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+
+        {/* Botão de Som no Canto Inferior Esquerdo */}
+        <div className="absolute bottom-5 left-5 z-20 flex items-center gap-3 pointer-events-auto">
+          {!hasInteractedSound ? (
+            <button
+              type="button"
+              onClick={toggleSound}
+              aria-label="Ativar som do vídeo"
+              aria-pressed="false"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#F5E6D0] text-[#14100D] font-text font-semibold text-xs tracking-wider uppercase shadow-md hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8832A] transition-all duration-200"
             >
-              <img
-                src="/images/ambiente/casa-fachada.webp"
-                alt="Fachada acolhedora de madeira rústica e braseiro do Braseiro Caiçara em Ubatuba"
-                width={960}
-                height={1200}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover object-center filter saturate-[1.08] contrast-[1.03]"
-              />
+              <Volume2 className="w-4 h-4 text-[#14100D] shrink-0" />
+              <span>Ativar som</span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={toggleSound}
+              aria-label={isMuted ? 'Ativar som do vídeo' : 'Desativar som do vídeo'}
+              aria-pressed={!isMuted}
+              className="w-11 h-11 rounded-full flex items-center justify-center bg-[#F5E6D0] text-[#14100D] shadow-md hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8832A] transition-all duration-200"
+            >
+              {isMuted ? (
+                <VolumeX className="w-5 h-5 text-[#14100D]" />
+              ) : (
+                <Volume2 className="w-5 h-5 text-[#14100D]" />
+              )}
+            </button>
+          )}
 
-              {/* Vinheta fotográfica suave */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#14100D]/75 via-transparent to-transparent pointer-events-none" />
+          {/* Botão play/pause adicional em modo reduced-motion */}
+          {prefersReducedMotion && (
+            <button
+              type="button"
+              onClick={handleManualPlay}
+              aria-label={isPlaying ? 'Pausar vídeo' : 'Reproduzir vídeo'}
+              className="w-11 h-11 rounded-full flex items-center justify-center bg-[#F5E6D0] text-[#14100D] shadow-md hover:bg-white"
+            >
+              <Play className="w-4 h-4 text-[#14100D] fill-current" />
+            </button>
+          )}
+        </div>
+      </div>
 
-              {/* Rótulo artesanal recortado no canto inferior */}
-              <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-[#F5E6D0] pointer-events-none">
-                <span className="font-display font-[800] uppercase text-xs sm:text-sm tracking-wider px-3.5 py-1.5 rounded-full bg-[#14100D]/85 backdrop-blur-md border border-[#F5E6D0]/20">
-                  Ubatuba · Litoral Norte
+      {/* ============================================================== */}
+      {/* COLUNA DIREITA: Texto Editorial & H2 com Chama Presa à Frase   */}
+      {/* ============================================================== */}
+      <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-14 xl:px-20 py-12 sm:py-16 lg:py-20 relative">
+        <div className="w-full max-w-2xl">
+          {/* Eyebrow com fios laterais */}
+          <div className="mb-4 sm:mb-6">
+            <span className="eyebrow text-[#14100D]/75">O CHURRASCO DO MAR</span>
+          </div>
+
+          {/* H2 com 3 Linhas na Lógica da Hero */}
+          <h2
+            id="quem-somos-heading"
+            className="mb-6 sm:mb-8 select-none"
+          >
+            {/* Linha 1 */}
+            <span className="block overflow-hidden">
+              <span
+                ref={addToLinesRef}
+                className="block font-display font-[700] uppercase text-[#14100D] whitespace-nowrap tracking-[0.06em] [word-spacing:0.12em] leading-[1.05] text-[clamp(1.1rem,5.4vw,1.7rem)] sm:text-[clamp(1.5rem,2.9vw,2.8rem)]"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                DO MAR PARA A BRASA,
+              </span>
+            </span>
+
+            {/* Linha 2 */}
+            <span className="block overflow-hidden">
+              <span
+                ref={addToLinesRef}
+                className="block font-display font-[700] uppercase text-[#14100D] whitespace-nowrap tracking-[0.06em] [word-spacing:0.12em] leading-[1.05] text-[clamp(1.1rem,5.4vw,1.7rem)] sm:text-[clamp(1.5rem,2.9vw,2.8rem)]"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                DA BRASA PARA A SUA
+              </span>
+            </span>
+
+            {/* Linha 3: mesa + CHAMA presa ao texto */}
+            <span className="block overflow-hidden">
+              <span
+                ref={addToLinesRef}
+                className="inline-flex items-baseline font-display font-[900] italic text-[#E8832A] leading-[0.8] -mt-[0.08em] text-[clamp(5rem,26vw,8rem)] sm:text-[clamp(6rem,12.5vw,11rem)]"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
+                }}
+              >
+                <span>mesa</span>
+                {/* Ícone da Chama como parte da palavra, com 1em de altura e inclinado -6deg */}
+                <span
+                  ref={chamaRef}
+                  aria-hidden="true"
+                  className="inline-block h-[1em] w-auto -ml-[0.12em] -mb-[0.08em] align-[-0.1em] text-[#E8832A] select-none pointer-events-none origin-bottom -rotate-6 shrink-0"
+                >
+                  <ChamaIcon className="h-full w-auto" />
                 </span>
-                <span className="font-text font-semibold uppercase tracking-[0.2em] text-[10px] sm:text-xs text-[#E8832A]">
-                  Desde 2022
-                </span>
-              </div>
+              </span>
+            </span>
+          </h2>
+
+          {/* Parágrafo de Copy */}
+          <p
+            ref={copyRef}
+            className="font-text font-normal text-[18px] sm:text-[19px] leading-[1.6] max-w-[44ch] text-[#14100D]/85 mb-8"
+            style={{ fontFamily: 'var(--font-text)' }}
+          >
+            O Churrasco do Mar do Braseiro é para quem gosta de sabores marcantes,
+            preparados com aquele cuidado que faz toda diferença.
+          </p>
+
+          {/* Informações Práticas Sem Caixas nem Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-[#14100D]/15 mb-8">
+            <div>
+              <span className="block font-text font-semibold uppercase tracking-[0.2em] text-[12px] text-[#E8832A] mb-1">
+                HORÁRIO
+              </span>
+              <p className="font-text font-medium text-[17px] text-[#14100D] leading-snug">
+                {siteConfig.hoursShort}
+              </p>
+            </div>
+
+            <div>
+              <span className="block font-text font-semibold uppercase tracking-[0.2em] text-[12px] text-[#E8832A] mb-1">
+                ONDE
+              </span>
+              <p className="font-text font-medium text-[17px] text-[#14100D] leading-snug">
+                {siteConfig.addressFull}
+              </p>
+              <a
+                href={siteConfig.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-[14px] text-[#14100D] underline hover:text-[#E8832A] mt-1 transition-colors"
+              >
+                Ver no Google Maps
+              </a>
             </div>
           </div>
 
-          {/* ============================================================== */}
-          {/* COLUNA DIREITA: Tipografia editorial em escala exagerada        */}
-          {/* ============================================================== */}
-          <div className="lg:col-span-7 order-2 relative">
-            {/* Ícone da Chama sobreposto (Efeito Mascote Vivo do Print 1) */}
-            <div
-              ref={chamaRef}
-              className="absolute -top-12 sm:-top-16 right-0 sm:right-2 lg:-top-20 lg:right-0 w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 text-[#E8832A] pointer-events-none select-none z-20 rotate-6 drop-shadow-[0_8px_20px_rgba(232,131,42,0.25)]"
-              aria-hidden="true"
+          {/* Botões no Estilo Editorial */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-5 sm:gap-7">
+            <a
+              href="#reservas"
+              className="inline-flex items-center justify-center px-8 py-3.5 rounded-[6px] bg-[#14100D] text-[#F5E6D0] font-text font-semibold uppercase tracking-[0.08em] text-[14px] hover:bg-[#B8352B] hover:text-white transition-colors duration-200 shadow-sm"
             >
-              <ChamaIcon className="w-full h-full" />
-            </div>
+              RESERVAR MESA
+            </a>
 
-            {/* Eyebrow com fios laterais de 1px */}
-            <div className="mb-6 sm:mb-8">
-              <span className="eyebrow text-[#14100D]/70">QUEM SOMOS</span>
-            </div>
-
-            {/* Título gigante em 3 linhas com máscara de revelação */}
-            <h2
-              id="quem-somos-heading"
-              className="titulo-secao text-[#14100D] mb-8 select-none"
+            <a
+              href="#cardapio"
+              className="inline-flex items-center justify-center py-2 text-[#14100D] font-text font-semibold uppercase tracking-[0.08em] text-[14px] underline decoration-2 decoration-[#E8832A] underline-offset-4 hover:text-[#E8832A] transition-colors duration-200"
             >
-              <span className="block overflow-hidden">
-                <span ref={addToTitleRefs} className="block quem-somos-line">
-                  A MESA É
-                </span>
-              </span>
-              <span className="block overflow-hidden">
-                <span ref={addToTitleRefs} className="block quem-somos-line">
-                  DE TODO
-                </span>
-              </span>
-              <span className="block overflow-hidden">
-                <span ref={addToTitleRefs} className="block quem-somos-line">
-                  <em className="destaque-italico not-italic">mundo.</em>
-                </span>
-              </span>
-            </h2>
-
-            {/* Conteúdo textual e comanda de detalhes */}
-            <div ref={contentRef} className="space-y-6">
-              <p className="corpo-editorial text-[#14100D]/90 font-medium">
-                Nascemos do encontro das águas de Ubatuba com a força ancestral
-                do fogo de chão. Aqui, o mar dita o ritmo e a brasa traz o
-                calor, reunindo pescadores, moradores e viajantes ao redor da
-                mesma fumaça aromática.
-              </p>
-
-              <p className="corpo-editorial text-[#14100D]/80">
-                Sem mistérios ou formalidades vazias: trabalhamos com cortes
-                nobres bem selecionados, pescados frescos que acabaram de
-                desembarcar do barco e a paciência de quem respeita o tempo exato
-                da brasa.
-              </p>
-
-              {/* Régua de detalhes em estilo editorial artesanal */}
-              <div className="pt-6 border-t border-[#14100D]/20 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="space-y-1">
-                  <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#B8352B] block">
-                    Parrilla & Cozinha
-                  </span>
-                  <p className="font-display font-[800] uppercase text-lg text-[#14100D]">
-                    {siteConfig.hoursShort}
-                  </p>
-                  <p className="text-xs text-[#14100D]/70 font-medium">
-                    {siteConfig.hoursDetail.kitchen}
-                  </p>
-                </div>
-
-                <div className="space-y-1">
-                  <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#2F6FA8] block">
-                    Localização
-                  </span>
-                  <p className="font-display font-[800] uppercase text-lg text-[#14100D]">
-                    {siteConfig.addressFull}
-                  </p>
-                  <a
-                    href={siteConfig.googleMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs text-[#14100D] font-semibold hover:text-[#B8352B] underline transition-colors"
-                  >
-                    Ver no Google Maps <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-
-              {/* Botão de ação artesanal */}
-              <div className="pt-4 flex flex-wrap items-center gap-4">
-                <a
-                  href="#reservas"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#14100D] text-[#F5E6D0] font-text font-bold uppercase tracking-wider text-sm hover:bg-[#B8352B] hover:text-white transition-colors duration-200 shadow-md"
-                >
-                  Reservar Mesa
-                  <ArrowUpRight className="w-4 h-4 text-[#E8832A]" />
-                </a>
-
-                <a
-                  href="#cardapio"
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-full border border-[#14100D]/30 text-[#14100D] font-text font-semibold uppercase tracking-wider text-sm hover:bg-[#14100D]/10 transition-colors duration-200"
-                >
-                  Conhecer o Cardápio
-                </a>
-              </div>
-            </div>
+              VER CARDÁPIO
+            </a>
           </div>
         </div>
       </div>
