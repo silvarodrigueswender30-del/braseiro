@@ -1,0 +1,377 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Tipografia parametrizável */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-text: "Instrument Sans", system-ui, sans-serif;
+  --font-ui: var(--font-text);
+
+  /* Escala tipográfica do título do Hero */
+  --hero-title-size-desktop: clamp(2.6rem, 7.5vw, 6.5rem);
+  --hero-title-size-mobile: clamp(2.4rem, 11vw, 3.4rem);
+
+  /* Cores Principais - Parrilla Editorial Artesanal */
+  --carvao: #14100D;
+  --creme: #F5E6D0;
+  --brasa: #E8832A;
+  --vermelho-terra: #B8352B;
+  --azul-mar: #2F6FA8;
+
+  --noite: #05070D;
+  --madeira-esc: #2A150C;
+  --madeira: #B5561C;
+  --luz: #F2B25A;
+  --rua: #1A1411;
+  --terracota: #A83A2A;
+  --turquesa: #2E9C9B;
+  --verde: #2F4A36;
+  --vermelho: #D6232B;
+  --azul: #3A86C8;
+  --ouro-pedra: #B78A4A;
+}
+
+/* Tipografia Hero: Fraunces Display & Instrument Sans */
+.hero-title-fraunces {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  line-height: 1;
+}
+
+.hero-title-fraunces .linha1 {
+  display: block;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #F5E6D0;
+  letter-spacing: 0.04em;
+  font-size: clamp(1.8rem, 4.6vw, 4.2rem);
+  line-height: 1.1;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.6);
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+}
+
+.hero-title-fraunces .brasa {
+  display: block;
+  font-style: italic;
+  font-weight: 900;
+  text-transform: lowercase;
+  color: #E8832A;
+  font-size: clamp(7rem, 18vw, 16rem);
+  line-height: 0.8;
+  margin-top: -0.08em;
+  padding-bottom: 0.08em;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.55);
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+}
+
+@media (max-width: 767px) {
+  .hero-title-fraunces .linha1 {
+    font-size: clamp(1.25rem, 6.4vw, 2rem);
+  }
+  .hero-title-fraunces .brasa {
+    font-size: clamp(5.5rem, 28vw, 9rem);
+  }
+}
+
+.hero-subtitle-instrument {
+  font-family: var(--font-text);
+  font-weight: 500;
+  color: #F5E6D0;
+  font-size: clamp(1.1rem, 1.9vw, 1.5rem);
+  line-height: 1.4;
+  text-wrap: balance;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+}
+
+.hero-btn-instrument {
+  font-family: var(--font-text);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================== */
+/* ESTILO EDITORIAL ARTESANAL: CLASSES UTILITÁRIAS                */
+/* ============================================================== */
+
+/* Título de Seção: Fraunces 900, caixa-alta, line-height .9, clamp(3rem, 9vw, 9rem) */
+.titulo-secao {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.9;
+  font-size: clamp(3rem, 9vw, 9rem);
+  letter-spacing: -0.01em;
+  font-optical-sizing: auto;
+}
+
+/* Destaque Itálico Assinatura: Fraunces 900 itálico, cor brasa, SOFT 100, WONK 1 */
+.destaque-italico {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: italic;
+  color: var(--brasa);
+  font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+  text-transform: lowercase;
+  display: inline-block;
+}
+
+/* Eyebrow: Instrument Sans 600, caixa-alta, tracking .25em, com fios laterais de 1px */
+.eyebrow {
+  font-family: var(--font-text);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.8125rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  content: "";
+  display: inline-block;
+  height: 1px;
+  width: 2.2rem;
+  background-color: currentColor;
+  opacity: 0.45;
+}
+
+/* Título Adesivo: texto creme com contorno carvão grosso via -webkit-text-stroke e paint-order: stroke fill */
+.titulo-adesivo {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--creme);
+  -webkit-text-stroke: 4px var(--carvao);
+  paint-order: stroke fill;
+  font-optical-sizing: auto;
+}
+
+/* Textura de Grão de Papel Sutil (SVG noise, opacidade ~3%) */
+.grao {
+  position: relative;
+}
+
+.grao::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Corpo editorial: Instrument Sans, mínimo 17px */
+.corpo-editorial {
+  font-family: var(--font-text);
+  font-size: clamp(1.0625rem, 1.25vw, 1.25rem); /* min 17px (1.0625rem) */
+  line-height: 1.6;
+}
+
+html {
+  background-color: #05070D;
+  color: #F3E6D0;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-text), 'DM Sans', system-ui, sans-serif;
+  font-size: 17px;
+  color: var(--creme);
+  background-color: #05070D;
+  overflow-x: hidden;
+}
+
+/* Master Global Gradient (.site-bg) que cobre toda a extensão da página */
+.site-bg {
+  background-color: #05070D;
+  background-image:
+    radial-gradient(1100px 700px at 75% 8%, rgba(217, 116, 28, 0.22), transparent 65%),
+    radial-gradient(900px 600px at 15% 32%, rgba(46, 156, 155, 0.12), transparent 65%),
+    radial-gradient(1000px 700px at 85% 58%, rgba(217, 116, 28, 0.18), transparent 65%),
+    radial-gradient(900px 600px at 15% 82%, rgba(46, 156, 155, 0.10), transparent 65%),
+    linear-gradient(180deg, #05070D 0%, #120B08 18%, #2A150C 45%, #1A1411 75%, #05070D 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* Smooth font rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--noite);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(217, 116, 28, 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 116, 28, 0.8);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Scroll margin top for sections matching sticky header height */
+[id] {
+  scroll-margin-top: 85px;
+}
+@media (max-width: 767px) {
+  [id] {
+    scroll-margin-top: 72px;
+  }
+}
+
+/* ============================================================== */
+/* FAIXA ANIMADA (MARQUEE STRIP)                                  */
+/* ============================================================== */
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+  user-select: none;
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marqueeScroll 35s linear infinite;
+}
+
+@media (max-width: 640px) {
+  .marquee__track {
+    animation-duration: 25s;
+  }
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+/* Icon animations inside marquee */
+@keyframes flameFlicker {
+  0% {
+    transform: scaleY(1) scaleX(1) skewX(0deg);
+  }
+  30% {
+    transform: scaleY(1.05) scaleX(0.97) skewX(-1.5deg);
+  }
+  55% {
+    transform: scaleY(0.98) scaleX(1.02) skewX(1deg);
+  }
+  80% {
+    transform: scaleY(1.06) scaleX(0.96) skewX(-1deg);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1) skewX(1.5deg);
+  }
+}
+
+@keyframes steakSizzle {
+  0% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-4%) rotate(0.8deg);
+  }
+  100% {
+    transform: translateY(-2%) rotate(1.5deg);
+  }
+}
+
+@keyframes sparkFloat {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.9;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-35%) scale(0.75);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-45%) scale(0.6);
+    opacity: 0;
+  }
+}
+
+.icon-chama .icon-body {
+  transform-origin: 50% 100%;
+  transform-box: fill-box;
+  animation: flameFlicker 2.2s ease-in-out infinite alternate;
+}
+
+.icon-carne .icon-body {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: steakSizzle 3s ease-in-out infinite alternate;
+}
+
+.icon-spark {
+  transform-box: fill-box;
+  animation: sparkFloat 2.4s ease-out infinite;
+}
+
+.icon-spark--1 {
+  animation-delay: 0s;
+}
+
+.icon-spark--2 {
+  animation-delay: 0.8s;
+}
+
+.icon-spark--3 {
+  animation-delay: 1.6s;
+}
+
+.marquee:hover .icon-body,
+.marquee:hover .icon-spark {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+    transform: none;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .icon-body,
+  .icon-spark {
+    animation: none !important;
+  }
+}

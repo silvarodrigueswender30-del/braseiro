@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Production build
+dist/
+dist-ssr/
+
+# Local testing and scratch artifacts
+scratch/
+*.log
+.DS_Store
+*.local
+
+# Temporary root screenshots
+screenshot-*.png
+
+# Vercel
+.vercel/
+
+# Editor
+.vscode/
+.idea/

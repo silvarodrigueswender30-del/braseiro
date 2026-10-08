@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>Braseiro Caiçara | Parrilla e Frutos do Mar em Ubatuba</title>
+    <meta
+      name="description"
+      content="Restaurante de parrilla e frutos do mar na brasa em Ubatuba, SP. Carnes nobres, pescados frescos do litoral norte e hospitalidade calorosa ao calor da lenha viva."
+    />
+    <link rel="canonical" href="https://braseirocaicara.com.br/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:url" content="https://braseirocaicara.com.br/" />
+    <meta property="og:title" content="Braseiro Caiçara | Parrilla e Frutos do Mar em Ubatuba" />
+    <meta
+      property="og:description"
+      content="Carnes e frutos do mar na brasa, num cantinho de Ubatuba onde a mesa é de todo mundo. Acende o fogo, senta à mesa."
+    />
+    <meta property="og:image" content="https://braseirocaicara.com.br/images/hero/home1.webp" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Braseiro Caiçara | Parrilla e Frutos do Mar em Ubatuba" />
+    <meta
+      name="twitter:description"
+      content="Carnes e frutos do mar na brasa em Ubatuba, SP. Hospitalidade caiçara ao calor do fogo."
+    />
+    <meta name="twitter:image" content="https://braseirocaicara.com.br/images/hero/home1.webp" />
+
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Instrument+Sans:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Performance: Preload hero posters with high fetchpriority -->
+    <link rel="preload" as="image" href="/images/hero/poster1.webp" type="image/webp" fetchpriority="high" />
+
+    <!-- Dados Estruturados JSON-LD (Schema.org / Restaurant) -->
+    <!-- NOTA SEO: Campos de endereço postal e telefone oficial mantidos vazios até confirmação formal do cliente para evitar indexação de dados placeholder falsos -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Braseiro Caiçara",
+        "image": "https://braseirocaicara.com.br/images/hero/home1.webp",
+        "servesCuisine": ["Parrilla", "Frutos do Mar", "Cozinha Caiçara", "Grelhados"],
+        "priceRange": "$$",
+        "url": "https://braseirocaicara.com.br/",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "11:30",
+            "closes": "23:30"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ubatuba",
+          "addressRegion": "SP",
+          "addressCountry": "BR"
+        }
+      }
+    </script>
+  </head>
+  <body class="site-bg antialiased selection:bg-[#D9741C] selection:text-[#05070D]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

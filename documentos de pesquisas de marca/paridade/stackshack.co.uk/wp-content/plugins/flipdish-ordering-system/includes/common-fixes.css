@@ -1,0 +1,5 @@
+#flipdish-menu [type=button],
+#flipdish-menu [type=submit],
+#flipdish-menu button {
+    white-space: normal !important;
+}

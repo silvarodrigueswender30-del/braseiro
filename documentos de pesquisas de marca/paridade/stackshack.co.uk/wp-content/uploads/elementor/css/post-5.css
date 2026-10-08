@@ -1,0 +1,87 @@
+.elementor-kit-5 {
+    --e-global-color-primary: #FFCC19;
+    --e-global-color-secondary: #26282D;
+    --e-global-color-text: #26282D;
+    --e-global-color-accent: #FFFFFF;
+    --e-global-color-714fdfd: #FDF9E9;
+    --e-global-typography-primary-font-family: "Antarctican Headline";
+    --e-global-typography-primary-font-weight: 600;
+    --e-global-typography-secondary-font-family: "Antarctican Headline";
+    --e-global-typography-secondary-font-weight: 400;
+    --e-global-typography-text-font-family: "Antarctican Headline";
+    --e-global-typography-text-font-weight: 400;
+    --e-global-typography-accent-font-family: "Antarctican Headline";
+    --e-global-typography-accent-font-weight: 500;
+    background-color: var( --e-global-color-accent);
+}
+
+.elementor-kit-5 e-page-transition {
+    background-color: var( --e-global-color-primary);
+}
+
+.elementor-section.elementor-section-boxed>.elementor-container {
+    max-width: 1140px;
+}
+
+.e-con {
+    --container-max-width: 1140px;
+}
+
+.elementor-widget:not(:last-child) {
+    margin-block-end: 20px;
+}
+
+.elementor-element {
+    --widgets-spacing: 20px 20px;
+    --widgets-spacing-row: 20px;
+    --widgets-spacing-column: 20px;
+}
+
+{}
+
+h1.entry-title {
+    display: var(--page-title-display);
+}
+
+.site-header {
+    padding-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+
+@media(max-width:1024px) {
+    .elementor-section.elementor-section-boxed>.elementor-container {
+        max-width: 1024px;
+    }
+    .e-con {
+        --container-max-width: 1024px;
+    }
+}
+
+@media(max-width:767px) {
+    .elementor-section.elementor-section-boxed>.elementor-container {
+        max-width: 767px;
+    }
+    .e-con {
+        --container-max-width: 767px;
+    }
+}
+
+/* Start Custom Fonts CSS */
+
+@font-face {
+    font-family: 'Antarctican Headline';
+    font-style: normal;
+    font-weight: bold;
+    font-display: auto;
+    src: url('https://stackshack.co.uk/wp-content/uploads/2023/03/AntarcticanHeadlineSemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Antarctican Headline';
+    font-style: normal;
+    font-weight: 900;
+    font-display: auto;
+    src: url('https://stackshack.co.uk/wp-content/uploads/2023/03/AntarcticanHeadlineBold.ttf') format('truetype');
+}
+
+/* End Custom Fonts CSS */
