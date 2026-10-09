@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { siteConfig, heroVideos } from '@/config';
+import { RotatingWord } from '@/components/RotatingWord';
 
 interface DesktopPanelProps {
   videoSrc: string;
@@ -341,10 +342,10 @@ export const Hero: React.FC = () => {
               <span className="w-8 sm:w-10 h-[1px] bg-[#F5E6D0]/85 inline-block" />
             </div>
 
-            {/* Título Principal: linha 1 discreta e elegante, "brasa" gigante */}
+            {/* Título Principal: linha 1 discreta e elegante, "brasa" animada com pulo */}
             <h1 className="hero-title-fraunces text-center m-0">
               <span className="linha1">TODO DIA É DIA DE</span>
-              <span className="brasa">brasa</span>
+              <RotatingWord />
             </h1>
 
             {/* Subtítulo com text-wrap: balance e max-width 34ch */}
@@ -471,7 +472,7 @@ export const Hero: React.FC = () => {
             <div className="w-full flex justify-center mb-2 animate-[fadeInUp_0.9s_ease-out_forwards]">
               <h1 className="hero-title-fraunces text-center m-0">
                 <span className="linha1">TODO DIA É DIA DE</span>
-                <span className="brasa">brasa</span>
+                <RotatingWord />
               </h1>
             </div>
 
