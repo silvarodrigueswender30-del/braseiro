@@ -13,6 +13,7 @@ scratch/
 
 # Temporary root screenshots
 screenshot-*.png
+screenshots/
 
 # Vercel
 .vercel/

@@ -3,39 +3,26 @@ import { siteConfig } from '@/config';
 
 export const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isPastHero, setIsPastHero] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   const isTransparentMode = siteConfig.headerMode === 'transparent';
 
-  // IntersectionObserver on #hero-sentinel to switch from transparent to solid without scroll listeners
+  // Aplica fundo sólido carvão após scroll > 80px com transição suave de 250ms
   useEffect(() => {
     if (!isTransparentMode) {
-      setIsPastHero(true);
+      setIsScrolled(true);
       return;
     }
 
-    const checkSentinel = () => {
-      const sentinel = document.getElementById('hero-sentinel');
-      if (!sentinel) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          // When sentinel is above viewport, hero has been scrolled past
-          const past = entry.boundingClientRect.top < 0 && !entry.isIntersecting;
-          setIsPastHero(past);
-        },
-        { rootMargin: '-72px 0px 0px 0px', threshold: 0 }
-      );
-
-      observer.observe(sentinel);
-      return observer;
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 80);
     };
 
-    // Retry finding sentinel if it renders slightly asynchronously
-    const observer = checkSentinel();
-    return () => observer?.disconnect();
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [isTransparentMode]);
 
   // Close on ESC and trap focus when drawer is open
@@ -89,32 +76,28 @@ export const Header: React.FC = () => {
     : 'sticky top-0';
 
   const headerBackgroundStyle: React.CSSProperties = isTransparentMode
-    ? isPastHero
+    ? isScrolled
       ? {
-          backgroundColor: 'rgba(5, 7, 13, 0.92)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
+          backgroundColor: 'rgba(20, 16, 13, 0.97)',
           borderBottom: '1px solid rgba(243, 230, 208, 0.08)',
         }
       : {
           background: 'linear-gradient(180deg, rgba(5,7,13,0.70) 0%, rgba(5,7,13,0) 100%)',
-          backdropFilter: 'none',
-          WebkitBackdropFilter: 'none',
           borderBottom: '1px solid transparent',
         }
     : {
-        backgroundColor: '#05070D',
-        borderBottom: '1px solid transparent',
+        backgroundColor: 'rgba(20, 16, 13, 0.97)',
+        borderBottom: '1px solid rgba(243, 230, 208, 0.08)',
       };
 
-  const shadowFilterStyle: React.CSSProperties = isTransparentMode && !isPastHero
+  const shadowFilterStyle: React.CSSProperties = isTransparentMode && !isScrolled
     ? { filter: 'drop-shadow(0 1px 6px rgba(0,0,0,0.6))' }
     : {};
 
   return (
     <>
       <header
-        className={`${headerPositionClass} z-[99] w-full px-5 h-[72px] md:h-[83px] transition-[background,backdrop-filter,border-color] duration-300 ease-out`}
+        className={`${headerPositionClass} z-[99] w-full px-5 h-[72px] md:h-[83px] transition-[background-color,border-color] duration-[250ms] ease-out`}
         style={headerBackgroundStyle}
       >
         <div className="w-full h-full flex items-center justify-between">

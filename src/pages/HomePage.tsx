@@ -1,6 +1,7 @@
 import React from 'react';
 import { Hero } from '@/components/Hero';
 import { MarqueeStrip } from '@/components/MarqueeStrip';
+import { ManifestoSection } from '@/components/sections/ManifestoSection';
 import { AboutSection } from '@/components/sections/AboutSection';
 import { FireSection } from '@/components/sections/FireSection';
 import { EventsSection } from '@/components/sections/EventsSection';
@@ -20,7 +21,10 @@ export const HomePage: React.FC = () => {
       {/* Faixa Animada (Marquee Strip) */}
       <MarqueeStrip />
 
-      {/* 1) A Casa Caiçara */}
+      {/* 1) Quem Somos (Manifesto: Sal, Fogo e Paciência) */}
+      <ManifestoSection />
+
+      {/* 2) O Churrasco do Mar (Vídeo 2 | Texto | Vídeo 3) */}
       <AboutSection />
 
       {/* 2) A Mão na Brasa */}

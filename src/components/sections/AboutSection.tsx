@@ -9,90 +9,130 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const videoWrapperRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const video2Ref = useRef<HTMLVideoElement>(null);
+  const video3Ref = useRef<HTMLVideoElement>(null);
   const titleLinesRef = useRef<HTMLSpanElement[]>([]);
   const chamaRef = useRef<HTMLSpanElement>(null);
-  const copyRef = useRef<HTMLParagraphElement>(null);
 
   const [isMuted, setIsMuted] = useState(true);
   const [hasInteractedSound, setHasInteractedSound] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying2, setIsPlaying2] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
-  // Detecta preferência de movimento reduzido
+  // Monitora viewport desktop (≥1024px) para renderizar o vídeo 3 apenas em telas grandes
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
+    const mqDesktop = window.matchMedia('(min-width: 1024px)');
+    setIsDesktop(mqDesktop.matches);
+    const handleDesktop = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mqDesktop.addEventListener('change', handleDesktop);
+
+    const mqMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mqMotion.matches);
+    const handleMotion = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mqMotion.addEventListener('change', handleMotion);
+
+    return () => {
+      mqDesktop.removeEventListener('change', handleDesktop);
+      mqMotion.removeEventListener('change', handleMotion);
+    };
   }, []);
 
-  // Controle de reprodução e visibilidade do vídeo
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+  // Lazy-load do src do vídeo 3 quando a seção estiver a 400px de entrar na tela
+  const [shouldLoadVideo3, setShouldLoadVideo3] = useState(false);
 
-    // Pausa e silencia ao trocar de aba
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const loadObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoadVideo3(true);
+          loadObserver.disconnect();
+        }
+      },
+      { rootMargin: '400px' }
+    );
+
+    loadObserver.observe(el);
+    return () => loadObserver.disconnect();
+  }, []);
+
+  // Controle de reprodução e visibilidade dos vídeos
+  useEffect(() => {
+    const v2 = video2Ref.current;
+    const v3 = video3Ref.current;
+
     const handleVisibility = () => {
-      if (document.hidden && video) {
-        video.pause();
-        video.muted = true;
-        setIsMuted(true);
-        setIsPlaying(false);
+      if (document.hidden) {
+        if (v2) {
+          v2.pause();
+          v2.muted = true;
+          setIsMuted(true);
+          setIsPlaying2(false);
+        }
+        if (v3) {
+          v3.pause();
+        }
       }
     };
     document.addEventListener('visibilitychange', handleVisibility);
 
-    // Autoplay apenas com pelo menos 40% visível na viewport
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             if (!prefersReducedMotion) {
-              video.play().then(() => setIsPlaying(true)).catch(() => {});
+              if (v2) v2.play().then(() => setIsPlaying2(true)).catch(() => {});
+              if (v3) v3.play().catch(() => {});
             }
           } else {
-            video.pause();
-            video.muted = true;
-            setIsMuted(true);
-            setIsPlaying(false);
+            if (v2) {
+              v2.pause();
+              v2.muted = true;
+              setIsMuted(true);
+              setIsPlaying2(false);
+            }
+            if (v3) {
+              v3.pause();
+            }
           }
         });
       },
       { threshold: 0.4 }
     );
 
-    observer.observe(video);
+    if (v2) observer.observe(v2);
+    if (v3) observer.observe(v3);
 
     return () => {
       observer.disconnect();
       document.removeEventListener('visibilitychange', handleVisibility);
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, shouldLoadVideo3, isDesktop]);
 
-  // Alternar som do vídeo
+  // Alternar som do vídeo 2
   const toggleSound = () => {
-    if (!videoRef.current) return;
+    if (!video2Ref.current) return;
     const nextMuted = !isMuted;
-    videoRef.current.muted = nextMuted;
+    video2Ref.current.muted = nextMuted;
     setIsMuted(nextMuted);
     setHasInteractedSound(true);
 
-    if (!nextMuted && videoRef.current.paused) {
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+    if (!nextMuted && video2Ref.current.paused) {
+      video2Ref.current.play().then(() => setIsPlaying2(true)).catch(() => {});
     }
   };
 
   // Botão manual de play para prefers-reduced-motion
   const handleManualPlay = () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.paused) {
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+    if (!video2Ref.current) return;
+    if (video2Ref.current.paused) {
+      video2Ref.current.play().then(() => setIsPlaying2(true)).catch(() => {});
     } else {
-      videoRef.current.pause();
-      setIsPlaying(false);
+      video2Ref.current.pause();
+      setIsPlaying2(false);
     }
   };
 
@@ -114,12 +154,20 @@ export const AboutSection: React.FC = () => {
           duration: 0.95,
           stagger: 0.12,
           ease: 'power3.out',
+          onComplete: () => {
+            titleLinesRef.current.forEach((el) => {
+              const wrapper = el.parentElement;
+              if (wrapper) {
+                wrapper.style.overflow = 'visible';
+              }
+            });
+          },
         });
       }
 
       // 2. Animação da Chama presa ao texto "mesa"
       if (chamaRef.current) {
-        // Entrada com leve pop após a revelação da palavra "mesa"
+        // Pop de entrada
         gsap.from(chamaRef.current, {
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -133,7 +181,7 @@ export const AboutSection: React.FC = () => {
           ease: 'back.out(1.7)',
         });
 
-        // Corpo respirando em loop
+        // Respiração do corpo
         const bodyEl = chamaRef.current.querySelector('.icon-body');
         if (bodyEl) {
           gsap.to(bodyEl, {
@@ -146,7 +194,7 @@ export const AboutSection: React.FC = () => {
           });
         }
 
-        // Faíscas subindo com durações e delays desencontrados (1.2s, 1.7s, 2.3s)
+        // Faíscas desincronizadas (1.2s, 1.7s, 2.3s)
         const sparks = chamaRef.current.querySelectorAll('.icon-spark');
         const sparkDurations = [1.2, 1.7, 2.3];
         const sparkDelays = [0, 0.45, 0.9];
@@ -162,10 +210,10 @@ export const AboutSection: React.FC = () => {
         });
       }
 
-      // 3. Efeito sutil de scale no vídeo conforme entra na viewport
-      if (videoRef.current) {
+      // 3. Efeito sutil de scale nos vídeos
+      if (video2Ref.current) {
         gsap.fromTo(
-          videoRef.current,
+          video2Ref.current,
           { scale: 1.06 },
           {
             scale: 1,
@@ -194,22 +242,21 @@ export const AboutSection: React.FC = () => {
     <section
       ref={sectionRef}
       id="casa"
-      aria-labelledby="quem-somos-heading"
+      aria-labelledby="churrasco-mar-heading"
       className="relative flex flex-col lg:flex-row items-stretch bg-[#F5E6D0] text-[#14100D] grao overflow-hidden border-t border-[#14100D]/15 scroll-mt-24"
     >
       {/* ============================================================== */}
-      {/* COLUNA ESQUERDA: Vídeo como Parede da Seção (Full-Bleed 9:16)  */}
+      {/* COLUNA ESQUERDA: Vídeo 2 (Full-Bleed 9:16 com som interativo)   */}
       {/* ============================================================== */}
       <div
-        ref={videoWrapperRef}
         className="w-full lg:w-[clamp(340px,31vw,460px)] shrink-0 relative aspect-[9/16] lg:aspect-auto max-h-[75svh] lg:max-h-none overflow-hidden bg-[#14100D]"
         style={{
-          // Garante proporção 9:16 rigorosa no desktop
+          // Define a proporção 9:16 base para a altura da seção no desktop
           aspectRatio: '9 / 16',
         }}
       >
         <video
-          ref={videoRef}
+          ref={video2Ref}
           src={heroVideos[1]}
           poster="/images/hero/poster2.webp"
           muted={isMuted}
@@ -219,10 +266,10 @@ export const AboutSection: React.FC = () => {
           className="w-full h-full object-cover select-none pointer-events-none"
         />
 
-        {/* Gradiente sutil no rodapé do vídeo para o botão de som destacar */}
+        {/* Gradiente sutil no rodapé para legibilidade do botão de som */}
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
 
-        {/* Botão de Som no Canto Inferior Esquerdo */}
+        {/* Botão de Som */}
         <div className="absolute bottom-5 left-5 z-20 flex items-center gap-3 pointer-events-auto">
           {!hasInteractedSound ? (
             <button
@@ -251,12 +298,11 @@ export const AboutSection: React.FC = () => {
             </button>
           )}
 
-          {/* Botão play/pause adicional em modo reduced-motion */}
           {prefersReducedMotion && (
             <button
               type="button"
               onClick={handleManualPlay}
-              aria-label={isPlaying ? 'Pausar vídeo' : 'Reproduzir vídeo'}
+              aria-label={isPlaying2 ? 'Pausar vídeo' : 'Reproduzir vídeo'}
               className="w-11 h-11 rounded-full flex items-center justify-center bg-[#F5E6D0] text-[#14100D] shadow-md hover:bg-white"
             >
               <Play className="w-4 h-4 text-[#14100D] fill-current" />
@@ -266,25 +312,32 @@ export const AboutSection: React.FC = () => {
       </div>
 
       {/* ============================================================== */}
-      {/* COLUNA DIREITA: Texto Editorial & H2 com Chama Presa à Frase   */}
+      {/* COLUNA CENTRAL: Texto Editorial "O Churrasco do Mar"           */}
       {/* ============================================================== */}
-      <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-14 xl:px-20 py-12 sm:py-16 lg:py-20 relative">
-        <div className="w-full max-w-2xl">
-          {/* Eyebrow com fios laterais */}
-          <div className="mb-4 sm:mb-6">
+      <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-[clamp(32px,3.8vw,64px)] py-12 sm:py-16 lg:py-14 relative z-10">
+        <div className="w-full max-w-xl mx-auto lg:mx-0">
+          {/* Eyebrow */}
+          <div className="mb-4 sm:mb-5">
             <span className="eyebrow text-[#14100D]/75">O CHURRASCO DO MAR</span>
           </div>
 
           {/* H2 com 3 Linhas na Lógica da Hero */}
           <h2
-            id="quem-somos-heading"
-            className="mb-6 sm:mb-8 select-none"
+            id="churrasco-mar-heading"
+            className="mb-5 sm:mb-6 select-none"
           >
             {/* Linha 1 */}
-            <span className="block overflow-hidden">
+            <span
+              className="block"
+              style={{
+                overflow: prefersReducedMotion ? 'visible' : 'hidden',
+                padding: '0.22em 0.18em 0.3em',
+                margin: '-0.22em -0.18em -0.3em',
+              }}
+            >
               <span
                 ref={addToLinesRef}
-                className="block font-display font-[700] uppercase text-[#14100D] whitespace-nowrap tracking-[0.06em] [word-spacing:0.12em] leading-[1.05] text-[clamp(1.1rem,5.4vw,1.7rem)] sm:text-[clamp(1.5rem,2.9vw,2.8rem)]"
+                className="block font-display font-[700] uppercase text-[#14100D] whitespace-nowrap tracking-[0.06em] [word-spacing:0.12em] leading-[1.05] text-[clamp(1.1rem,4.8vw,1.6rem)] sm:text-[clamp(1.35rem,2.4vw,2.3rem)]"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 DO MAR PARA A BRASA,
@@ -292,10 +345,17 @@ export const AboutSection: React.FC = () => {
             </span>
 
             {/* Linha 2 */}
-            <span className="block overflow-hidden">
+            <span
+              className="block"
+              style={{
+                overflow: prefersReducedMotion ? 'visible' : 'hidden',
+                padding: '0.22em 0.18em 0.3em',
+                margin: '-0.22em -0.18em -0.3em',
+              }}
+            >
               <span
                 ref={addToLinesRef}
-                className="block font-display font-[700] uppercase text-[#14100D] whitespace-nowrap tracking-[0.06em] [word-spacing:0.12em] leading-[1.05] text-[clamp(1.1rem,5.4vw,1.7rem)] sm:text-[clamp(1.5rem,2.9vw,2.8rem)]"
+                className="block font-display font-[700] uppercase text-[#14100D] whitespace-nowrap tracking-[0.06em] [word-spacing:0.12em] leading-[1.05] text-[clamp(1.1rem,4.8vw,1.6rem)] sm:text-[clamp(1.35rem,2.4vw,2.3rem)]"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 DA BRASA PARA A SUA
@@ -303,17 +363,23 @@ export const AboutSection: React.FC = () => {
             </span>
 
             {/* Linha 3: mesa + CHAMA presa ao texto */}
-            <span className="block overflow-hidden">
+            <span
+              className="block"
+              style={{
+                overflow: prefersReducedMotion ? 'visible' : 'hidden',
+                padding: '0.22em 0.18em 0.3em',
+                margin: '-0.22em -0.18em -0.3em',
+              }}
+            >
               <span
                 ref={addToLinesRef}
-                className="inline-flex items-baseline font-display font-[900] italic text-[#E8832A] leading-[0.8] -mt-[0.08em] text-[clamp(5rem,26vw,8rem)] sm:text-[clamp(6rem,12.5vw,11rem)]"
+                className="inline-flex items-baseline font-display font-[900] italic text-[#E8832A] leading-[0.8] -mt-[0.08em] text-[clamp(4.8rem,24vw,7.5rem)] sm:text-[clamp(5rem,9.5vw,8.5rem)]"
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
                 }}
               >
                 <span>mesa</span>
-                {/* Ícone da Chama como parte da palavra, com 1em de altura e inclinado -6deg */}
                 <span
                   ref={chamaRef}
                   aria-hidden="true"
@@ -325,23 +391,33 @@ export const AboutSection: React.FC = () => {
             </span>
           </h2>
 
-          {/* Parágrafo de Copy */}
+          {/* Parágrafo 1 */}
           <p
-            ref={copyRef}
-            className="font-text font-normal text-[18px] sm:text-[19px] leading-[1.6] max-w-[44ch] text-[#14100D]/85 mb-8"
+            className="font-text font-normal text-[17px] sm:text-[18px] leading-[1.6] max-w-[44ch] text-[#14100D]/85 mb-3"
             style={{ fontFamily: 'var(--font-text)' }}
           >
             O Churrasco do Mar do Braseiro é para quem gosta de sabores marcantes,
             preparados com aquele cuidado que faz toda diferença.
           </p>
 
-          {/* Informações Práticas Sem Caixas nem Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-[#14100D]/15 mb-8">
+          {/* Parágrafo 2 (Sensorial) */}
+          {/* TODO: Confirmar com o restaurante a procedência/pescadores locais */}
+          <p
+            className="font-text font-normal text-[17px] sm:text-[18px] leading-[1.6] max-w-[44ch] text-[#14100D]/85 mb-6"
+            style={{ fontFamily: 'var(--font-text)' }}
+          >
+            Peixes e frutos do mar chegam frescos dos pescadores de Ubatuba e vão
+            direto para a brasa de lenha. Sem pressa, só com sal, fogo e o tempo
+            certo de cada corte.
+          </p>
+
+          {/* Informações Práticas com Fio Fino */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-5 border-t border-[#14100D]/15 mb-7">
             <div>
               <span className="block font-text font-semibold uppercase tracking-[0.2em] text-[12px] text-[#E8832A] mb-1">
                 HORÁRIO
               </span>
-              <p className="font-text font-medium text-[17px] text-[#14100D] leading-snug">
+              <p className="font-text font-medium text-[16px] text-[#14100D] leading-snug">
                 {siteConfig.hoursShort}
               </p>
             </div>
@@ -350,38 +426,74 @@ export const AboutSection: React.FC = () => {
               <span className="block font-text font-semibold uppercase tracking-[0.2em] text-[12px] text-[#E8832A] mb-1">
                 ONDE
               </span>
-              <p className="font-text font-medium text-[17px] text-[#14100D] leading-snug">
+              <p className="font-text font-medium text-[16px] text-[#14100D] leading-snug">
                 {siteConfig.addressFull}
               </p>
               <a
                 href={siteConfig.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-[14px] text-[#14100D] underline hover:text-[#E8832A] mt-1 transition-colors"
+                className="inline-block text-[13px] text-[#14100D] underline hover:text-[#E8832A] mt-1 transition-colors"
               >
                 Ver no Google Maps
               </a>
             </div>
           </div>
 
-          {/* Botões no Estilo Editorial */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-5 sm:gap-7">
+          {/* Botões Editoriais */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
             <a
               href="#reservas"
-              className="inline-flex items-center justify-center px-8 py-3.5 rounded-[6px] bg-[#14100D] text-[#F5E6D0] font-text font-semibold uppercase tracking-[0.08em] text-[14px] hover:bg-[#B8352B] hover:text-white transition-colors duration-200 shadow-sm"
+              className="inline-flex items-center justify-center px-7 py-3.5 rounded-[6px] bg-[#14100D] text-[#F5E6D0] font-text font-semibold uppercase tracking-[0.08em] text-[13px] sm:text-[14px] hover:bg-[#B8352B] hover:text-white transition-colors duration-200 shadow-sm"
             >
               RESERVAR MESA
             </a>
 
             <a
               href="#cardapio"
-              className="inline-flex items-center justify-center py-2 text-[#14100D] font-text font-semibold uppercase tracking-[0.08em] text-[14px] underline decoration-2 decoration-[#E8832A] underline-offset-4 hover:text-[#E8832A] transition-colors duration-200"
+              className="inline-flex items-center justify-center py-2 text-[#14100D] font-text font-semibold uppercase tracking-[0.08em] text-[13px] sm:text-[14px] underline decoration-2 decoration-[#E8832A] underline-offset-4 hover:text-[#E8832A] transition-colors duration-200"
             >
               VER CARDÁPIO
             </a>
           </div>
         </div>
       </div>
+
+      {/* ============================================================== */}
+      {/* VÍDEO 3 MOBILE (<1024px): Fora do container de texto, full-bleed */}
+      {/* ============================================================== */}
+      {!isDesktop && (
+        <div className="w-full relative aspect-video overflow-hidden bg-[#14100D] m-0 p-0 block shrink-0">
+          <video
+            ref={video3Ref}
+            src={shouldLoadVideo3 && !prefersReducedMotion ? heroVideos[2] : undefined}
+            poster="/images/hero/poster3.webp"
+            muted
+            loop
+            playsInline
+            preload="none"
+            className="w-full h-full object-cover select-none pointer-events-none filter saturate-[1.05] contrast-[1.02] block border-0 rounded-none shadow-none"
+          />
+        </div>
+      )}
+
+      {/* ============================================================== */}
+      {/* COLUNA DIREITA: Vídeo 3 (Full-Bleed, Desktop ≥1024px apenas)    */}
+      {/* ============================================================== */}
+      {isDesktop && (
+        <div className="hidden lg:block lg:w-[clamp(260px,22vw,330px)] shrink-0 relative overflow-hidden bg-[#14100D]">
+          <video
+            ref={video3Ref}
+            src={shouldLoadVideo3 && !prefersReducedMotion ? heroVideos[2] : undefined}
+            poster="/images/hero/poster3.webp"
+            muted
+            loop
+            playsInline
+            preload="none"
+            className="w-full h-full object-cover select-none pointer-events-none filter saturate-[1.05] contrast-[1.02]"
+          />
+        </div>
+      )}
     </section>
   );
 };
