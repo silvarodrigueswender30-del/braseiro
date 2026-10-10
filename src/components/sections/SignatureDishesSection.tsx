@@ -1,174 +1,730 @@
-import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
-import type { Variants } from 'framer-motion';
-import { SectionLabel } from '@/components/ui/SectionLabel';
-import { Divider } from '@/components/ui/Divider';
-import { signatureDishes } from '@/data/pratos';
-import { siteConfig } from '@/config';
-import { ChevronLeft, ChevronRight, MessageSquare } from 'lucide-react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+gsap.registerPlugin(ScrollTrigger);
+
+/**
+ * CONFIGURAÇÃO DOS CARDS DE CARDÁPIO (Único ponto de edição)
+ * TODO: trocar os vídeos por clipes definitivos (um por cardápio); o de drinks e o de executivos são provisórios
+ * TODO: substituir por visualizador interno do cardápio
+ */
+export const MENU_CARDS = [
+  {
+    id: 'gastronomia',
+    numero: '01',
+    titulo: 'gastronomia',
+    href: 'https://www.braseirocaicara.com/gastronomia-atualizado',
+    video: 'https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/carne.mp4',
+    poster: '/images/pratos/gastronomia-poster.webp',
+    ariaLabel: 'Ver cardápio de gastronomia',
   },
-};
+  {
+    id: 'drinks',
+    numero: '02',
+    titulo: 'drinks',
+    href: 'https://www.braseirocaicara.com/drinks',
+    // Provisório: vídeo 3 da Hero hospedado no Supabase (trecho / provisório conforme prompt)
+    video: 'https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/vid3.mp4',
+    poster: '/images/pratos/drinks-poster.webp',
+    ariaLabel: 'Ver cardápio de drinks',
+  },
+  {
+    id: 'executivos',
+    numero: '03',
+    titulo: 'executivos',
+    href: 'https://www.braseirocaicara.com/executivos',
+    // Provisório: clipe mar.mp4 hospedado no Supabase
+    video: 'https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/mar.mp4',
+    poster: '/images/pratos/executivos-poster.webp',
+    ariaLabel: 'Ver cardápio de executivos',
+  },
+] as const;
+
+/**
+ * TEXTOS E ELEMENTOS ANTERIORES REMOVIDOS (PRESERVADOS PARA REFERÊNCIA):
+ * - Título anterior: "Os pratos da casa" (font-condensed uppercase) + divisor com losango/chama
+ * - Subtítulo anterior: "Receitas feitas com o calor da lenha e o frescor da maré de Ubatuba."
+ * - Setas de navegação do carrossel desktop (ChevronLeft/ChevronRight) e barra de progresso
+ * - Pílulas de categoria: "CARNES", "FRUTOS DO MAR", "BEBIDAS"
+ * - Prato 1 (inventado): "Corte nobre na brasa" ("Picanha de parrilla selada na lenha com sal grosso e chimichurri artesanal.")
+ * - Prato 2 (inventado): "Arroz caiçara de frutos do mar" ("Polvo grelhado, camarões pistola e mariscos frescos com arroz caldoso aromático.")
+ * - Prato 3 (inventado): "Coquetel cítrico da casa" ("Coquetel autoral com cachaça de alambique local, xarope de capim-santo e cítricos.")
+ * - Botões anteriores: "PEDIR PELO WHATSAPP"
+ */
 
 export const SignatureDishesSection: React.FC = () => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (!scrollContainerRef.current) return;
-    const cardWidth = scrollContainerRef.current.firstElementChild
-      ? (scrollContainerRef.current.firstElementChild as HTMLElement).clientWidth + 24
-      : 360;
-    const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
-    scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  };
+  // Título e máscaras
+  const titleLine1WrapperRef = useRef<HTMLSpanElement>(null);
+  const titleLine1InnerRef = useRef<HTMLSpanElement>(null);
+  const titleLine2WrapperRef = useRef<HTMLSpanElement>(null);
+  const titleLine2InnerRef = useRef<HTMLSpanElement>(null);
 
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'Carnes':
-        return 'text-[#D9741C] bg-[#D9741C]/15 border-[#D9741C]/30';
-      case 'Frutos do mar':
-        return 'text-[#2E9C9B] bg-[#2E9C9B]/15 border-[#2E9C9B]/30';
-      case 'Bebidas':
-        return 'text-[#F2B25A] bg-[#F2B25A]/15 border-[#F2B25A]/30';
-      default:
-        return 'text-[#F2B25A] bg-[#F2B25A]/15 border-[#F2B25A]/30';
+  // Cards e vídeos desktop
+  const desktopCardsContainerRef = useRef<HTMLDivElement>(null);
+  const desktopCardRefs = useRef<(HTMLElement | null)[]>([]);
+  const desktopVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const desktopWordWrapperRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const desktopWordInnerRefs = useRef<(HTMLSpanElement | null)[]>([]);
+
+  // Mobile carrossel
+  const mobileCarouselRef = useRef<HTMLDivElement>(null);
+  const mobileCardRefs = useRef<(HTMLElement | null)[]>([]);
+  const mobileVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  // Estado mobile e hover desktop
+  const [activeMobileIdx, setActiveMobileIdx] = useState(0);
+  const [hoveredCardIdx, setHoveredCardIdx] = useState<number | null>(null);
+  const [videoErrors, setVideoErrors] = useState<Record<string, boolean>>({});
+
+  // Preferência de movimento reduzido
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     }
+    return false;
+  });
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+    mediaQuery.addEventListener('change', handleMotionChange);
+    return () => mediaQuery.removeEventListener('change', handleMotionChange);
+  }, []);
+
+  // 1) CONTROLE DE CARREGAMENTO E REPRODUÇÃO DOS VÍDEOS
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
+    const sectionEl = sectionRef.current;
+    if (!sectionEl) return;
+
+    let isSectionNear = false;
+    let isSectionVisible40 = false;
+    let isDocVisible = !document.hidden;
+
+    const allVideos = () => [
+      ...desktopVideoRefs.current.filter(Boolean),
+      ...mobileVideoRefs.current.filter(Boolean),
+    ];
+
+    const updateVideoPlayback = () => {
+      const isDesktop = window.innerWidth >= 1024;
+      const shouldPlayGeneral = isSectionVisible40 && isDocVisible;
+
+      if (!shouldPlayGeneral) {
+        allVideos().forEach((vid) => {
+          if (vid && !vid.paused) vid.pause();
+        });
+        return;
+      }
+
+      if (isDesktop) {
+        // No desktop, tocam os 3 vídeos da seção (máx 3 simultâneos)
+        desktopVideoRefs.current.forEach((vid) => {
+          if (vid && vid.src && vid.paused) {
+            vid.play().catch(() => {});
+          }
+        });
+        // Pausar mobile se houver
+        mobileVideoRefs.current.forEach((vid) => {
+          if (vid && !vid.paused) vid.pause();
+        });
+      } else {
+        // No mobile, apenas o card ativo toca; os outros pausam
+        mobileVideoRefs.current.forEach((vid, idx) => {
+          if (!vid) return;
+          if (idx === activeMobileIdx) {
+            if (vid.src && vid.paused) {
+              vid.play().catch(() => {});
+            }
+          } else {
+            if (!vid.paused) vid.pause();
+          }
+        });
+        // Pausar desktop
+        desktopVideoRefs.current.forEach((vid) => {
+          if (vid && !vid.paused) vid.pause();
+        });
+      }
+    };
+
+    // Observer 1: Carregar src dos vídeos apenas quando a até 400px da viewport
+    const preloadObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isSectionNear) {
+            isSectionNear = true;
+            MENU_CARDS.forEach((card, idx) => {
+              const dVid = desktopVideoRefs.current[idx];
+              if (dVid && !dVid.src && !videoErrors[card.id]) {
+                dVid.src = card.video;
+                dVid.load();
+              }
+              const mVid = mobileVideoRefs.current[idx];
+              if (mVid && !mVid.src && !videoErrors[card.id]) {
+                mVid.src = card.video;
+                mVid.load();
+              }
+            });
+          }
+        });
+      },
+      { rootMargin: '400px' }
+    );
+    preloadObserver.observe(sectionEl);
+
+    // Observer 2: Play com 40% visível, pause ao sair
+    const playbackObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isSectionVisible40 = entry.isIntersecting;
+          updateVideoPlayback();
+        });
+      },
+      { threshold: 0.4 }
+    );
+    playbackObserver.observe(sectionEl);
+
+    const handleVisibility = () => {
+      isDocVisible = !document.hidden;
+      updateVideoPlayback();
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    const handleResize = () => {
+      updateVideoPlayback();
+    };
+    window.addEventListener('resize', handleResize);
+
+    // Atualizar quando mudar o card ativo no mobile
+    updateVideoPlayback();
+
+    return () => {
+      preloadObserver.disconnect();
+      playbackObserver.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [prefersReducedMotion, activeMobileIdx, videoErrors]);
+
+  // 2) OBSERVER DO CARROSSEL MOBILE (SYNC DOS PONTINHOS E VÍDEO ATIVO)
+  useEffect(() => {
+    const carouselEl = mobileCarouselRef.current;
+    if (!carouselEl) return;
+
+    const cards = mobileCardRefs.current.filter(Boolean) as HTMLElement[];
+    if (cards.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = cards.indexOf(entry.target as HTMLElement);
+            if (idx !== -1) {
+              setActiveMobileIdx(idx);
+            }
+          }
+        });
+      },
+      {
+        root: carouselEl,
+        threshold: 0.6,
+      }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // 3) ANIMAÇÕES GSAP (SCROLLTRIGGER)
+  useEffect(() => {
+    if (prefersReducedMotion || !sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Timeline do Título (Linha 1 "OS PRATOS" e Linha 2 "da casa")
+      const titleTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          once: true,
+        },
+        onComplete: () => {
+          if (titleLine1WrapperRef.current) titleLine1WrapperRef.current.style.overflow = 'visible';
+          if (titleLine2WrapperRef.current) titleLine2WrapperRef.current.style.overflow = 'visible';
+        },
+      });
+
+      if (titleLine1InnerRef.current) {
+        titleTl.fromTo(
+          titleLine1InnerRef.current,
+          { yPercent: 100, opacity: 0 },
+          { yPercent: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }
+        );
+      }
+
+      if (titleLine2InnerRef.current) {
+        titleTl.fromTo(
+          titleLine2InnerRef.current,
+          { yPercent: 100, scale: 0.94, opacity: 0 },
+          { yPercent: 0, scale: 1, opacity: 1, duration: 0.85, ease: 'power3.out' },
+          '-=0.55'
+        );
+      }
+
+      // Cards Desktop: entram com y 48 -> 0 e fade, com zoom suave no vídeo
+      const validDesktopCards = desktopCardRefs.current.filter(Boolean);
+      if (validDesktopCards.length > 0 && desktopCardsContainerRef.current) {
+        const cardsTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: desktopCardsContainerRef.current,
+            start: 'top 75%',
+            once: true,
+          },
+          onComplete: () => {
+            desktopWordWrapperRefs.current.forEach((w) => {
+              if (w) w.style.overflow = 'visible';
+            });
+          },
+        });
+
+        cardsTl.fromTo(
+          validDesktopCards,
+          { y: 48, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.14,
+            ease: 'power2.out',
+          }
+        );
+
+        // Revelação das palavras dos cards
+        const validWordInners = desktopWordInnerRefs.current.filter(Boolean);
+        if (validWordInners.length > 0) {
+          cardsTl.fromTo(
+            validWordInners,
+            { yPercent: 100, opacity: 0 },
+            {
+              yPercent: 0,
+              opacity: 1,
+              duration: 0.7,
+              stagger: 0.12,
+              ease: 'power3.out',
+            },
+            '-=0.5'
+          );
+        }
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [prefersReducedMotion]);
+
+  // Scroll suave no mobile ao clicar no pontinho
+  const scrollMobileTo = useCallback((index: number) => {
+    const targetCard = mobileCardRefs.current[index];
+    if (targetCard && mobileCarouselRef.current) {
+      targetCard.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest',
+      });
+    }
+  }, []);
+
+  const handleVideoError = (cardId: string) => {
+    setVideoErrors((prev) => ({ ...prev, [cardId]: true }));
   };
 
   return (
-    <section id="pratos" className="relative py-20 sm:py-28 overflow-hidden">
-      {/* Tinta de Seção: Brilho Âmbar Suave herdando o Degradê Mestre */}
+    <section
+      id="pratos"
+      ref={sectionRef}
+      className="grao relative w-full overflow-x-clip bg-[#F5E6D0] text-[#14100D] scroll-mt-16"
+      style={{
+        backgroundColor: '#F5E6D0',
+        paddingTop: 'clamp(72px, 8vw, 120px)',
+        paddingBottom: 'clamp(72px, 8vw, 120px)',
+        paddingLeft: 'clamp(24px, 5vw, 80px)',
+        paddingRight: 'clamp(24px, 5vw, 80px)',
+      }}
+    >
+      {/* ============================================================== */}
+      {/* TEXTURA DE GRÃO 3% OPACIDADE                                   */}
+      {/* ============================================================== */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-25"
+        className="absolute inset-0 pointer-events-none z-10 opacity-[0.03]"
         style={{
-          background:
-            'radial-gradient(ellipse 900px 500px at 50% 50%, rgba(217, 116, 28, 0.18), transparent 70%)',
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Cabeçalho com Setas de Navegação em Desktop */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16">
-          <div className="text-center md:text-left max-w-2xl">
-            <SectionLabel>DA BRASA PRA MESA</SectionLabel>
-            <h2 className="mt-2 font-condensed font-bold uppercase text-3xl sm:text-5xl text-[#F3E6D0] tracking-wide leading-tight">
-              Os pratos da casa
-            </h2>
-            <div className="my-4 flex justify-center md:justify-start">
-              <Divider variant="flame" />
-            </div>
-            <p className="font-serif italic text-xl sm:text-2xl text-[#F2B25A] font-medium leading-relaxed">
-              “Receitas feitas com o calor da lenha e o frescor da maré de Ubatuba.”
-            </p>
-          </div>
+      <div className="relative z-10 w-full max-w-[1280px] mx-auto flex flex-col items-center">
+        {/* ============================================================ */}
+        {/* CABEÇALHO DA SEÇÃO (EYEBROW + TÍTULO EM 2 LINHAS)            */}
+        {/* ============================================================ */}
+        <div className="flex flex-col items-center text-center">
+          {/* Eyebrow: DA BRASA PRA MESA */}
+          <span className="eyebrow text-[#14100D] select-none">
+            DA BRASA PRA MESA
+          </span>
 
-          {/* Botões de Navegação do Carrossel (Desktop) */}
-          <div className="hidden md:flex items-center gap-3 mt-6 md:mt-0 justify-center">
-            <button
-              onClick={() => scroll('left')}
-              className="w-11 h-11 rounded-full bg-[#1A1411]/90 border border-[#F3E6D0]/20 flex items-center justify-center text-[#F3E6D0] hover:text-[#05070D] hover:bg-[#F2B25A] hover:border-[#F2B25A] transition-all duration-300 shadow-lg cursor-pointer"
-              aria-label="Rolar pratos para a esquerda"
+          {/* H2 com texto acessível e layout visual em 2 linhas */}
+          <h2
+            className="mt-3 sm:mt-4 flex flex-col items-center text-center m-0 select-none"
+            aria-label="Os pratos da casa"
+          >
+            {/* Linha 1: "OS PRATOS" */}
+            <span
+              ref={titleLine1WrapperRef}
+              className="line-wrapper block"
+              style={{
+                overflow: prefersReducedMotion ? 'visible' : 'hidden',
+                padding: '0.22em 0.18em 0.3em',
+                margin: '-0.22em -0.18em -0.3em',
+              }}
             >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => scroll('right')}
-              className="w-11 h-11 rounded-full bg-[#1A1411]/90 border border-[#F3E6D0]/20 flex items-center justify-center text-[#F3E6D0] hover:text-[#05070D] hover:bg-[#F2B25A] hover:border-[#F2B25A] transition-all duration-300 shadow-lg cursor-pointer"
-              aria-label="Rolar pratos para a direita"
+              <span
+                ref={titleLine1InnerRef}
+                className="block uppercase text-[#14100D] whitespace-nowrap text-[clamp(1.35rem,6.8vw,2.2rem)] lg:text-[clamp(1.75rem,3.8vw,3.6rem)]"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 700,
+                  letterSpacing: '0.05em',
+                  wordSpacing: '0.12em',
+                  lineHeight: 1.1,
+                }}
+              >
+                OS PRATOS
+              </span>
+            </span>
+
+            {/* Linha 2: "da casa" (Fraunces 900 itálico, brasa) */}
+            <span
+              ref={titleLine2WrapperRef}
+              className="line-wrapper block"
+              style={{
+                overflow: prefersReducedMotion ? 'visible' : 'hidden',
+                padding: '0.22em 0.18em 0.3em',
+                margin: '-0.22em -0.18em -0.3em',
+              }}
             >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
+              <span
+                ref={titleLine2InnerRef}
+                className="block lowercase italic text-[#E8832A] whitespace-nowrap text-[clamp(4.2rem,21vw,7.2rem)] lg:text-[clamp(5rem,11vw,10rem)]"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 900,
+                  fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
+                  lineHeight: 0.85,
+                  marginTop: '-0.06em',
+                  textShadow: '0 4px 24px rgba(20,16,13,0.12)',
+                }}
+              >
+                da casa
+              </span>
+            </span>
+          </h2>
         </div>
 
-        {/* Carrossel Horizontal: 3 por vez no Desktop, Scroll-Snap no Mobile */}
+        {/* ============================================================ */}
+        {/* CARDS DESKTOP (≥1024px): 3 CARDS VERTICAIS EM FLEX           */}
+        {/* ============================================================ */}
         <div
-          ref={scrollContainerRef}
-          className="flex gap-6 overflow-x-auto pb-6 scrollbar-none snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth"
-          style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}
+          ref={desktopCardsContainerRef}
+          className="hidden lg:flex w-full justify-center items-stretch gap-3"
+          style={{
+            marginTop: 'clamp(40px, 4.5vw, 72px)',
+            height: 'clamp(520px, 33vw, 720px)',
+          }}
         >
-          {signatureDishes.map((dish, idx) => {
-            const waUrl = `https://wa.me/${siteConfig.phoneRaw}?text=${encodeURIComponent(dish.whatsappMessage)}`;
+          {MENU_CARDS.map((card, idx) => {
+            const isHovered = hoveredCardIdx === idx;
+            const hasHover = hoveredCardIdx !== null;
+            const flexValue = prefersReducedMotion
+              ? 1
+              : hasHover
+              ? isHovered
+                ? 1.4
+                : 0.8
+              : 1;
+
+            // Harmonização de tom: leve saturação no vídeo de executivos se necessário
+            const isMar = card.id === 'executivos';
+            const filterStyle = isMar ? 'saturate(1.05) contrast(1.02)' : undefined;
+
             return (
-              <motion.div
-                key={dish.id}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: idx * 0.1 }}
-                className="w-[84vw] sm:w-[360px] lg:w-[calc(33.333%-16px)] shrink-0 snap-start h-[520px] rounded-2xl overflow-hidden border border-[#F3E6D0]/15 group relative shadow-2xl transition-all duration-500 hover:border-[#F2B25A]/50 bg-[#1A1411]"
+              <article
+                key={card.id}
+                ref={(el) => {
+                  desktopCardRefs.current[idx] = el;
+                }}
+                onMouseEnter={() => setHoveredCardIdx(idx)}
+                onMouseLeave={() => setHoveredCardIdx(null)}
+                className="relative overflow-hidden shadow-[0_8px_24px_rgba(20,16,13,0.18)] bg-[#14100D] flex flex-col justify-end"
+                style={{
+                  flex: flexValue,
+                  transition: prefersReducedMotion
+                    ? 'none'
+                    : 'flex 600ms cubic-bezier(0.2, 0.7, 0.2, 1)',
+                  containerType: 'inline-size',
+                }}
               >
-                {/* Imagem Vertical (Aspect 4/5) com Zoom Suave (transform only) */}
+                {/* Poster fixo WebP de fallback e carregamento inicial */}
                 <img
-                  src={dish.image}
-                  alt={dish.alt}
+                  src={card.poster}
+                  alt=""
                   width={900}
-                  height={1200}
+                  height={1600}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-106"
+                  className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
+                  style={{ filter: filterStyle }}
                 />
 
-                {/* Moldura Interna Delici */}
-                <div className="absolute inset-2.5 rounded-xl border border-[#F2B25A]/20 pointer-events-none group-hover:border-[#F2B25A]/40 transition-colors duration-300" />
+                {/* Vídeo remoto em looping silencioso */}
+                {!prefersReducedMotion && !videoErrors[card.id] && (
+                  <video
+                    ref={(el) => {
+                      desktopVideoRefs.current[idx] = el;
+                    }}
+                    poster={card.poster}
+                    muted
+                    loop
+                    playsInline
+                    preload="none"
+                    aria-hidden="true"
+                    onError={() => handleVideoError(card.id)}
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
+                    style={{ filter: filterStyle }}
+                  />
+                )}
 
-                {/* Overlay Escuro com Degradê Suave para Leitura */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#05070D] via-[#05070D]/65 to-transparent pointer-events-none" />
+                {/* Overlays em CSS puro (sem backdrop-filter) */}
+                {/* Camada 1: Base suave 12% */}
+                <div className="absolute inset-0 bg-[#14100D]/12 pointer-events-none z-[1]" />
 
-                {/* Conteúdo do Card */}
-                <div className="absolute inset-0 p-6 flex flex-col justify-between z-10 pointer-events-none">
-                  {/* Topo: Etiqueta de Categoria */}
-                  <div className="flex items-center justify-between">
-                    <span
-                      className={`text-[11px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border backdrop-blur-md ${getCategoryColor(
-                        dish.category
-                      )}`}
+                {/* Camada 2: Gradiente inferior para contraste AA */}
+                <div
+                  className="absolute inset-0 pointer-events-none z-[2]"
+                  style={{
+                    background:
+                      'linear-gradient(to top, rgba(20,16,13,0.94) 0%, rgba(20,16,13,0.72) 26%, transparent 55%)',
+                  }}
+                />
+
+                {/* Conteúdo na base do card */}
+                <div className="relative z-10 w-full flex flex-col items-center text-center px-4 pb-7">
+                  {/* Numeração: 01 / 02 / 03 */}
+                  <span
+                    className="font-text font-semibold uppercase text-[13px] text-[#F5E6D0]/90 select-none tracking-[0.25em]"
+                    style={{ fontFamily: 'var(--font-text)' }}
+                  >
+                    {card.numero}
+                  </span>
+
+                  {/* Título gigante adesivo */}
+                  <div
+                    ref={(el) => {
+                      desktopWordWrapperRefs.current[idx] = el;
+                    }}
+                    className="line-wrapper block w-full mt-1.5"
+                    style={{
+                      overflow: prefersReducedMotion ? 'visible' : 'hidden',
+                      padding: '0.22em 0.18em 0.3em',
+                      margin: '-0.22em -0.18em -0.3em',
+                    }}
+                  >
+                    <h3
+                      ref={(el) => {
+                        desktopWordInnerRefs.current[idx] = el;
+                      }}
+                      className="block lowercase italic text-[#F5E6D0] whitespace-nowrap m-0 select-none"
+                      style={{
+                        fontFamily: 'var(--font-display)',
+                        fontWeight: 900,
+                        fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
+                        lineHeight: 0.9,
+                        // Tamanho responsivo por container query (cqi da largura do card)
+                        fontSize:
+                          card.id === 'gastronomia'
+                            ? 'clamp(2rem, 14.5cqi, 3.8rem)'
+                            : card.id === 'drinks'
+                            ? 'clamp(2.4rem, 26cqi, 5.8rem)'
+                            : 'clamp(2rem, 16cqi, 4.2rem)',
+                        WebkitTextStroke: '0.07em #14100D',
+                        paintOrder: 'stroke fill',
+                        strokeLinejoin: 'round',
+                        textShadow: '0 4px 18px rgba(0,0,0,0.5)',
+                      }}
                     >
-                      {dish.category}
-                    </span>
-                  </div>
-
-                  {/* Rodapé: Título, Descrição e Botão */}
-                  <div className="space-y-3 pointer-events-auto">
-                    <h3 className="font-condensed font-bold uppercase text-2xl sm:text-3xl text-[#F3E6D0] tracking-wide leading-tight drop-shadow-md">
-                      {dish.name}
+                      {card.titulo}
                     </h3>
-
-                    <p className="text-xs sm:text-sm text-[#F3E6D0]/85 line-clamp-2 leading-relaxed">
-                      {dish.description}
-                    </p>
-
-                    <div className="pt-2">
-                      <a
-                        href={waUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-[#D9741C] hover:bg-[#F2B25A] text-[#05070D] font-condensed font-bold uppercase text-xs sm:text-sm tracking-wider transition-all duration-300 shadow-lg cursor-pointer"
-                      >
-                        <MessageSquare className="w-4 h-4" />
-                        <span>Pedir pelo WhatsApp</span>
-                      </a>
-                    </div>
                   </div>
+
+                  {/* Botão pequeno "VER CARDÁPIO" com pseudo-elemento cobrindo o card */}
+                  <a
+                    href={card.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={card.ariaLabel}
+                    className="mt-4 inline-flex items-center justify-center rounded-[6px] bg-[#F5E6D0] text-[#14100D] hover:bg-[#E8832A] hover:text-[#14100D] transition-colors duration-200 font-text font-semibold uppercase text-[13px] tracking-[0.08em] py-[10px] px-[22px] select-none shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#E8832A] after:absolute after:inset-0 after:z-10 cursor-pointer"
+                    style={{ fontFamily: 'var(--font-text)' }}
+                  >
+                    VER CARDÁPIO
+                  </a>
                 </div>
-              </motion.div>
+              </article>
             );
           })}
         </div>
 
-        {/* Indicador de Deslize no Mobile */}
-        <div className="flex md:hidden justify-center items-center gap-2 mt-4 text-xs text-[#F2B25A]/70">
-          <span>Deslize para ver mais pratos</span>
-          <ChevronRight className="w-4 h-4 animate-pulse" />
+        {/* ============================================================ */}
+        {/* CARROSSEL MOBILE (<1024px): SCROLL-SNAP HORIZONTAL           */}
+        {/* ============================================================ */}
+        <div className="lg:hidden w-full flex flex-col items-center">
+          <div
+            ref={mobileCarouselRef}
+            className="w-full flex gap-3 overflow-x-auto snap-x snap-mandatory py-4 scrollbar-none"
+            style={{
+              marginTop: 'clamp(36px, 5vw, 48px)',
+              paddingLeft: 'max(24px, calc((100vw - 320px) / 2))',
+              paddingRight: 'max(24px, calc((100vw - 320px) / 2))',
+              scrollSnapType: 'x mandatory',
+              WebkitOverflowScrolling: 'touch',
+            }}
+          >
+            {MENU_CARDS.map((card, idx) => {
+              const isMar = card.id === 'executivos';
+              const filterStyle = isMar ? 'saturate(1.05) contrast(1.02)' : undefined;
+              const isActive = activeMobileIdx === idx;
+
+              return (
+                <article
+                  key={card.id}
+                  ref={(el) => {
+                    mobileCardRefs.current[idx] = el;
+                  }}
+                  className="relative shrink-0 snap-center w-[78vw] max-w-[340px] aspect-[9/16] overflow-hidden shadow-[0_8px_24px_rgba(20,16,13,0.18)] bg-[#14100D] flex flex-col justify-end transition-transform duration-500"
+                  style={{
+                    transform: isActive ? 'scale(1)' : 'scale(0.96)',
+                    containerType: 'inline-size',
+                  }}
+                >
+                  {/* Poster WebP */}
+                  <img
+                    src={card.poster}
+                    alt=""
+                    width={900}
+                    height={1600}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
+                    style={{ filter: filterStyle }}
+                  />
+
+                  {/* Vídeo remoto: só toca se for o card mais visível */}
+                  {!prefersReducedMotion && !videoErrors[card.id] && (
+                    <video
+                      ref={(el) => {
+                        mobileVideoRefs.current[idx] = el;
+                      }}
+                      poster={card.poster}
+                      muted
+                      loop
+                      playsInline
+                      preload="none"
+                      aria-hidden="true"
+                      onError={() => handleVideoError(card.id)}
+                      className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
+                      style={{ filter: filterStyle }}
+                    />
+                  )}
+
+                  {/* Overlays */}
+                  <div className="absolute inset-0 bg-[#14100D]/12 pointer-events-none z-[1]" />
+                  <div
+                    className="absolute inset-0 pointer-events-none z-[2]"
+                    style={{
+                      background:
+                        'linear-gradient(to top, rgba(20,16,13,0.94) 0%, rgba(20,16,13,0.72) 26%, transparent 55%)',
+                    }}
+                  />
+
+                  {/* Conteúdo na base do card */}
+                  <div className="relative z-10 w-full flex flex-col items-center text-center px-4 pb-7">
+                    <span
+                      className="font-text font-semibold uppercase text-[13px] text-[#F5E6D0]/90 select-none tracking-[0.25em]"
+                      style={{ fontFamily: 'var(--font-text)' }}
+                    >
+                      {card.numero}
+                    </span>
+
+                    <h3
+                      className="mt-1 block lowercase italic text-[#F5E6D0] whitespace-nowrap m-0 select-none"
+                      style={{
+                        fontFamily: 'var(--font-display)',
+                        fontWeight: 900,
+                        fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
+                        lineHeight: 0.9,
+                        fontSize:
+                          card.id === 'gastronomia'
+                            ? 'clamp(2rem, 14.5cqi, 3.4rem)'
+                            : card.id === 'drinks'
+                            ? 'clamp(2.4rem, 26cqi, 5.2rem)'
+                            : 'clamp(2rem, 16cqi, 3.8rem)',
+                        WebkitTextStroke: '0.07em #14100D',
+                        paintOrder: 'stroke fill',
+                        strokeLinejoin: 'round',
+                        textShadow: '0 4px 18px rgba(0,0,0,0.5)',
+                      }}
+                    >
+                      {card.titulo}
+                    </h3>
+
+                    <a
+                      href={card.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={card.ariaLabel}
+                      className="mt-4 inline-flex items-center justify-center rounded-[6px] bg-[#F5E6D0] text-[#14100D] hover:bg-[#E8832A] hover:text-[#14100D] transition-colors duration-200 font-text font-semibold uppercase text-[13px] tracking-[0.08em] py-[10px] px-[22px] select-none shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#E8832A] after:absolute after:inset-0 after:z-10 cursor-pointer"
+                      style={{ fontFamily: 'var(--font-text)' }}
+                    >
+                      VER CARDÁPIO
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          {/* Indicador de 3 pontinhos para o mobile */}
+          <div className="flex items-center justify-center gap-2 mt-4 select-none">
+            {MENU_CARDS.map((card, idx) => (
+              <button
+                key={card.id}
+                type="button"
+                onClick={() => scrollMobileTo(idx)}
+                aria-label={`Ir para cardápio ${card.numero}: ${card.titulo}`}
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                  activeMobileIdx === idx
+                    ? 'bg-[#E8832A] scale-125'
+                    : 'bg-[#14100D]/30 hover:bg-[#14100D]/50'
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 };
+
+export default SignatureDishesSection;

@@ -19,7 +19,7 @@ export const OndaIcon: React.FC<IconProps> = ({ className = '', style, ...props 
       className="icon-waves-outline"
       fill="none"
       stroke="#14100D"
-      strokeWidth={68}
+      strokeWidth={54}
       strokeLinecap="round"
       strokeLinejoin="round"
     >

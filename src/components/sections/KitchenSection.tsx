@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight } from 'lucide-react';
 import { siteConfig } from '@/config';
 import { CarneIcon } from '@/components/icons/CarneIcon';
 import { OndaIcon } from '@/components/icons/OndaIcon';
@@ -30,29 +29,30 @@ export const KitchenSection: React.FC = () => {
   // Selo central
   const badgeRef = useRef<HTMLDivElement>(null);
 
-  // Painéis e elementos
+  // Painéis e elementos de texto/ícones
   const panelTerraRef = useRef<HTMLDivElement>(null);
   const panelMarRef = useRef<HTMLDivElement>(null);
 
-  const wordTerraWrapperRef = useRef<HTMLDivElement>(null);
-  const wordTerraInnerRef = useRef<HTMLDivElement>(null);
+  const wordTerraWrapperRef = useRef<HTMLSpanElement>(null);
+  const wordTerraInnerRef = useRef<HTMLSpanElement>(null);
   const iconCarneRef = useRef<HTMLSpanElement>(null);
 
-  const wordMarWrapperRef = useRef<HTMLDivElement>(null);
-  const wordMarInnerRef = useRef<HTMLDivElement>(null);
+  const wordMarWrapperRef = useRef<HTMLSpanElement>(null);
+  const wordMarInnerRef = useRef<HTMLSpanElement>(null);
   const iconOndaRef = useRef<HTMLSpanElement>(null);
 
+  // Descrições e etiquetas mobile
   const descTerraRef = useRef<HTMLParagraphElement>(null);
   const tagTerraRef = useRef<HTMLSpanElement>(null);
   const descMarRef = useRef<HTMLParagraphElement>(null);
   const tagMarRef = useRef<HTMLSpanElement>(null);
 
-  // Bloco inferior
-  const bottomContainerRef = useRef<HTMLDivElement>(null);
-  const bottomQuoteRef = useRef<HTMLParagraphElement>(null);
-  const bottomBtnRef = useRef<HTMLAnchorElement>(null);
-  const bottomLinkRef = useRef<HTMLAnchorElement>(null);
-  const bottomDrinksRef = useRef<HTMLParagraphElement>(null);
+  // Rodapé desktop (3 colunas sobre os vídeos)
+  const bottom3ColsRef = useRef<HTMLDivElement>(null);
+
+  // Bloco inferior mobile e faixa WhatsApp
+  const mobileBottomBlockRef = useRef<HTMLDivElement>(null);
+  const bottomBarRef = useRef<HTMLDivElement>(null);
 
   // Hover state para o grid desktop (50/50, 62/38, 38/62)
   const [hoveredPanel, setHoveredPanel] = useState<'terra' | 'mar' | null>(null);
@@ -108,7 +108,6 @@ export const KitchenSection: React.FC = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !isSectionNear) {
             isSectionNear = true;
-            // Injetar src nos vídeos
             if (videoTerraRef.current && !videoTerraRef.current.src) {
               videoTerraRef.current.src = VIDEOS.terra.src;
               videoTerraRef.current.load();
@@ -155,11 +154,28 @@ export const KitchenSection: React.FC = () => {
     if (prefersReducedMotion || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Scale sutil 1.06 -> 1 nos vídeos ao entrar
-      const vids = [videoTerraRef.current, videoMarRef.current].filter(Boolean);
-      if (vids.length > 0) {
+      // Zoom sutil nos vídeos ao rolar
+      // Terra: mantém scale >= 1.22 com origin 'bottom right' e object-position bottom para ocultar texto gravado no topo
+      if (videoTerraRef.current) {
         gsap.fromTo(
-          vids,
+          videoTerraRef.current,
+          { scale: 1.28 },
+          {
+            scale: 1.22,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: panelsContainerRef.current || sectionRef.current,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1.2,
+            },
+          }
+        );
+      }
+
+      if (videoMarRef.current) {
+        gsap.fromTo(
+          videoMarRef.current,
           { scale: 1.06 },
           {
             scale: 1,
@@ -193,7 +209,7 @@ export const KitchenSection: React.FC = () => {
         );
       }
 
-      // Linhas com máscaras: "terra" primeiro e "mar" 0.15s depois
+      // Linhas com máscaras: revelação das palavras "terra" e "mar"
       const lineWrappers = [
         wordTerraWrapperRef.current,
         wordMarWrapperRef.current,
@@ -210,6 +226,13 @@ export const KitchenSection: React.FC = () => {
           lineWrappers.forEach((w) => {
             if (w) w.style.overflow = 'visible';
           });
+          // Garantir estado final de escala e opacidade nos ícones
+          if (iconCarneRef.current) {
+            gsap.set(iconCarneRef.current, { scale: 1, rotate: 8, opacity: 1 });
+          }
+          if (iconOndaRef.current) {
+            gsap.set(iconOndaRef.current, { scale: 1, opacity: 1 });
+          }
         },
       });
 
@@ -222,7 +245,7 @@ export const KitchenSection: React.FC = () => {
         );
       }
 
-      // Pop do ícone da carne
+      // Pop do ícone da carne (fora da máscara)
       if (iconCarneRef.current) {
         wordsTl.fromTo(
           iconCarneRef.current,
@@ -238,11 +261,11 @@ export const KitchenSection: React.FC = () => {
           wordMarInnerRef.current,
           { yPercent: 100, scale: 0.94, opacity: 0 },
           { yPercent: 0, scale: 1, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          '-=0.65' // 0.15s stagger após terra
+          '-=0.65'
         );
       }
 
-      // Pop do ícone da onda
+      // Pop do ícone da onda (fora da máscara)
       if (iconOndaRef.current) {
         wordsTl.fromTo(
           iconOndaRef.current,
@@ -329,7 +352,7 @@ export const KitchenSection: React.FC = () => {
         loopTweens.push(s3);
       }
 
-      // B) Loops das ondas (sensação de maré com deslize em x)
+      // B) Loops das ondas (maré com deslize em x)
       const ondaSvg = iconOndaRef.current?.querySelector('svg');
       const wave1 = ondaSvg?.querySelector('.icon-wave--1');
       const waveOutline1 = ondaSvg?.querySelector('.icon-wave-outline--1');
@@ -398,17 +421,17 @@ export const KitchenSection: React.FC = () => {
         },
       });
 
-      // 4) FADE-UP DAS DESCRIÇÕES E ETIQUETAS
-      const panelTexts = [
+      // 4) FADE-UP DAS DESCRIÇÕES E ETIQUETAS NO MOBILE
+      const mobileTexts = [
         descTerraRef.current,
         tagTerraRef.current,
         descMarRef.current,
         tagMarRef.current,
       ].filter(Boolean);
 
-      if (panelTexts.length > 0) {
+      if (mobileTexts.length > 0) {
         gsap.fromTo(
-          panelTexts,
+          mobileTexts,
           { y: 18, opacity: 0 },
           {
             y: 0,
@@ -425,27 +448,56 @@ export const KitchenSection: React.FC = () => {
         );
       }
 
-      // 5) FADE-UP DO BLOCO INFERIOR (FRASE, BOTÕES E DRINKS)
-      const bottomEls = [
-        bottomQuoteRef.current,
-        bottomBtnRef.current,
-        bottomLinkRef.current,
-        bottomDrinksRef.current,
-      ].filter(Boolean);
-
-      if (bottomEls.length > 0) {
+      // 5) FADE-UP DA LINHA INFERIOR EM 3 COLUNAS (DESKTOP >= 1024px)
+      if (bottom3ColsRef.current) {
         gsap.fromTo(
-          bottomEls,
+          bottom3ColsRef.current,
           { y: 22, opacity: 0 },
           {
             y: 0,
             opacity: 1,
             duration: 0.65,
-            stagger: 0.08,
             ease: 'power2.out',
             scrollTrigger: {
-              trigger: bottomContainerRef.current || sectionRef.current,
+              trigger: panelsContainerRef.current || sectionRef.current,
+              start: 'top 70%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      // 6) FADE-UP DO BLOCO EXCLUSIVO MOBILE (< 1024px)
+      if (mobileBottomBlockRef.current) {
+        gsap.fromTo(
+          mobileBottomBlockRef.current,
+          { y: 20, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.65,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: mobileBottomBlockRef.current,
               start: 'top 95%',
+              once: true,
+            },
+          }
+        );
+      }
+
+      // 7) FADE-IN DA FAIXA FINA (WHATSAPP E DRINKS)
+      if (bottomBarRef.current) {
+        gsap.fromTo(
+          bottomBarRef.current,
+          { opacity: 0 },
+          {
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: bottomBarRef.current,
+              start: 'top 98%',
               once: true,
             },
           }
@@ -484,7 +536,7 @@ export const KitchenSection: React.FC = () => {
       />
 
       {/* ============================================================== */}
-      {/* CONTAINER DOS PAINÉIS (VÍDEO TERRA & MAR)                      */}
+      {/* CONTAINER DOS PAINÉIS DE VÍDEO E RODAPÉ EM 3 COLUNAS          */}
       {/* ============================================================== */}
       <div className="relative w-full">
         <div
@@ -504,7 +556,7 @@ export const KitchenSection: React.FC = () => {
             ref={panelTerraRef}
             onMouseEnter={() => setHoveredPanel('terra')}
             onMouseLeave={() => setHoveredPanel(null)}
-            className="relative w-full h-[clamp(380px,62svh,520px)] lg:h-[clamp(620px,92svh,900px)] overflow-hidden flex flex-col justify-end items-center text-center pb-12 sm:pb-16 lg:pb-20 px-6"
+            className="relative w-full h-[clamp(380px,62svh,520px)] lg:h-[clamp(620px,92svh,900px)] overflow-hidden flex flex-col justify-end items-center text-center pb-12 sm:pb-16 lg:pb-[clamp(210px,26vh,270px)] px-6"
           >
             {/* Poster / Fundo enquanto o vídeo carrega */}
             <img
@@ -515,9 +567,14 @@ export const KitchenSection: React.FC = () => {
               loading="lazy"
               decoding="async"
               className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
+              style={{
+                objectPosition: '50% 100%',
+                transform: 'scale(1.22)',
+                transformOrigin: 'bottom right',
+              }}
             />
 
-            {/* Vídeo remoto Terra (Carne) */}
+            {/* Vídeo remoto Terra (Carne) com zoom e ancoragem no canto inferior direito */}
             {!prefersReducedMotion && (
               <video
                 ref={videoTerraRef}
@@ -528,6 +585,11 @@ export const KitchenSection: React.FC = () => {
                 preload="none"
                 aria-hidden="true"
                 className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
+                style={{
+                  objectPosition: '50% 100%',
+                  transform: 'scale(1.22)',
+                  transformOrigin: 'bottom right',
+                }}
               />
             )}
 
@@ -535,12 +597,12 @@ export const KitchenSection: React.FC = () => {
             {/* Camada 1: Base suave 18% */}
             <div className="absolute inset-0 bg-[#14100D]/18 pointer-events-none z-[1]" />
 
-            {/* Camada 2: Gradiente inferior para legibilidade da copy */}
+            {/* Camada 2: Gradiente inferior para contraste AA */}
             <div
               className="absolute inset-0 pointer-events-none z-[2]"
               style={{
                 background:
-                  'linear-gradient(to top, rgba(20,16,13,0.92) 0%, rgba(20,16,13,0.60) 28%, transparent 55%)',
+                  'linear-gradient(to top, rgba(20,16,13,0.94) 0%, rgba(20,16,13,0.7) 22%, transparent 46%)',
               }}
             />
 
@@ -554,80 +616,82 @@ export const KitchenSection: React.FC = () => {
             />
 
             {/* Conteúdo do Painel Terra */}
-            <div className="relative z-10 w-full max-w-[480px] flex flex-col items-center">
-              {/* Palavra Gigante: "terra" + Ícone da Carne */}
-              <div
-                ref={wordTerraWrapperRef}
-                className="line-wrapper block max-w-full"
+            <div className="relative z-10 w-full max-w-[560px] flex flex-col items-center">
+              {/* Container inline-flex h3 com tamanho de fonte fluido */}
+              <h3
+                className="inline-flex items-center justify-center lowercase italic text-[#E8832A] whitespace-nowrap m-0 select-none text-[clamp(5rem,26vw,8.5rem)] lg:text-[clamp(5.5rem,13vw,12rem)]"
                 style={{
-                  overflow: prefersReducedMotion ? 'visible' : 'hidden',
-                  padding: '0.22em 0.18em 0.3em',
-                  margin: '-0.22em -0.18em -0.3em',
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 900,
+                  fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
+                  lineHeight: 0.85,
+                  WebkitTextStroke: '0.06em #14100D',
+                  paintOrder: 'stroke fill',
+                  strokeLinejoin: 'round',
+                  textShadow: '0 6px 26px rgba(0,0,0,0.55)',
                 }}
               >
-                <div
-                  ref={wordTerraInnerRef}
-                  className="inline-flex items-center justify-center max-w-full"
+                {/* Máscara de revelação apenas na palavra "terra" */}
+                <span
+                  ref={wordTerraWrapperRef}
+                  className="line-wrapper inline-block"
+                  style={{
+                    overflow: prefersReducedMotion ? 'visible' : 'hidden',
+                    padding: '0.22em 0.04em 0.3em 0.18em',
+                    margin: '-0.22em -0.04em -0.3em -0.18em',
+                  }}
                 >
-                  <h3
-                    className="inline-block lowercase italic text-[#E8832A] whitespace-nowrap m-0 select-none text-[clamp(5rem,26vw,8.5rem)] lg:text-[clamp(5.5rem,13vw,12rem)]"
+                  <span
+                    ref={wordTerraInnerRef}
+                    className="inline-block"
                     style={{
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 900,
-                      fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
-                      lineHeight: 0.85,
-                      WebkitTextStroke: '0.06em #14100D',
-                      paintOrder: 'stroke fill',
-                      strokeLinejoin: 'round',
-                      textShadow: '0 6px 26px rgba(0,0,0,0.55)',
+                      transform: prefersReducedMotion ? 'none' : undefined,
+                      opacity: prefersReducedMotion ? 1 : undefined,
                     }}
                   >
                     terra
-                  </h3>
-
-                  {/* Ícone da Carne (inline após a palavra) */}
-                  <span
-                    ref={iconCarneRef}
-                    aria-hidden="true"
-                    className="inline-block select-none pointer-events-none origin-bottom-left"
-                    style={{
-                      height: '0.62em',
-                      width: 'auto',
-                      verticalAlign: 'middle',
-                      marginLeft: '0.04em',
-                      transform: 'rotate(8deg)',
-                    }}
-                  >
-                    <CarneIcon className="h-full w-auto inline-block align-middle" />
                   </span>
-                </div>
+                </span>
+
+                {/* Ícone da Carne (colado à letra "a" final, FORA da máscara) */}
+                <span
+                  ref={iconCarneRef}
+                  aria-hidden="true"
+                  className="inline-block shrink-0 select-none pointer-events-none origin-bottom-left"
+                  style={{
+                    height: '0.62em',
+                    width: '0.62em',
+                    aspectRatio: '1 / 1',
+                    verticalAlign: 'middle',
+                    marginLeft: '0.02em',
+                    transform: 'rotate(8deg)',
+                    opacity: prefersReducedMotion ? 1 : undefined,
+                  }}
+                >
+                  <CarneIcon className="w-full h-full block" />
+                </span>
+              </h3>
+
+              {/* Descrição e etiqueta centralizadas no mobile (< 1024px) */}
+              <div className="lg:hidden mt-3 flex flex-col items-center">
+                <span
+                  ref={tagTerraRef}
+                  className="font-text font-semibold uppercase tracking-[0.25em] text-[12px] text-[#F5E6D0]/85 select-none"
+                  style={{ fontFamily: 'var(--font-text)' }}
+                >
+                  PARRILLA
+                </span>
+                <p
+                  ref={descTerraRef}
+                  className="mt-2 font-text font-medium text-[#F5E6D0]/92 text-[clamp(0.95rem,1.1vw,1.0625rem)] leading-[1.5] max-w-[36ch]"
+                  style={{
+                    fontFamily: 'var(--font-text)',
+                    textWrap: 'balance',
+                  }}
+                >
+                  Picanha, chorizo e assado de tira no ponto certo, selados na lenha com flor de sal marinho.
+                </p>
               </div>
-
-              {/* Descrição enxuta de 1 linha */}
-              {/* 
-                Texto anterior completo:
-                "Picanha, chorizo e assado de tira no ponto certo, selados na lenha com flor de sal marinho."
-                TODO: confirmar com o restaurante origem dos cortes e temperos.
-              */}
-              <p
-                ref={descTerraRef}
-                className="mt-4 font-text font-medium text-[#F5E6D0]/92 text-[clamp(0.95rem,1.1vw,1.0625rem)] leading-[1.5] max-w-[40ch]"
-                style={{
-                  fontFamily: 'var(--font-text)',
-                  textWrap: 'balance',
-                }}
-              >
-                Picanha, chorizo e assado de tira no ponto certo, selados na lenha.
-              </p>
-
-              {/* Etiqueta sem pílula */}
-              <span
-                ref={tagTerraRef}
-                className="mt-3 font-text font-semibold uppercase tracking-[0.25em] text-[12px] text-[#F5E6D0]/85 select-none"
-                style={{ fontFamily: 'var(--font-text)' }}
-              >
-                PARRILLA
-              </span>
             </div>
           </div>
 
@@ -638,7 +702,7 @@ export const KitchenSection: React.FC = () => {
             ref={panelMarRef}
             onMouseEnter={() => setHoveredPanel('mar')}
             onMouseLeave={() => setHoveredPanel(null)}
-            className="relative w-full h-[clamp(380px,62svh,520px)] lg:h-[clamp(620px,92svh,900px)] overflow-hidden flex flex-col justify-end items-center text-center pb-12 sm:pb-16 lg:pb-20 px-6"
+            className="relative w-full h-[clamp(380px,62svh,520px)] lg:h-[clamp(620px,92svh,900px)] overflow-hidden flex flex-col justify-end items-center text-center pb-12 sm:pb-16 lg:pb-[clamp(210px,26vh,270px)] px-6"
           >
             {/* Poster / Fundo enquanto o vídeo carrega */}
             <img
@@ -650,7 +714,7 @@ export const KitchenSection: React.FC = () => {
               decoding="async"
               className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
               style={{
-                // Ajuste sutil de tom se necessário para harmonizar com a carne
+                objectPosition: '50% 78%',
                 filter: 'saturate(1.05) contrast(1.02)',
               }}
             />
@@ -667,6 +731,7 @@ export const KitchenSection: React.FC = () => {
                 aria-hidden="true"
                 className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
                 style={{
+                  objectPosition: '50% 78%',
                   filter: 'saturate(1.05) contrast(1.02)',
                 }}
               />
@@ -676,89 +741,100 @@ export const KitchenSection: React.FC = () => {
             {/* Camada 1: Base suave 18% */}
             <div className="absolute inset-0 bg-[#14100D]/18 pointer-events-none z-[1]" />
 
-            {/* Camada 2: Gradiente inferior para legibilidade da copy */}
+            {/* Camada 2: Gradiente inferior para contraste AA */}
             <div
               className="absolute inset-0 pointer-events-none z-[2]"
               style={{
                 background:
-                  'linear-gradient(to top, rgba(20,16,13,0.92) 0%, rgba(20,16,13,0.60) 28%, transparent 55%)',
+                  'linear-gradient(to top, rgba(20,16,13,0.94) 0%, rgba(20,16,13,0.7) 22%, transparent 46%)',
+              }}
+            />
+
+            {/* Camada 3: Gradiente de transição de 90px no topo para emenda limpa */}
+            <div
+              className="absolute inset-0 pointer-events-none z-[3]"
+              style={{
+                background:
+                  'linear-gradient(to bottom, rgba(20,16,13,1) 0px, rgba(20,16,13,0.6) 45px, transparent 90px)',
               }}
             />
 
             {/* Conteúdo do Painel Mar */}
-            <div className="relative z-10 w-full max-w-[480px] flex flex-col items-center">
-              {/* Palavra Gigante: Ícone da Onda + "mar" */}
-              <div
-                ref={wordMarWrapperRef}
-                className="line-wrapper block max-w-full"
+            <div className="relative z-10 w-full max-w-[560px] flex flex-col items-center">
+              {/* Container inline-flex h3 com tamanho de fonte fluido */}
+              <h3
+                className="inline-flex items-center justify-center lowercase italic text-[#E8832A] whitespace-nowrap m-0 select-none text-[clamp(5rem,26vw,8.5rem)] lg:text-[clamp(5.5rem,13vw,12rem)]"
                 style={{
-                  overflow: prefersReducedMotion ? 'visible' : 'hidden',
-                  padding: '0.22em 0.18em 0.3em',
-                  margin: '-0.22em -0.18em -0.3em',
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 900,
+                  fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
+                  lineHeight: 0.85,
+                  WebkitTextStroke: '0.06em #14100D',
+                  paintOrder: 'stroke fill',
+                  strokeLinejoin: 'round',
+                  textShadow: '0 6px 26px rgba(0,0,0,0.55)',
                 }}
               >
-                <div
-                  ref={wordMarInnerRef}
-                  className="inline-flex items-center justify-center max-w-full"
+                {/* Ícone da Onda (inline antes da palavra, sem rotação, FORA da máscara) */}
+                <span
+                  ref={iconOndaRef}
+                  aria-hidden="true"
+                  className="inline-block shrink-0 select-none pointer-events-none origin-center"
+                  style={{
+                    height: '0.5em',
+                    width: '0.5em',
+                    aspectRatio: '1 / 1',
+                    verticalAlign: 'middle',
+                    marginRight: '0.02em',
+                    opacity: prefersReducedMotion ? 1 : undefined,
+                  }}
                 >
-                  {/* Ícone da Onda (inline antes da palavra) */}
-                  <span
-                    ref={iconOndaRef}
-                    aria-hidden="true"
-                    className="inline-block select-none pointer-events-none origin-center"
-                    style={{
-                      height: '0.5em',
-                      width: 'auto',
-                      verticalAlign: 'middle',
-                      marginRight: '0.02em',
-                    }}
-                  >
-                    <OndaIcon className="h-full w-auto inline-block align-middle" />
-                  </span>
+                  <OndaIcon className="w-full h-full block" />
+                </span>
 
-                  <h3
-                    className="inline-block lowercase italic text-[#E8832A] whitespace-nowrap m-0 select-none text-[clamp(5rem,26vw,8.5rem)] lg:text-[clamp(5.5rem,13vw,12rem)]"
+                {/* Máscara de revelação apenas na palavra "mar" */}
+                <span
+                  ref={wordMarWrapperRef}
+                  className="line-wrapper inline-block"
+                  style={{
+                    overflow: prefersReducedMotion ? 'visible' : 'hidden',
+                    padding: '0.22em 0.18em 0.3em 0.04em',
+                    margin: '-0.22em -0.18em -0.3em -0.04em',
+                  }}
+                >
+                  <span
+                    ref={wordMarInnerRef}
+                    className="inline-block"
                     style={{
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 900,
-                      fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
-                      lineHeight: 0.85,
-                      WebkitTextStroke: '0.06em #14100D',
-                      paintOrder: 'stroke fill',
-                      strokeLinejoin: 'round',
-                      textShadow: '0 6px 26px rgba(0,0,0,0.55)',
+                      transform: prefersReducedMotion ? 'none' : undefined,
+                      opacity: prefersReducedMotion ? 1 : undefined,
                     }}
                   >
                     mar
-                  </h3>
-                </div>
+                  </span>
+                </span>
+              </h3>
+
+              {/* Descrição e etiqueta centralizadas no mobile (< 1024px) */}
+              <div className="lg:hidden mt-3 flex flex-col items-center">
+                <span
+                  ref={tagMarRef}
+                  className="font-text font-semibold uppercase tracking-[0.25em] text-[12px] text-[#F5E6D0]/85 select-none"
+                  style={{ fontFamily: 'var(--font-text)' }}
+                >
+                  COSTA DE UBATUBA
+                </span>
+                <p
+                  ref={descMarRef}
+                  className="mt-2 font-text font-medium text-[#F5E6D0]/92 text-[clamp(0.95rem,1.1vw,1.0625rem)] leading-[1.5] max-w-[36ch]"
+                  style={{
+                    fontFamily: 'var(--font-text)',
+                    textWrap: 'balance',
+                  }}
+                >
+                  Polvo tenro grelhado, camarões e peixe fresco do dia dos pescadores locais.
+                </p>
               </div>
-
-              {/* Descrição enxuta de 1 linha */}
-              {/* 
-                Texto anterior completo:
-                "Polvo tenro grelhado, camarões pistola na brasa e peixe do dia fresco dos pescadores locais."
-                TODO: confirmar com o restaurante origem dos pescados e cortes.
-              */}
-              <p
-                ref={descMarRef}
-                className="mt-4 font-text font-medium text-[#F5E6D0]/92 text-[clamp(0.95rem,1.1vw,1.0625rem)] leading-[1.5] max-w-[40ch]"
-                style={{
-                  fontFamily: 'var(--font-text)',
-                  textWrap: 'balance',
-                }}
-              >
-                Polvo tenro grelhado, camarões e peixe fresco do dia dos pescadores locais.
-              </p>
-
-              {/* Etiqueta sem pílula */}
-              <span
-                ref={tagMarRef}
-                className="mt-3 font-text font-semibold uppercase tracking-[0.25em] text-[12px] text-[#F5E6D0]/85 select-none"
-                style={{ fontFamily: 'var(--font-text)' }}
-              >
-                COSTA DE UBATUBA
-              </span>
             </div>
           </div>
         </div>
@@ -766,13 +842,9 @@ export const KitchenSection: React.FC = () => {
         {/* ============================================================== */}
         {/* SELO CENTRAL H2 ("DUAS BRASAS, UMA MESA")                      */}
         {/* ============================================================== */}
-        {/* 
-          Desktop: posicionado absolute sobre a emenda vertical dos painéis a ~46% da altura
-          Mobile: posicionado sobre a emenda horizontal entre os dois painéis
-        */}
         <div
           ref={badgeRef}
-          className="absolute z-20 left-1/2 -translate-x-1/2 pointer-events-none select-none top-1/2 -translate-y-1/2 lg:top-[46%]"
+          className="absolute z-20 left-1/2 -translate-x-1/2 pointer-events-none select-none top-1/2 -translate-y-1/2 lg:top-[42%]"
         >
           <div className="flex items-center gap-3 sm:gap-4 px-5 py-2.5 bg-[#14100D]/80 shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
             <span className="w-8 sm:w-10 h-[1px] bg-[#F5E6D0]/80 inline-block shrink-0" />
@@ -790,19 +862,94 @@ export const KitchenSection: React.FC = () => {
             <span className="w-8 sm:w-10 h-[1px] bg-[#F5E6D0]/80 inline-block shrink-0" />
           </div>
         </div>
+
+        {/* ============================================================== */}
+        {/* RODAPÉ EM 3 COLUNAS SOBRE OS VÍDEOS (DESKTOP >= 1024px)        */}
+        {/* Fixado à seção (não aos painéis), para não reflowar no hover  */}
+        {/* ============================================================== */}
+        <div
+          ref={bottom3ColsRef}
+          className="hidden lg:grid absolute bottom-0 inset-x-0 z-20 pointer-events-auto items-end grid-cols-[1fr_auto_1fr]"
+          style={{
+            paddingLeft: 'clamp(24px, 3vw, 48px)',
+            paddingRight: 'clamp(24px, 3vw, 48px)',
+            paddingBottom: 'clamp(24px, 3vw, 44px)',
+          }}
+        >
+          {/* Coluna Esquerda: etiqueta PARRILLA + descrição */}
+          <div className="flex flex-col items-start justify-end text-left pr-6">
+            <span
+              className="font-text font-semibold uppercase text-[12px] text-[#F5E6D0]/90 select-none"
+              style={{
+                fontFamily: 'var(--font-text)',
+                letterSpacing: '0.25em',
+              }}
+            >
+              PARRILLA
+            </span>
+            <p
+              className="mt-1.5 font-text font-medium text-[15px] leading-[1.5] text-[#F5E6D0] max-w-[34ch]"
+              style={{ fontFamily: 'var(--font-text)' }}
+            >
+              Picanha, chorizo e assado de tira no ponto certo, selados na lenha com flor de sal marinho.
+            </p>
+          </div>
+
+          {/* Coluna Central: Frase em itálico + botão pequeno VER CARDÁPIO */}
+          <div className="flex flex-col items-center justify-end text-center px-4">
+            <p
+              className="font-display italic text-[#F5E6D0] leading-[1.4] text-center max-w-[30ch] text-[clamp(0.95rem,1.2vw,1.15rem)]"
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontWeight: 500,
+                textWrap: 'balance',
+              }}
+            >
+              “A força do pasto encontra a maresia do Atlântico sobre a mesma lenha viva.”
+            </p>
+            <a
+              href="/cardapio"
+              className="mt-4 inline-flex items-center justify-center rounded-[6px] bg-[#F5E6D0] text-[#14100D] hover:bg-[#E8832A] hover:text-[#14100D] transition-colors duration-200 font-text font-semibold uppercase text-[13px] shadow-sm select-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#E8832A]"
+              style={{
+                fontFamily: 'var(--font-text)',
+                letterSpacing: '0.08em',
+                padding: '10px 22px',
+              }}
+            >
+              VER CARDÁPIO
+            </a>
+          </div>
+
+          {/* Coluna Direita: etiqueta COSTA DE UBATUBA + descrição */}
+          <div className="flex flex-col items-end justify-end text-right pl-6">
+            <span
+              className="font-text font-semibold uppercase text-[12px] text-[#F5E6D0]/90 select-none text-right"
+              style={{
+                fontFamily: 'var(--font-text)',
+                letterSpacing: '0.25em',
+              }}
+            >
+              COSTA DE UBATUBA
+            </span>
+            <p
+              className="mt-1.5 font-text font-medium text-[15px] leading-[1.5] text-[#F5E6D0] max-w-[34ch] text-right"
+              style={{ fontFamily: 'var(--font-text)' }}
+            >
+              Polvo tenro grelhado, camarões e peixe fresco do dia dos pescadores locais.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* ============================================================== */}
-      {/* BLOCO INFERIOR (FRASE, BOTÃO, WHATSAPP E DRINKS)               */}
+      {/* BLOCO EXCLUSIVO MOBILE (< 1024px): FRASE + BOTÃO               */}
       {/* ============================================================== */}
       <div
-        ref={bottomContainerRef}
-        className="relative z-10 w-full bg-[#14100D] py-[clamp(44px,5vw,72px)] px-6 flex flex-col items-center text-center"
+        ref={mobileBottomBlockRef}
+        className="lg:hidden relative z-10 w-full bg-[#14100D] py-10 px-6 flex flex-col items-center text-center"
       >
-        {/* Frase em itálico */}
         <p
-          ref={bottomQuoteRef}
-          className="font-display italic text-[#F5E6D0] leading-[1.4] text-center max-w-[40ch] text-[clamp(1.15rem,1.7vw,1.5rem)]"
+          className="font-display italic text-[#F5E6D0] leading-[1.4] text-center max-w-[32ch] text-[clamp(1.05rem,1.4vw,1.25rem)]"
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 500,
@@ -811,47 +958,38 @@ export const KitchenSection: React.FC = () => {
         >
           “A força do pasto encontra a maresia do Atlântico sobre a mesma lenha viva.”
         </p>
+        <a
+          href="/cardapio"
+          className="mt-6 inline-flex items-center justify-center rounded-[6px] bg-[#F5E6D0] text-[#14100D] hover:bg-[#E8832A] hover:text-[#14100D] transition-colors duration-200 font-text font-semibold uppercase tracking-[0.08em] text-[13px] shadow-md py-[10px] px-[22px] select-none"
+          style={{ fontFamily: 'var(--font-text)' }}
+        >
+          VER CARDÁPIO
+        </a>
+      </div>
 
-        {/* Botão Principal: VER CARDÁPIO */}
-        <div className="mt-8 w-full flex justify-center">
-          <a
-            ref={bottomBtnRef}
-            href="/cardapio"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-[6px] bg-[#F5E6D0] text-[#14100D] hover:bg-[#E8832A] hover:text-[#14100D] active:translate-y-0.5 transition-all duration-300 font-text font-semibold uppercase tracking-[0.08em] text-[14px] sm:text-[15px] shadow-lg w-full max-w-[340px] sm:max-w-[420px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#E8832A]"
-            style={{ fontFamily: 'var(--font-text)' }}
-          >
-            <span>VER CARDÁPIO</span>
-            <ArrowUpRight className="w-[18px] h-[18px]" />
-          </a>
-        </div>
-
-        {/* Link Secundário: Consultar pratos do dia no WhatsApp */}
-        <div className="mt-4">
-          <a
-            ref={bottomLinkRef}
-            href={siteConfig.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-text font-medium text-[15px] sm:text-[16px] text-[#F5E6D0] hover:text-[#E8832A] transition-colors duration-200 border-b-2 border-[#E8832A] pb-0.5"
-            style={{ fontFamily: 'var(--font-text)' }}
-          >
-            <span>Consultar pratos do dia no WhatsApp</span>
-            <ArrowUpRight className="w-4 h-4 text-[#E8832A]" />
-          </a>
-        </div>
-
-        {/* Linha Pequena de Drinks (substitui o card "Drinks da Casa") */}
-        {/*
-          Card anterior preservado para referência:
-          "Drinks da Casa: Coquetéis autorais em tons âmbar, infusões de botânicos da mata, caipirinhas de frutas locais e chopp trincando."
-        */}
-        <p
-          ref={bottomDrinksRef}
-          className="mt-6 font-text text-[15px] text-[#F5E6D0]/75"
+      {/* ============================================================== */}
+      {/* FAIXA FINA CARVÃO: WHATSAPP E BRINDE (COMUM DESKTOP E MOBILE)  */}
+      {/* ============================================================== */}
+      <div
+        ref={bottomBarRef}
+        className="relative z-10 w-full bg-[#14100D] py-[20px] px-6 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-center border-t border-[#F5E6D0]/8"
+      >
+        <a
+          href={siteConfig.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 font-text font-medium text-[15px] text-[#F5E6D0] hover:text-[#E8832A] transition-colors duration-200 border-b-2 border-[#E8832A] pb-0.5"
+          style={{ fontFamily: 'var(--font-text)' }}
+        >
+          Consultar pratos do dia no WhatsApp
+        </a>
+        <span className="hidden sm:inline text-[#F5E6D0]/50 select-none">·</span>
+        <span
+          className="font-text text-[15px] text-[#F5E6D0]/75"
           style={{ fontFamily: 'var(--font-text)' }}
         >
           E para brindar: coquetelaria autoral e chopp trincando.
-        </p>
+        </span>
       </div>
     </section>
   );

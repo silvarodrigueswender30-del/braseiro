@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
   <!-- Contorno externo adesivo carvão (#14100D) atrás de todas as ondas -->
-  <g class="icon-waves-outline" fill="none" stroke="#14100D" stroke-width="68" stroke-linecap="round" stroke-linejoin="round">
+  <g class="icon-waves-outline" fill="none" stroke="#14100D" stroke-width="54" stroke-linecap="round" stroke-linejoin="round">
     <!-- Onda 1 (superior) -->
     <path class="icon-wave-outline--1" d="M 120 360 C 220 250, 360 250, 460 360 C 560 470, 700 470, 800 360 C 850 305, 900 305, 940 340" />
     <!-- Onda 2 (meio) -->
