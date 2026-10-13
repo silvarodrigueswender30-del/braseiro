@@ -81,11 +81,12 @@ export const heroVideos = [
   'https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/vid3.mp4',
 ];
 
-// PLACEHOLDERS: TODO - preencher com os dados finais de contato/endereço do restaurante
-const PHONE_RAW = '5512999999999'; // TODO: preencher com o telefone real
-const PHONE_DISPLAY = '(12) 99999-9999'; // TODO: preencher com o telefone visível real
-const ADDRESS_FULL = 'Rua Guarani, 370 - Itaguá, Ubatuba - SP'; // TODO: confirmar endereço exato
-const INSTAGRAM_HANDLE = '@braseirocaicara.ubatuba'; // TODO: confirmar usuário do Instagram
+// Dados oficiais de contato do restaurante
+const PHONE_RAW = '551232083369'; // WhatsApp oficial comercial
+const PHONE_DISPLAY = '(12) 3208-3369';
+const ADDRESS_FULL = 'Rua Guarani, 370 - Itaguá, Ubatuba - SP';
+// Instagram: mantido vazio para ocultar o item até confirmação do perfil oficial
+const INSTAGRAM_HANDLE = ''; 
 const GOOGLE_MAPS_URL = 'https://maps.google.com/?q=Braseiro+Caiçara+Ubatuba';
 const PARKING_INFO = 'Vagas na rua e estacionamento próximo';
 
@@ -114,7 +115,7 @@ export const siteConfig: SiteConfig = {
   parkingInfo: PARKING_INFO,
   googleMapsUrl: GOOGLE_MAPS_URL,
   instagramHandle: INSTAGRAM_HANDLE,
-  instagramUrl: 'https://instagram.com/braseirocaicara.ubatuba', // [CONFIRMAR]
+  instagramUrl: '',
   navLinks: [
     { label: 'Início', href: '/#inicio' },
     { label: 'A Casa', href: '/#casa' },

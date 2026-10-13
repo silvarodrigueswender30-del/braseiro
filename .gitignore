@@ -11,15 +11,26 @@ scratch/
 .DS_Store
 *.local
 
+# Environment & credentials
+.env
+.env.*
+*.pem
+*.key
+
 # Temporary root screenshots
 screenshot-*.png
 screenshots/
 
+# Research and original large media assets
+documentos de pesquisas de marca/
+img-ideiais/
+*.mp4
+*.mov
+
 # Vercel
 .vercel/
+.vercel
 
 # Editor
 .vscode/
 .idea/
-
-.vercel
