@@ -410,6 +410,7 @@ export const Footer: React.FC = () => {
         backgroundColor: '#F5E6D0',
         color: '#14100D',
         paddingTop: 'clamp(72px, 8vw, 120px)',
+        paddingBottom: 'calc(clamp(72px, 8vw, 120px) + var(--dock-h, 0px))',
         paddingLeft: 'clamp(24px, 5vw, 80px)',
         paddingRight: 'clamp(24px, 5vw, 80px)',
       }}

@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { WhatsAppButton } from '@/components/WhatsAppButton';
+import { AtalhosDock } from '@/components/AtalhosDock';
 import { HomePage } from '@/pages/HomePage';
 import { ScrollToTopOnRoute } from '@/components/ScrollToTopOnRoute';
 
@@ -72,8 +72,8 @@ export const App: React.FC = () => {
         {/* Rodapé Global */}
         <Footer />
 
-        {/* Botão Flutuante de WhatsApp */}
-        <WhatsAppButton />
+        {/* Dock de Atalhos Cardápio e WhatsApp */}
+        <AtalhosDock />
       </div>
     </BrowserRouter>
   );
