@@ -347,7 +347,7 @@ export const SignatureDishesSection: React.FC = () => {
     <section
       id="pratos"
       ref={sectionRef}
-      className="grao relative w-full overflow-x-clip bg-[#F5E6D0] text-[#14100D] scroll-mt-16"
+      className="grao relative w-full overflow-x-clip bg-[#F5E6D0] text-[#14100D] scroll-mt-20"
       style={{
         backgroundColor: '#F5E6D0',
         paddingTop: 'clamp(72px, 8vw, 120px)',
@@ -420,7 +420,7 @@ export const SignatureDishesSection: React.FC = () => {
               <span
                 ref={titleLine2InnerRef}
                 data-reveal="true"
-                className="block lowercase italic text-[#E8832A] whitespace-nowrap text-[clamp(4.2rem,21vw,7.2rem)] lg:text-[clamp(5rem,11vw,10rem)]"
+                className="block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap text-[clamp(4.2rem,21vw,7.2rem)] lg:text-[clamp(5rem,11vw,10rem)]"
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontWeight: 900,

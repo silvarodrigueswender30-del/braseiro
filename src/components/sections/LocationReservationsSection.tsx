@@ -34,6 +34,7 @@ export const LocationReservationsSection: React.FC = () => {
   const [horario, setHorario] = useState('19:30');
   const [pessoas, setPessoas] = useState('2');
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   // Erros de validação
   const [errors, setErrors] = useState<{
@@ -56,6 +57,28 @@ export const LocationReservationsSection: React.FC = () => {
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
   }, []);
+
+  // Validação em tempo real acessível ao perder foco (onBlur)
+  const handleBlurField = (field: 'nome' | 'data' | 'horario' | 'pessoas') => {
+    setFocusedField(null);
+    const newErrors = { ...errors };
+
+    if (field === 'nome') {
+      if (!nome.trim()) newErrors.nome = 'Informe seu nome para a reserva';
+      else delete newErrors.nome;
+    } else if (field === 'data') {
+      if (!data) newErrors.data = 'Selecione a data';
+      else delete newErrors.data;
+    } else if (field === 'horario') {
+      if (!horario) newErrors.horario = 'Selecione o horário';
+      else delete newErrors.horario;
+    } else if (field === 'pessoas') {
+      if (!pessoas) newErrors.pessoas = 'Selecione o número de pessoas';
+      else delete newErrors.pessoas;
+    }
+
+    setErrors(newErrors);
+  };
 
   // Data mínima: hoje (yyyy-mm-dd)
   const todayStr = new Date().toISOString().split('T')[0];
@@ -107,6 +130,7 @@ export const LocationReservationsSection: React.FC = () => {
 
     const whatsappUrl = `https://wa.me/${siteConfig.phoneRaw}?text=${encodeURIComponent(msg)}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    setIsSubmitted(true);
   };
 
   // Animações GSAP + ScrollTrigger
@@ -246,7 +270,7 @@ export const LocationReservationsSection: React.FC = () => {
       ref={sectionRef}
       id="contato-reservas"
       aria-labelledby="reservas-heading"
-      className="relative w-full overflow-hidden bg-[#14100D] text-[#F5E6D0] scroll-mt-16"
+      className="relative w-full overflow-hidden bg-[#14100D] text-[#F5E6D0] scroll-mt-20"
       style={{
         position: 'relative',
         isolation: 'isolate',
@@ -470,225 +494,249 @@ export const LocationReservationsSection: React.FC = () => {
           {/* COLUNA ESQUERDA: FORMULÁRIO SEM CAIXAS                       */}
           {/* ============================================================ */}
           <div ref={formColRef} className="w-full flex flex-col">
-            <form onSubmit={handleFormSubmit} noValidate className="w-full flex flex-col">
-              {/* Grid 2x2 para Data, Pessoas, Horário e Nome (Nome ocupa 2 colunas) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-7">
-                {/* 1) DATA */}
-                <div className="relative flex flex-col">
-                  <label
-                    htmlFor="reserva-data"
-                    className="font-text font-semibold uppercase text-[12px] tracking-[0.2em] text-[#F5E6D0]/80 mb-1"
-                    style={{ fontFamily: 'var(--font-text)' }}
-                  >
-                    DATA
-                  </label>
-                  <input
-                    id="reserva-data"
-                    type="date"
-                    min={todayStr}
-                    value={data}
-                    onChange={(e) => {
-                      setData(e.target.value);
-                      if (errors.data) setErrors({ ...errors, data: undefined });
-                    }}
-                    onFocus={() => setFocusedField('data')}
-                    onBlur={() => setFocusedField(null)}
-                    required
-                    aria-describedby={errors.data ? 'erro-data' : undefined}
-                    className="w-full bg-transparent border-0 border-b border-[#F5E6D0]/45 py-2 px-0 text-[#F5E6D0] font-text font-medium text-[18px] focus:outline-none cursor-pointer"
-                    style={{
-                      fontFamily: 'var(--font-text)',
-                      colorScheme: 'dark',
-                    }}
-                  />
-                  {/* Linha de foco animada scaleX */}
-                  <span
-                    className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E8832A] pointer-events-none transition-transform duration-250 ease-out origin-left"
-                    style={{
-                      transform: focusedField === 'data' ? 'scaleX(1)' : 'scaleX(0)',
-                    }}
-                  />
-                  {errors.data && (
-                    <span id="erro-data" aria-live="polite" className="mt-1.5 text-[13px] text-[#F4A340] font-text font-medium">
-                      {errors.data}
-                    </span>
-                  )}
+            {isSubmitted ? (
+              <div
+                role="status"
+                aria-live="polite"
+                className="w-full p-6 sm:p-8 rounded-[8px] bg-[#14100D] border border-[#E8832A]/50 text-[#F5E6D0] flex flex-col items-start gap-4 shadow-xl"
+              >
+                <div className="flex items-center gap-3 text-[#E8832A]">
+                  <span className="w-3 h-3 rounded-full bg-[#E8832A] animate-ping" />
+                  <span className="font-text font-bold text-[16px] uppercase tracking-wider">
+                    Reserva solicitada pelo WhatsApp
+                  </span>
                 </div>
-
-                {/* 2) PESSOAS */}
-                <div className="relative flex flex-col">
-                  <label
-                    htmlFor="reserva-pessoas"
-                    className="font-text font-semibold uppercase text-[12px] tracking-[0.2em] text-[#F5E6D0]/80 mb-1"
-                    style={{ fontFamily: 'var(--font-text)' }}
-                  >
-                    PESSOAS
-                  </label>
-                  <select
-                    id="reserva-pessoas"
-                    value={pessoas}
-                    onChange={(e) => {
-                      setPessoas(e.target.value);
-                      if (errors.pessoas) setErrors({ ...errors, pessoas: undefined });
-                    }}
-                    onFocus={() => setFocusedField('pessoas')}
-                    onBlur={() => setFocusedField(null)}
-                    required
-                    aria-describedby={errors.pessoas ? 'erro-pessoas' : undefined}
-                    className="w-full bg-transparent border-0 border-b border-[#F5E6D0]/45 py-2 px-0 text-[#F5E6D0] font-text font-medium text-[18px] focus:outline-none cursor-pointer"
-                    style={{
-                      fontFamily: 'var(--font-text)',
-                      colorScheme: 'dark',
-                    }}
-                  >
-                    {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
-                      <option key={n} value={n} className="bg-[#14100D] text-[#F5E6D0]">
-                        {n} {n === 1 ? 'pessoa' : 'pessoas'}
-                      </option>
-                    ))}
-                    <option value="13+" className="bg-[#14100D] text-[#F5E6D0]">
-                      13 ou mais (falar com a gente)
-                    </option>
-                  </select>
-                  <span
-                    className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E8832A] pointer-events-none transition-transform duration-250 ease-out origin-left"
-                    style={{
-                      transform: focusedField === 'pessoas' ? 'scaleX(1)' : 'scaleX(0)',
-                    }}
-                  />
-                  {errors.pessoas && (
-                    <span id="erro-pessoas" aria-live="polite" className="mt-1.5 text-[13px] text-[#F4A340] font-text font-medium">
-                      {errors.pessoas}
-                    </span>
-                  )}
-                </div>
-
-                {/* 3) HORÁRIO */}
-                <div className="relative flex flex-col">
-                  <label
-                    htmlFor="reserva-horario"
-                    className="font-text font-semibold uppercase text-[12px] tracking-[0.2em] text-[#F5E6D0]/80 mb-1"
-                    style={{ fontFamily: 'var(--font-text)' }}
-                  >
-                    HORÁRIO
-                  </label>
-                  {/* TODO: confirmar último horário de reserva com o restaurante */}
-                  <select
-                    id="reserva-horario"
-                    value={horario}
-                    onChange={(e) => {
-                      setHorario(e.target.value);
-                      if (errors.horario) setErrors({ ...errors, horario: undefined });
-                    }}
-                    onFocus={() => setFocusedField('horario')}
-                    onBlur={() => setFocusedField(null)}
-                    required
-                    aria-describedby={errors.horario ? 'erro-horario' : undefined}
-                    className="w-full bg-transparent border-0 border-b border-[#F5E6D0]/45 py-2 px-0 text-[#F5E6D0] font-text font-medium text-[18px] focus:outline-none cursor-pointer"
-                    style={{
-                      fontFamily: 'var(--font-text)',
-                      colorScheme: 'dark',
-                    }}
-                  >
-                    {[
-                      '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
-                      '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00',
-                      '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30',
-                      '22:00', '22:30',
-                    ].map((h) => (
-                      <option key={h} value={h} className="bg-[#14100D] text-[#F5E6D0]">
-                        {h}
-                      </option>
-                    ))}
-                  </select>
-                  <span
-                    className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E8832A] pointer-events-none transition-transform duration-250 ease-out origin-left"
-                    style={{
-                      transform: focusedField === 'horario' ? 'scaleX(1)' : 'scaleX(0)',
-                    }}
-                  />
-                  {errors.horario && (
-                    <span id="erro-horario" aria-live="polite" className="mt-1.5 text-[13px] text-[#F4A340] font-text font-medium">
-                      {errors.horario}
-                    </span>
-                  )}
-                </div>
-
-                {/* 4) NOME (Ocupa a linha inteira em sm:col-span-2) */}
-                <div className="sm:col-span-2 relative flex flex-col">
-                  <label
-                    htmlFor="reserva-nome"
-                    className="font-text font-semibold uppercase text-[12px] tracking-[0.2em] text-[#F5E6D0]/80 mb-1"
-                    style={{ fontFamily: 'var(--font-text)' }}
-                  >
-                    NOME COMPLETO
-                  </label>
-                  <input
-                    id="reserva-nome"
-                    type="text"
-                    autoComplete="name"
-                    value={nome}
-                    onChange={(e) => {
-                      setNome(e.target.value);
-                      if (errors.nome) setErrors({ ...errors, nome: undefined });
-                    }}
-                    onFocus={() => setFocusedField('nome')}
-                    onBlur={() => setFocusedField(null)}
-                    placeholder="Seu nome"
-                    required
-                    aria-describedby={errors.nome ? 'erro-nome' : undefined}
-                    className="w-full bg-transparent border-0 border-b border-[#F5E6D0]/45 py-2 px-0 text-[#F5E6D0] placeholder-[#F5E6D0]/35 font-text font-medium text-[18px] focus:outline-none"
-                    style={{ fontFamily: 'var(--font-text)' }}
-                  />
-                  <span
-                    className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E8832A] pointer-events-none transition-transform duration-250 ease-out origin-left"
-                    style={{
-                      transform: focusedField === 'nome' ? 'scaleX(1)' : 'scaleX(0)',
-                    }}
-                  />
-                  {errors.nome && (
-                    <span id="erro-nome" aria-live="polite" className="mt-1.5 text-[13px] text-[#F4A340] font-text font-medium">
-                      {errors.nome}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Botão de Envio */}
-              <div className="mt-9 flex flex-col items-start w-full">
+                <p className="font-text text-[15px] text-[#F5E6D0]/90 leading-relaxed m-0">
+                  Abrimos o WhatsApp com a sua solicitação para <strong>{pessoas} {pessoas === '1' ? 'pessoa' : 'pessoas'}</strong> no dia <strong>{data ? data.split('-').reverse().join('/') : ''}</strong> às <strong>{horario}</strong> em nome de <strong>{nome}</strong>. Aguarde a confirmação de nossa equipe!
+                </p>
                 <button
-                  type="submit"
-                  disabled={isDummyNumber}
-                  aria-disabled={isDummyNumber}
-                  className={`inline-flex items-center justify-center gap-2 rounded-[6px] bg-[#F5E6D0] text-[#14100D] transition-colors duration-200 font-text font-semibold uppercase text-[14px] tracking-[0.08em] py-4 px-7 select-none shadow-md w-full sm:w-auto max-w-[420px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#E8832A] ${
-                    isDummyNumber
-                      ? 'opacity-60 cursor-not-allowed'
-                      : 'hover:bg-[#E8832A] hover:text-[#14100D] cursor-pointer'
-                  }`}
-                  style={{ fontFamily: 'var(--font-text)' }}
+                  type="button"
+                  onClick={() => setIsSubmitted(false)}
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-[6px] bg-[#F5E6D0] text-[#14100D] hover:bg-[#E8832A] hover:text-[#14100D] transition-colors py-3.5 px-6 text-[13px] font-text font-semibold uppercase tracking-[0.08em] select-none cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8832A]"
                 >
-                  <span>RESERVAR PELO WHATSAPP</span>
-                  <ArrowUpRight className="w-[18px] h-[18px] shrink-0" />
+                  <span>Abrir de novo o formulário</span>
                 </button>
-
-                {/* Linha informativa / aviso se número for dummy */}
-                {isDummyNumber ? (
-                  <p
-                    className="mt-3 text-[14px] text-[#F4A340] font-text m-0"
-                    style={{ fontFamily: 'var(--font-text)' }}
-                  >
-                    Reservas por WhatsApp em breve (aguardando número oficial do restaurante).
-                  </p>
-                ) : (
-                  <p
-                    className="mt-3 text-[14px] text-[#F5E6D0]/75 font-text m-0"
-                    style={{ fontFamily: 'var(--font-text)' }}
-                  >
-                    A reserva é confirmada por mensagem do restaurante.
-                  </p>
-                )}
               </div>
-            </form>
+            ) : (
+              <form onSubmit={handleFormSubmit} noValidate className="w-full flex flex-col">
+                {/* Grid 2x2 para Data, Pessoas, Horário e Nome (Nome ocupa 2 colunas) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-7">
+                  {/* 1) DATA */}
+                  <div className="relative flex flex-col">
+                    <label
+                      htmlFor="reserva-data"
+                      className="font-text font-semibold uppercase text-[12px] tracking-[0.2em] text-[#F5E6D0]/80 mb-1"
+                      style={{ fontFamily: 'var(--font-text)' }}
+                    >
+                      DATA
+                    </label>
+                    <input
+                      id="reserva-data"
+                      type="date"
+                      min={todayStr}
+                      value={data}
+                      onChange={(e) => {
+                        setData(e.target.value);
+                        if (errors.data) setErrors({ ...errors, data: undefined });
+                      }}
+                      onFocus={() => setFocusedField('data')}
+                      onBlur={() => handleBlurField('data')}
+                      required
+                      aria-describedby={errors.data ? 'erro-data' : undefined}
+                      className="w-full bg-transparent border-0 border-b border-[#F5E6D0]/45 py-2 px-0 text-[#F5E6D0] font-text font-medium text-[18px] focus:outline-none cursor-pointer"
+                      style={{
+                        fontFamily: 'var(--font-text)',
+                        colorScheme: 'dark',
+                      }}
+                    />
+                    {/* Linha de foco animada scaleX */}
+                    <span
+                      className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E8832A] pointer-events-none transition-transform duration-250 ease-out origin-left"
+                      style={{
+                        transform: focusedField === 'data' ? 'scaleX(1)' : 'scaleX(0)',
+                      }}
+                    />
+                    {errors.data && (
+                      <span id="erro-data" role="alert" aria-live="polite" className="mt-1.5 text-[13px] text-[#F4A340] font-text font-medium">
+                        {errors.data}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* 2) PESSOAS */}
+                  <div className="relative flex flex-col">
+                    <label
+                      htmlFor="reserva-pessoas"
+                      className="font-text font-semibold uppercase text-[12px] tracking-[0.2em] text-[#F5E6D0]/80 mb-1"
+                      style={{ fontFamily: 'var(--font-text)' }}
+                    >
+                      PESSOAS
+                    </label>
+                    <select
+                      id="reserva-pessoas"
+                      value={pessoas}
+                      onChange={(e) => {
+                        setPessoas(e.target.value);
+                        if (errors.pessoas) setErrors({ ...errors, pessoas: undefined });
+                      }}
+                      onFocus={() => setFocusedField('pessoas')}
+                      onBlur={() => handleBlurField('pessoas')}
+                      required
+                      aria-describedby={errors.pessoas ? 'erro-pessoas' : undefined}
+                      className="w-full bg-transparent border-0 border-b border-[#F5E6D0]/45 py-2 px-0 text-[#F5E6D0] font-text font-medium text-[18px] focus:outline-none cursor-pointer"
+                      style={{
+                        fontFamily: 'var(--font-text)',
+                        colorScheme: 'dark',
+                      }}
+                    >
+                      {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
+                        <option key={n} value={n} className="bg-[#14100D] text-[#F5E6D0]">
+                          {n} {n === 1 ? 'pessoa' : 'pessoas'}
+                        </option>
+                      ))}
+                      <option value="13+" className="bg-[#14100D] text-[#F5E6D0]">
+                        13 ou mais (falar com a gente)
+                      </option>
+                    </select>
+                    <span
+                      className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E8832A] pointer-events-none transition-transform duration-250 ease-out origin-left"
+                      style={{
+                        transform: focusedField === 'pessoas' ? 'scaleX(1)' : 'scaleX(0)',
+                      }}
+                    />
+                    {errors.pessoas && (
+                      <span id="erro-pessoas" role="alert" aria-live="polite" className="mt-1.5 text-[13px] text-[#F4A340] font-text font-medium">
+                        {errors.pessoas}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* 3) HORÁRIO */}
+                  <div className="relative flex flex-col">
+                    <label
+                      htmlFor="reserva-horario"
+                      className="font-text font-semibold uppercase text-[12px] tracking-[0.2em] text-[#F5E6D0]/80 mb-1"
+                      style={{ fontFamily: 'var(--font-text)' }}
+                    >
+                      HORÁRIO
+                    </label>
+                    <select
+                      id="reserva-horario"
+                      value={horario}
+                      onChange={(e) => {
+                        setHorario(e.target.value);
+                        if (errors.horario) setErrors({ ...errors, horario: undefined });
+                      }}
+                      onFocus={() => setFocusedField('horario')}
+                      onBlur={() => handleBlurField('horario')}
+                      required
+                      aria-describedby={errors.horario ? 'erro-horario' : undefined}
+                      className="w-full bg-transparent border-0 border-b border-[#F5E6D0]/45 py-2 px-0 text-[#F5E6D0] font-text font-medium text-[18px] focus:outline-none cursor-pointer"
+                      style={{
+                        fontFamily: 'var(--font-text)',
+                        colorScheme: 'dark',
+                      }}
+                    >
+                      {[
+                        '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+                        '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00',
+                        '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30',
+                        '22:00', '22:30',
+                      ].map((h) => (
+                        <option key={h} value={h} className="bg-[#14100D] text-[#F5E6D0]">
+                          {h}
+                        </option>
+                      ))}
+                    </select>
+                    <span
+                      className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E8832A] pointer-events-none transition-transform duration-250 ease-out origin-left"
+                      style={{
+                        transform: focusedField === 'horario' ? 'scaleX(1)' : 'scaleX(0)',
+                      }}
+                    />
+                    {errors.horario && (
+                      <span id="erro-horario" role="alert" aria-live="polite" className="mt-1.5 text-[13px] text-[#F4A340] font-text font-medium">
+                        {errors.horario}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* 4) NOME (Ocupa a linha inteira em sm:col-span-2) */}
+                  <div className="sm:col-span-2 relative flex flex-col">
+                    <label
+                      htmlFor="reserva-nome"
+                      className="font-text font-semibold uppercase text-[12px] tracking-[0.2em] text-[#F5E6D0]/80 mb-1"
+                      style={{ fontFamily: 'var(--font-text)' }}
+                    >
+                      NOME COMPLETO
+                    </label>
+                    <input
+                      id="reserva-nome"
+                      type="text"
+                      autoComplete="name"
+                      value={nome}
+                      onChange={(e) => {
+                        setNome(e.target.value);
+                        if (errors.nome) setErrors({ ...errors, nome: undefined });
+                      }}
+                      onFocus={() => setFocusedField('nome')}
+                      onBlur={() => handleBlurField('nome')}
+                      placeholder="Seu nome"
+                      required
+                      aria-describedby={errors.nome ? 'erro-nome' : undefined}
+                      className="w-full bg-transparent border-0 border-b border-[#F5E6D0]/45 py-2 px-0 text-[#F5E6D0] placeholder-[#F5E6D0]/35 font-text font-medium text-[18px] focus:outline-none"
+                      style={{ fontFamily: 'var(--font-text)' }}
+                    />
+                    <span
+                      className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E8832A] pointer-events-none transition-transform duration-250 ease-out origin-left"
+                      style={{
+                        transform: focusedField === 'nome' ? 'scaleX(1)' : 'scaleX(0)',
+                      }}
+                    />
+                    {errors.nome && (
+                      <span id="erro-nome" role="alert" aria-live="polite" className="mt-1.5 text-[13px] text-[#F4A340] font-text font-medium">
+                        {errors.nome}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Botão de Envio */}
+                <div className="mt-9 flex flex-col items-start w-full">
+                  <button
+                    type="submit"
+                    disabled={isDummyNumber}
+                    aria-disabled={isDummyNumber}
+                    className={`inline-flex items-center justify-center gap-2 rounded-[6px] bg-[#F5E6D0] text-[#14100D] transition-colors duration-200 font-text font-semibold uppercase text-[14px] tracking-[0.08em] py-4 px-7 select-none shadow-md w-full sm:w-auto max-w-[420px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#E8832A] ${
+                      isDummyNumber
+                        ? 'opacity-60 cursor-not-allowed'
+                        : 'hover:bg-[#E8832A] hover:text-[#14100D] cursor-pointer'
+                    }`}
+                    style={{ fontFamily: 'var(--font-text)' }}
+                  >
+                    <span>RESERVAR PELO WHATSAPP</span>
+                    <ArrowUpRight className="w-[18px] h-[18px] shrink-0" />
+                  </button>
+
+                  {/* Linha informativa / aviso se número for dummy */}
+                  {isDummyNumber ? (
+                    <p
+                      className="mt-3 text-[14px] text-[#F4A340] font-text m-0"
+                      style={{ fontFamily: 'var(--font-text)' }}
+                    >
+                      Reservas por WhatsApp em breve (aguardando número oficial do restaurante).
+                    </p>
+                  ) : (
+                    <p
+                      className="mt-3 text-[14px] text-[#F5E6D0]/75 font-text m-0"
+                      style={{ fontFamily: 'var(--font-text)' }}
+                    >
+                      A reserva é confirmada por mensagem do restaurante.
+                    </p>
+                  )}
+                </div>
+              </form>
+            )}
           </div>
 
           {/* ============================================================ */}

@@ -508,7 +508,7 @@ export const EventsSection: React.FC = () => {
                     }}
                   >
                     <span
-                      className="inline-block lowercase italic text-[#E8832A] whitespace-nowrap"
+                      className="inline-block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap"
                       style={{
                         fontWeight: 900,
                         fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
@@ -564,7 +564,7 @@ export const EventsSection: React.FC = () => {
                 {/* Traço laranja pincelado */}
                 <span
                   aria-hidden="true"
-                  className="inline-block shrink-0 rounded-full bg-[#E8832A] mt-2.5"
+                  className="inline-block shrink-0 rounded-full bg-[var(--brasa-creme-texto)] mt-2.5"
                   style={{
                     width: '22px',
                     height: '5px',
@@ -582,7 +582,7 @@ export const EventsSection: React.FC = () => {
               <li className="flex items-start gap-3.5">
                 <span
                   aria-hidden="true"
-                  className="inline-block shrink-0 rounded-full bg-[#E8832A] mt-2.5"
+                  className="inline-block shrink-0 rounded-full bg-[var(--brasa-creme-texto)] mt-2.5"
                   style={{
                     width: '22px',
                     height: '5px',
@@ -600,7 +600,7 @@ export const EventsSection: React.FC = () => {
               <li className="flex items-start gap-3.5">
                 <span
                   aria-hidden="true"
-                  className="inline-block shrink-0 rounded-full bg-[#E8832A] mt-2.5"
+                  className="inline-block shrink-0 rounded-full bg-[var(--brasa-creme-texto)] mt-2.5"
                   style={{
                     width: '22px',
                     height: '5px',

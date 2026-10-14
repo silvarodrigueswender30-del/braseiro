@@ -255,7 +255,7 @@ export const AmbianceSection: React.FC = () => {
       ref={sectionRef}
       id="ambiente"
       aria-labelledby="ambiente-heading"
-      className="relative w-full overflow-x-clip bg-[#14100D] text-[#F5E6D0] scroll-mt-16 pb-0"
+      className="relative w-full overflow-x-clip bg-[#14100D] text-[#F5E6D0] scroll-mt-20 pb-0"
       style={{
         backgroundColor: '#14100D',
       }}

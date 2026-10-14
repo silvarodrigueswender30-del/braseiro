@@ -133,8 +133,8 @@ export const REVIEWS: readonly ReviewItem[] = [
 
 // Paleta dos papéis de recorte
 const PAPER_COLORS: Record<'creme' | 'kraft' | 'laranja', { bg: string; starColor: string }> = {
-  creme: { bg: '#F5E6D0', starColor: '#E8832A' },
-  kraft: { bg: '#C9A878', starColor: '#E8832A' },
+  creme: { bg: '#F5E6D0', starColor: '#C4631A' },
+  kraft: { bg: '#C9A878', starColor: '#14100D' },
   laranja: { bg: '#F2A55E', starColor: '#14100D' },
 };
 

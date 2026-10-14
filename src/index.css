@@ -16,6 +16,8 @@
   --carvao: #14100D;
   --creme: #F5E6D0;
   --brasa: #E8832A;
+  --brasa-creme-grande: #C4631A; /* 3.32:1 contra #F5E6D0 (WCAG AA Texto Grande >= 3.0:1) */
+  --brasa-creme-texto: #A34B14;  /* 4.79:1 contra #F5E6D0 (WCAG AA Texto Normal >= 4.5:1) */
   --vermelho-terra: #B8352B;
   --azul-mar: #2F6FA8;
 
@@ -362,8 +364,12 @@ body {
   animation-delay: 1.6s;
 }
 
+.marquee:hover .marquee__track,
+.marquee:focus-within .marquee__track,
 .marquee:hover .icon-body,
-.marquee:hover .icon-spark {
+.marquee:hover .icon-spark,
+.marquee:focus-within .icon-body,
+.marquee:focus-within .icon-spark {
   animation-play-state: paused;
 }
 

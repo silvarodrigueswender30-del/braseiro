@@ -373,7 +373,7 @@ export const AboutSection: React.FC = () => {
             >
               <span
                 ref={addToLinesRef}
-                className="inline-flex items-baseline font-display font-[900] italic text-[#E8832A] leading-[0.8] -mt-[0.08em] text-[clamp(4.8rem,24vw,7.5rem)] sm:text-[clamp(5rem,9.5vw,8.5rem)]"
+                className="inline-flex items-baseline font-display font-[900] italic text-[var(--brasa-creme-grande)] leading-[0.8] -mt-[0.08em] text-[clamp(4.8rem,24vw,7.5rem)] sm:text-[clamp(5rem,9.5vw,8.5rem)]"
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
@@ -383,7 +383,7 @@ export const AboutSection: React.FC = () => {
                 <span
                   ref={chamaRef}
                   aria-hidden="true"
-                  className="inline-block h-[1em] w-auto -ml-[0.12em] -mb-[0.08em] align-[-0.1em] text-[#E8832A] select-none pointer-events-none origin-bottom -rotate-6 shrink-0"
+                  className="inline-block h-[1em] w-auto -ml-[0.12em] -mb-[0.08em] align-[-0.1em] text-[var(--brasa-creme-grande)] select-none pointer-events-none origin-bottom -rotate-6 shrink-0"
                 >
                   <ChamaIcon className="h-full w-auto" />
                 </span>
@@ -414,7 +414,7 @@ export const AboutSection: React.FC = () => {
           {/* Informações Práticas com Fio Fino */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-5 border-t border-[#14100D]/15 mb-7">
             <div>
-              <span className="block font-text font-semibold uppercase tracking-[0.2em] text-[12px] text-[#E8832A] mb-1">
+              <span className="block font-text font-semibold uppercase tracking-[0.2em] text-[12px] text-[var(--brasa-creme-texto)] mb-1">
                 HORÁRIO
               </span>
               <p className="font-text font-medium text-[16px] text-[#14100D] leading-snug">
@@ -423,7 +423,7 @@ export const AboutSection: React.FC = () => {
             </div>
 
             <div>
-              <span className="block font-text font-semibold uppercase tracking-[0.2em] text-[12px] text-[#E8832A] mb-1">
+              <span className="block font-text font-semibold uppercase tracking-[0.2em] text-[12px] text-[var(--brasa-creme-texto)] mb-1">
                 ONDE
               </span>
               <p className="font-text font-medium text-[16px] text-[#14100D] leading-snug">
@@ -433,7 +433,7 @@ export const AboutSection: React.FC = () => {
                 href={siteConfig.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-[13px] text-[#14100D] underline hover:text-[#E8832A] mt-1 transition-colors"
+                className="inline-block text-[13px] text-[#14100D] underline hover:text-[var(--brasa-creme-texto)] mt-1 transition-colors"
               >
                 Ver no Google Maps
               </a>
@@ -443,7 +443,7 @@ export const AboutSection: React.FC = () => {
           {/* Botões Editoriais */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
             <a
-              href="#reservas"
+              href="#contato-reservas"
               className="inline-flex items-center justify-center px-7 py-3.5 rounded-[6px] bg-[#14100D] text-[#F5E6D0] font-text font-semibold uppercase tracking-[0.08em] text-[13px] sm:text-[14px] hover:bg-[#B8352B] hover:text-white transition-colors duration-200 shadow-sm"
             >
               RESERVAR MESA
@@ -451,7 +451,7 @@ export const AboutSection: React.FC = () => {
 
             <a
               href="#cardapio"
-              className="inline-flex items-center justify-center py-2 text-[#14100D] font-text font-semibold uppercase tracking-[0.08em] text-[13px] sm:text-[14px] underline decoration-2 decoration-[#E8832A] underline-offset-4 hover:text-[#E8832A] transition-colors duration-200"
+              className="inline-flex items-center justify-center py-2 text-[#14100D] font-text font-semibold uppercase tracking-[0.08em] text-[13px] sm:text-[14px] underline decoration-2 decoration-[var(--brasa-creme-texto)] underline-offset-4 hover:text-[var(--brasa-creme-texto)] transition-colors duration-200"
             >
               VER CARDÁPIO
             </a>

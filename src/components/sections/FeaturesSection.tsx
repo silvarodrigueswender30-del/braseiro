@@ -118,6 +118,7 @@ export const FeaturesSection: React.FC = () => {
   // Interação do usuário para pausar avanço automático
   const [userInteracted, setUserInteracted] = useState<boolean>(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastScrollYRef = useRef<number>(0);
 
   const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
@@ -185,14 +186,17 @@ export const FeaturesSection: React.FC = () => {
     };
   }, [prefersReducedMotion, userInteracted]);
 
-  // Manipulador de intenção com atraso de 120ms (só pointer fine)
+  // Resposta imediata (< 50ms) com histerese de 24px para evitar trocas acidentais na rolagem
   const handleMouseEnterPanel = (idx: number) => {
     if (window.matchMedia('(pointer: fine)').matches) {
       if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-      hoverTimeoutRef.current = setTimeout(() => {
-        setUserInteracted(true);
-        setActiveDesktopIdx(idx);
-      }, 120);
+      const scrollDiff = Math.abs(window.scrollY - lastScrollYRef.current);
+      lastScrollYRef.current = window.scrollY;
+      if (scrollDiff > 24) {
+        return;
+      }
+      setUserInteracted(true);
+      setActiveDesktopIdx(idx);
     }
   };
 
@@ -342,7 +346,7 @@ export const FeaturesSection: React.FC = () => {
       ref={sectionRef}
       id="diferenciais"
       aria-labelledby="diferenciais-heading"
-      className="relative w-full overflow-x-clip bg-[#F5E6D0] text-[#14100D] scroll-mt-16"
+      className="relative w-full overflow-x-clip bg-[#F5E6D0] text-[#14100D] scroll-mt-20"
       style={{
         backgroundColor: '#F5E6D0',
       }}
@@ -418,7 +422,7 @@ export const FeaturesSection: React.FC = () => {
           >
             <span
               ref={titleLine2InnerRef}
-              className="block lowercase italic text-[#E8832A] whitespace-nowrap text-[clamp(4rem,19vw,6.5rem)] lg:text-[clamp(5rem,11.5vw,10.5rem)]"
+              className="block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap text-[clamp(4rem,19vw,6.5rem)] lg:text-[clamp(5rem,11.5vw,10.5rem)]"
               style={{
                 fontFamily: 'var(--font-display)',
                 fontWeight: 900,

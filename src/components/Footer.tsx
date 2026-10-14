@@ -504,7 +504,7 @@ export const Footer: React.FC = () => {
                   <span
                     ref={titleLine2InnerRef}
                     data-reveal="true"
-                    className="block lowercase italic text-[#E8832A] whitespace-nowrap text-[clamp(2.55rem,11.8vw,4.5rem)] lg:text-[clamp(3.4rem,6.9vw,6.3rem)]"
+                    className="block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap text-[clamp(2.55rem,11.8vw,4.5rem)] lg:text-[clamp(3.4rem,6.9vw,6.3rem)]"
                     style={{
                       fontFamily: 'var(--font-display)',
                       fontWeight: 900,
@@ -521,7 +521,7 @@ export const Footer: React.FC = () => {
                 <span
                   ref={chamaRef}
                   aria-hidden="true"
-                  className="inline-block text-[#E8832A] select-none pointer-events-none shrink-0 text-[clamp(2.55rem,11.8vw,4.5rem)] lg:text-[clamp(3.4rem,6.9vw,6.3rem)]"
+                  className="inline-block text-[var(--brasa-creme-grande)] select-none pointer-events-none shrink-0 text-[clamp(2.55rem,11.8vw,4.5rem)] lg:text-[clamp(3.4rem,6.9vw,6.3rem)]"
                   style={{
                     height: '0.62em',
                     width: '0.62em',
@@ -755,13 +755,13 @@ export const Footer: React.FC = () => {
                     viewBox="0 0 140 140"
                     className="w-full h-full overflow-visible"
                   >
-                    {/* Anel Externo Duplo em #E8832A */}
+                    {/* Anel Externo Duplo em var(--brasa-creme-texto) */}
                     <circle
                       cx="70"
                       cy="70"
                       r="65"
                       fill="none"
-                      stroke="#E8832A"
+                      stroke="var(--brasa-creme-texto)"
                       strokeWidth="3"
                     />
                     <circle
@@ -769,7 +769,7 @@ export const Footer: React.FC = () => {
                       cy="70"
                       r="59"
                       fill="none"
-                      stroke="#E8832A"
+                      stroke="var(--brasa-creme-texto)"
                       strokeWidth="1.2"
                       strokeDasharray="4 2"
                     />
@@ -779,7 +779,7 @@ export const Footer: React.FC = () => {
                       cy="70"
                       r="40"
                       fill="none"
-                      stroke="#E8832A"
+                      stroke="var(--brasa-creme-texto)"
                       strokeWidth="2"
                     />
 
@@ -792,7 +792,7 @@ export const Footer: React.FC = () => {
                     </defs>
 
                     <text
-                      fill="#E8832A"
+                      fill="var(--brasa-creme-texto)"
                       fontSize="10.2"
                       fontWeight="700"
                       letterSpacing="0.14em"
@@ -895,7 +895,7 @@ export const Footer: React.FC = () => {
               <a
                 href="/#inicio"
                 onClick={handleScrollToTop}
-                className="mt-2 inline-block font-text font-semibold uppercase text-[12px] tracking-[0.12em] text-[#14100D] border-b-2 border-[#E8832A] pb-0.5 hover:text-[#E8832A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E8832A] transition-colors duration-200 select-none"
+                className="mt-2 inline-block font-text font-semibold uppercase text-[12px] tracking-[0.12em] text-[#14100D] border-b-2 border-[var(--brasa-creme-texto)] pb-0.5 hover:text-[var(--brasa-creme-texto)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E8832A] transition-colors duration-200 select-none"
                 style={{ fontFamily: 'var(--font-text)' }}
               >
                 VOLTAR AO TOPO ↑
@@ -917,7 +917,7 @@ export const Footer: React.FC = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="min-h-[44px] flex items-center justify-center font-text font-medium text-[15px] text-[#14100D] border-b-2 border-transparent hover:border-[#E8832A] focus-visible:border-[#E8832A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8832A] transition-colors duration-200"
+                  className="min-h-[44px] flex items-center justify-center font-text font-medium text-[15px] text-[#14100D] border-b-2 border-transparent hover:border-[var(--brasa-creme-texto)] focus-visible:border-[var(--brasa-creme-texto)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8832A] transition-colors duration-200"
                   style={{ fontFamily: 'var(--font-text)' }}
                 >
                   {link.label}
@@ -967,7 +967,7 @@ export const Footer: React.FC = () => {
               <a
                 href="/#inicio"
                 onClick={handleScrollToTop}
-                className="mt-3 min-h-[44px] inline-flex items-center justify-center font-text font-semibold uppercase text-[12px] tracking-[0.12em] text-[#14100D] border-b-2 border-[#E8832A] px-2 hover:text-[#E8832A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E8832A] transition-colors duration-200 select-none"
+                className="mt-3 min-h-[44px] inline-flex items-center justify-center font-text font-semibold uppercase text-[12px] tracking-[0.12em] text-[#14100D] border-b-2 border-[var(--brasa-creme-texto)] px-2 hover:text-[var(--brasa-creme-texto)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E8832A] transition-colors duration-200 select-none"
                 style={{ fontFamily: 'var(--font-text)' }}
               >
                 VOLTAR AO TOPO ↑

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Pause, Play } from 'lucide-react';
 import { siteConfig, heroVideos } from '@/config';
 import { RotatingWord } from '@/components/RotatingWord';
+import { useVideosPaused } from '@/lib/videoState';
 
 interface DesktopPanelProps {
   videoSrc: string;
@@ -174,7 +176,23 @@ export const Hero: React.FC = () => {
     };
   }, []);
 
-  const shouldPauseVideos = !isDocVisible || !isIntersecting || reducedMotion;
+  const { isPaused: userPausedVideos, toggle: togglePauseVideos } = useVideosPaused();
+
+  const shouldPauseVideos = !isDocVisible || !isIntersecting || reducedMotion || userPausedVideos;
+
+  // Sincroniza estado de pausa com os reprodutores mobile
+  useEffect(() => {
+    if (shouldPauseVideos) {
+      if (videoARef.current) videoARef.current.pause();
+      if (videoBRef.current) videoBRef.current.pause();
+    } else {
+      if (activePlayer === 'A' && videoARef.current) {
+        videoARef.current.play().catch(() => {});
+      } else if (activePlayer === 'B' && videoBRef.current) {
+        videoBRef.current.play().catch(() => {});
+      }
+    }
+  }, [shouldPauseVideos, activePlayer]);
 
   // 3. Mobile Sequential Player Logic: vid01 -> vid2 -> vid3 -> vid01
   const advanceMobileVideo = useCallback(() => {
@@ -354,7 +372,7 @@ export const Hero: React.FC = () => {
             </p>
 
             {/* Botão CTA Desktop */}
-            <div className="mt-2">
+            <div className="mt-2 flex flex-col items-center">
               <a
                 href={siteConfig.whatsappUrl}
                 target="_blank"
@@ -364,6 +382,27 @@ export const Hero: React.FC = () => {
               >
                 RESERVAR MINHA MESA
               </a>
+
+              {/* Botão Global de Pausa dos Vídeos (WCAG 2.2.2) - Desktop */}
+              <button
+                type="button"
+                onClick={togglePauseVideos}
+                aria-label={userPausedVideos ? 'Reproduzir vídeos de fundo da hero' : 'Pausar vídeos de fundo da hero'}
+                aria-pressed={userPausedVideos}
+                className="mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#14100D]/70 hover:bg-[#14100D] border border-[#F5E6D0]/20 text-[#F5E6D0] hover:text-[#E8832A] transition-all duration-200 text-[11px] font-text font-semibold uppercase tracking-[0.14em] shadow-sm backdrop-blur-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8832A] select-none cursor-pointer"
+              >
+                {userPausedVideos ? (
+                  <>
+                    <Play className="w-3.5 h-3.5 fill-current text-[#E8832A]" aria-hidden="true" />
+                    <span>REPRODUZIR VÍDEOS</span>
+                  </>
+                ) : (
+                  <>
+                    <Pause className="w-3.5 h-3.5 fill-current text-[#E8832A]" aria-hidden="true" />
+                    <span>PAUSAR VÍDEOS</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -493,6 +532,29 @@ export const Hero: React.FC = () => {
               >
                 RESERVAR
               </a>
+            </div>
+
+            {/* Botão Mobile de Pausa dos Vídeos (WCAG 2.2.2) */}
+            <div className="w-full flex justify-center mt-3 animate-[fadeInUp_0.9s_ease-out_forwards]">
+              <button
+                type="button"
+                onClick={togglePauseVideos}
+                aria-label={userPausedVideos ? 'Reproduzir vídeos de fundo da hero' : 'Pausar vídeos de fundo da hero'}
+                aria-pressed={userPausedVideos}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 min-h-[44px] min-w-[44px] rounded-full bg-[#14100D]/75 border border-[#F5E6D0]/20 text-[#F5E6D0] hover:text-[#E8832A] text-[11px] font-text font-semibold uppercase tracking-[0.12em] shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8832A] select-none cursor-pointer"
+              >
+                {userPausedVideos ? (
+                  <>
+                    <Play className="w-3.5 h-3.5 fill-current text-[#E8832A]" aria-hidden="true" />
+                    <span>REPRODUZIR VÍDEOS</span>
+                  </>
+                ) : (
+                  <>
+                    <Pause className="w-3.5 h-3.5 fill-current text-[#E8832A]" aria-hidden="true" />
+                    <span>PAUSAR VÍDEOS</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
