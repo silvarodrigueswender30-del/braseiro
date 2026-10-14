@@ -44,6 +44,31 @@ export const LocationReservationsSection: React.FC = () => {
     pessoas?: string;
   }>({});
 
+  // Carregamento tardio do mapa Google Maps (600px antes da viewport)
+  const [loadMap, setLoadMap] = useState<boolean>(false);
+  const mapWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = mapWrapperRef.current;
+    if (!el || loadMap) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setLoadMap(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: '600px 0px 600px 0px',
+        threshold: 0,
+      }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [loadMap]);
+
   const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -743,27 +768,37 @@ export const LocationReservationsSection: React.FC = () => {
           {/* COLUNA DIREITA: MAPA GOOGLE EMBED + 3 COLUNAS DE INFO        */}
           {/* ============================================================ */}
           <div ref={mapColRef} className="w-full flex flex-col">
-            {/* Iframe do Mapa: Desktop full-bleed até a borda direita da tela */}
+            {/* Iframe do Mapa: Desktop full-bleed até a borda direita da tela (Carregamento tardio 600px antes da viewport) */}
             <div
-              className="relative w-full overflow-hidden"
+              ref={mapWrapperRef}
+              className="relative w-full overflow-hidden bg-[#14100D]"
               style={{
                 height: 'clamp(300px, 34vw, 420px)',
                 marginRight: 'calc(-1 * var(--pad, 0px))',
                 width: 'calc(100% + var(--pad, 0px))',
               }}
             >
-              <iframe
-                title="Mapa: Braseiro Caiçara em Ubatuba"
-                src="https://maps.google.com/maps?q=Braseiro%20Cai%C3%A7ara%20Ubatuba&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                width="100%"
-                height="100%"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full border-0 pointer-events-none lg:pointer-events-auto"
-                style={{
-                  filter: 'grayscale(0.9) invert(0.92) hue-rotate(180deg) brightness(0.85) contrast(0.95)',
-                }}
-              />
+              {loadMap ? (
+                <iframe
+                  title="Mapa: Braseiro Caiçara em Ubatuba"
+                  src="https://maps.google.com/maps?q=Braseiro%20Cai%C3%A7ara%20Ubatuba&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  width="100%"
+                  height="100%"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full border-0 pointer-events-none lg:pointer-events-auto"
+                  style={{
+                    filter: 'grayscale(0.9) invert(0.92) hue-rotate(180deg) brightness(0.85) contrast(0.95)',
+                  }}
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center bg-[#14100D] text-[#F5E6D0]/60 gap-2 select-none">
+                  <div className="w-6 h-6 border-2 border-[#E8832A] border-t-transparent rounded-full animate-spin" />
+                  <span className="font-text text-[12px] uppercase tracking-wider text-[#F5E6D0]/75">
+                    Carregando mapa...
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Link para abrir o mapa no mobile sem capturar scroll da página */}

@@ -60,23 +60,8 @@ export const AtalhosDock: React.FC = () => {
   // 2. Observer das seções "Como chegar e reservas" (#contato-reservas) e rodapé (#rodape)
   // Oculta assim que a seção atingir a zona do dock (rootMargin negativo na base e threshold 0)
   useEffect(() => {
-    const sectionReservas = document.getElementById('contato-reservas');
-    const sectionRodape = document.getElementById('rodape');
-
-    const updateVisibility = () => {
-      const vh = window.innerHeight;
-      const dockH = dockRef.current?.offsetHeight || 72;
-      const limitY = vh - dockH;
-
-      if (sectionReservas) {
-        const r = sectionReservas.getBoundingClientRect();
-        setReservasVisible(r.top <= limitY && r.bottom >= 0);
-      }
-      if (sectionRodape) {
-        const r = sectionRodape.getBoundingClientRect();
-        setRodapeVisible(r.top <= limitY && r.bottom >= 0);
-      }
-    };
+    let observedReservas: Element | null = null;
+    let observedRodape: Element | null = null;
 
     const dockHeight = dockRef.current?.offsetHeight || 72;
     const observer = new IntersectionObserver(
@@ -96,11 +81,37 @@ export const AtalhosDock: React.FC = () => {
       }
     );
 
-    if (sectionReservas) observer.observe(sectionReservas);
-    if (sectionRodape) observer.observe(sectionRodape);
+    const updateVisibility = () => {
+      const vh = window.innerHeight;
+      const dockH = dockRef.current?.offsetHeight || 72;
+      const limitY = vh - dockH;
 
-    window.addEventListener('scroll', updateVisibility, { passive: true });
+      const secRes = document.getElementById('contato-reservas');
+      const secRod = document.getElementById('rodape');
+
+      if (secRes) {
+        const r = secRes.getBoundingClientRect();
+        setReservasVisible(r.top <= limitY && r.bottom >= 0);
+        if (secRes !== observedReservas) {
+          if (observedReservas) observer.unobserve(observedReservas);
+          observer.observe(secRes);
+          observedReservas = secRes;
+        }
+      }
+
+      if (secRod) {
+        const r = secRod.getBoundingClientRect();
+        setRodapeVisible(r.top <= limitY && r.bottom >= 0);
+        if (secRod !== observedRodape) {
+          if (observedRodape) observer.unobserve(observedRodape);
+          observer.observe(secRod);
+          observedRodape = secRod;
+        }
+      }
+    };
+
     updateVisibility();
+    window.addEventListener('scroll', updateVisibility, { passive: true });
 
     return () => {
       observer.disconnect();

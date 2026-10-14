@@ -115,11 +115,13 @@ export const Hero: React.FC = () => {
 
   // Mobile Sequential state (Player A e Player B com crossfade 500ms)
   const [activePlayer, setActivePlayer] = useState<'A' | 'B'>('A');
-  const [playerASrc, setPlayerASrc] = useState<string>(heroVideos[0]);
+  // Poster-first: inicia vazio para não concorrer com LCP na rede móvel
+  const [playerASrc, setPlayerASrc] = useState<string>('');
   const [playerBSrc, setPlayerBSrc] = useState<string>('');
   const [currentVideoIdx, setCurrentVideoIdx] = useState<number>(0);
   const [mobilePlaying, setMobilePlaying] = useState<boolean>(false);
   const [mobileAllFailed, setMobileAllFailed] = useState<boolean>(false);
+  const [mobileVideoStarted, setMobileVideoStarted] = useState<boolean>(false);
 
   const heroContainerRef = useRef<HTMLElement>(null);
   const videoARef = useRef<HTMLVideoElement>(null);
@@ -150,6 +152,39 @@ export const Hero: React.FC = () => {
       motionMq.removeEventListener('change', handleMotion);
     };
   }, []);
+
+  // Poster-first no Mobile: só inicia download do MP4 após LCP consolidado (interação ou timeout 2.5s)
+  useEffect(() => {
+    if (!isMobile || reducedMotion || mobileVideoStarted) return;
+
+    let timer: NodeJS.Timeout | null = null;
+    const startVideo = () => {
+      setMobileVideoStarted(true);
+      setPlayerASrc(heroVideos[0]);
+      cleanup();
+    };
+
+    const cleanup = () => {
+      if (timer) clearTimeout(timer);
+      window.removeEventListener('scroll', startVideo);
+      window.removeEventListener('touchstart', startVideo);
+      window.removeEventListener('click', startVideo);
+    };
+
+    window.addEventListener('scroll', startVideo, { passive: true, once: true });
+    window.addEventListener('touchstart', startVideo, { passive: true, once: true });
+    window.addEventListener('click', startVideo, { passive: true, once: true });
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(() => {
+        timer = setTimeout(startVideo, 2500);
+      }, { timeout: 3500 });
+    } else {
+      timer = setTimeout(startVideo, 2500);
+    }
+
+    return cleanup;
+  }, [isMobile, reducedMotion, mobileVideoStarted]);
 
   // 2. Pause when document hidden or hero offscreen
   useEffect(() => {
@@ -426,26 +461,28 @@ export const Hero: React.FC = () => {
           {/* Player A e Player B empilhados com crossfade 500ms */}
           {!reducedMotion && !mobileAllFailed && (
             <div className="absolute inset-0 w-full h-full pointer-events-none z-[1]">
-              <video
-                ref={videoARef}
-                src={playerASrc}
-                autoPlay
-                muted
-                playsInline
-                disablePictureInPicture
-                controlsList="nodownload"
-                aria-hidden="true"
-                tabIndex={-1}
-                preload="auto"
-                onTimeUpdate={handleMobileTimeUpdate}
-                onEnded={advanceMobileVideo}
-                onWaiting={handleMobileWaiting}
-                onPlaying={handleMobilePlaying}
-                onError={handleMobileError}
-                className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ease-out ${
-                  activePlayer === 'A' && mobilePlaying ? 'opacity-100' : 'opacity-0'
-                }`}
-              />
+              {playerASrc && (
+                <video
+                  ref={videoARef}
+                  src={playerASrc}
+                  autoPlay
+                  muted
+                  playsInline
+                  disablePictureInPicture
+                  controlsList="nodownload"
+                  aria-hidden="true"
+                  tabIndex={-1}
+                  preload="auto"
+                  onTimeUpdate={handleMobileTimeUpdate}
+                  onEnded={advanceMobileVideo}
+                  onWaiting={handleMobileWaiting}
+                  onPlaying={handleMobilePlaying}
+                  onError={handleMobileError}
+                  className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ease-out ${
+                    activePlayer === 'A' && mobilePlaying ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+              )}
 
               {playerBSrc && (
                 <video

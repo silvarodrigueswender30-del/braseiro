@@ -36,7 +36,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Instrument+Sans:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Instrument+Sans:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -44,7 +44,6 @@
     <link rel="preload" as="image" href="/images/hero/poster1.webp" type="image/webp" fetchpriority="high" />
 
     <!-- Dados Estruturados JSON-LD (Schema.org / Restaurant) -->
-    <!-- NOTA SEO: Campos de endereço postal e telefone oficial mantidos vazios até confirmação formal do cliente para evitar indexação de dados placeholder falsos -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -54,6 +53,7 @@
         "servesCuisine": ["Parrilla", "Frutos do Mar", "Cozinha Caiçara", "Grelhados"],
         "priceRange": "$$",
         "url": "https://braseirocaicara.com.br/",
+        "telephone": "+551232083369",
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
@@ -72,8 +72,10 @@
         ],
         "address": {
           "@type": "PostalAddress",
+          "streetAddress": "Rua Guarani, 370",
           "addressLocality": "Ubatuba",
           "addressRegion": "SP",
+          "postalCode": "11680-000",
           "addressCountry": "BR"
         }
       }
