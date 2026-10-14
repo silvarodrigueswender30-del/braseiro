@@ -313,7 +313,7 @@ export const AmbianceSection: React.FC = () => {
               style={{
                 fontFamily: 'var(--font-display)',
                 fontWeight: 700,
-                letterSpacing: '0.05em',
+                letterSpacing: '0.03em',
                 wordSpacing: '0.12em',
                 lineHeight: 1.1,
               }}

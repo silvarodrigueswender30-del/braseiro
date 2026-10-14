@@ -17,11 +17,14 @@ scratch/
 *.pem
 *.key
 
-# Temporary root screenshots
+# Temporary root screenshots and test scripts
 screenshot-*.png
 screenshots/
 auditoria/
+scripts/
 .agent/
+.impeccable/
+.impeccable
 
 # Research and original large media assets
 documentos de pesquisas de marca/

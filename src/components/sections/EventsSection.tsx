@@ -477,7 +477,7 @@ export const EventsSection: React.FC = () => {
                     style={{
                       fontFamily: 'var(--font-display)',
                       fontWeight: 700,
-                      letterSpacing: '0.04em',
+                      letterSpacing: '0.03em',
                       wordSpacing: '0.12em',
                       lineHeight: 1.1,
                       fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',

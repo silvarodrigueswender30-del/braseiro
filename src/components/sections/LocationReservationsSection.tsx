@@ -35,6 +35,7 @@ export const LocationReservationsSection: React.FC = () => {
   const [pessoas, setPessoas] = useState('2');
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [submittedWhatsappUrl, setSubmittedWhatsappUrl] = useState<string>('');
 
   // Erros de validação
   const [errors, setErrors] = useState<{
@@ -154,8 +155,13 @@ export const LocationReservationsSection: React.FC = () => {
     }
 
     const whatsappUrl = `https://wa.me/${siteConfig.phoneRaw}?text=${encodeURIComponent(msg)}`;
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    setSubmittedWhatsappUrl(whatsappUrl);
     setIsSubmitted(true);
+    try {
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    } catch {
+      // Bloqueio de pop-up tratado pelo botão visível na UI
+    }
   };
 
   // Animações GSAP + ScrollTrigger
@@ -436,7 +442,7 @@ export const LocationReservationsSection: React.FC = () => {
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontWeight: 700,
-                  letterSpacing: '0.05em',
+                  letterSpacing: '0.03em',
                   wordSpacing: '0.12em',
                   lineHeight: 1.1,
                   textShadow: '0 4px 18px rgba(0,0,0,0.85)',
@@ -534,13 +540,23 @@ export const LocationReservationsSection: React.FC = () => {
                 <p className="font-text text-[15px] text-[#F5E6D0]/90 leading-relaxed m-0">
                   Abrimos o WhatsApp com a sua solicitação para <strong>{pessoas} {pessoas === '1' ? 'pessoa' : 'pessoas'}</strong> no dia <strong>{data ? data.split('-').reverse().join('/') : ''}</strong> às <strong>{horario}</strong> em nome de <strong>{nome}</strong>. Aguarde a confirmação de nossa equipe!
                 </p>
-                <button
-                  type="button"
-                  onClick={() => setIsSubmitted(false)}
-                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-[6px] bg-[#F5E6D0] text-[#14100D] hover:bg-[#E8832A] hover:text-[#14100D] transition-colors py-3.5 px-6 text-[13px] font-text font-semibold uppercase tracking-[0.08em] select-none cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8832A]"
-                >
-                  <span>Abrir de novo o formulário</span>
-                </button>
+                <div className="mt-2 flex flex-wrap items-center gap-3">
+                  <a
+                    href={submittedWhatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-[6px] bg-[#E8832A] text-[#14100D] hover:bg-[#F5E6D0] transition-colors py-3.5 px-6 text-[13px] font-text font-semibold uppercase tracking-[0.08em] select-none cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8832A]"
+                  >
+                    <span>Abrir o WhatsApp de novo</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setIsSubmitted(false)}
+                    className="inline-flex items-center justify-center gap-2 rounded-[6px] border border-[#F5E6D0]/40 text-[#F5E6D0] hover:bg-[#F5E6D0]/10 transition-colors py-3.5 px-6 text-[13px] font-text font-semibold uppercase tracking-[0.08em] select-none cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8832A]"
+                  >
+                    <span>Editar dados</span>
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleFormSubmit} noValidate className="w-full flex flex-col">
