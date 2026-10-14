@@ -1,0 +1,117 @@
+{
+  "entradas-tentaculos-de-polvo": {
+    "arquivo": "/cardapio/fotos/tentaculos-de-polvo.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "saladas-salada-caicara": {
+    "arquivo": "/cardapio/fotos/salada-caicara.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "carnes-picanha-angus": {
+    "arquivo": "/images/pratos/prato-corte-nobre.webp",
+    "fonte": "site",
+    "confianca": "alta"
+  },
+  "carnes-file-mignon-angus": {
+    "arquivo": "/public/cardapio/executivos/file-mignon-grelhado.webp",
+    "fonte": "wix",
+    "confianca": "media"
+  },
+  "carnes-trio-braseiro": {
+    "arquivo": "/images/pratos/prato-circular-duas-brasas.webp",
+    "fonte": "site",
+    "confianca": "media"
+  },
+  "hamburguer-sanduiche-de-costela": {
+    "arquivo": "/cardapio/fotos/sanduiche-de-costela.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "monte-o-prato-picanha-angus": {
+    "arquivo": "/cardapio/fotos/monte-o-prato.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "peixes-churrasco-do-mar": {
+    "arquivo": "/cardapio/fotos/churrasco-do-mar.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "peixes-pescada-cambucu-grelhada": {
+    "arquivo": "/images/pratos/prato-prancha-mar.webp",
+    "fonte": "site",
+    "confianca": "media"
+  },
+  "peixes-pescada-ao-molho-de-camarao": {
+    "arquivo": "/cardapio/executivos/pescada-molho-de-camarao.webp",
+    "fonte": "wix",
+    "confianca": "media"
+  },
+  "frutos-do-mar-camarao-na-moranga": {
+    "arquivo": "/cardapio/fotos/camarao-na-moranga.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "frutos-do-mar-camarao-do-chefe": {
+    "arquivo": "/images/pratos/prato-polvo-camarao.webp",
+    "fonte": "site",
+    "confianca": "media"
+  },
+  "bebidas-soda-italiana": {
+    "arquivo": "/cardapio/fotos/soda-italiana.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "executivo-frango-grelhado": {
+    "arquivo": "/cardapio/executivos/frango-grelhado.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "executivo-picanha-grelhada": {
+    "arquivo": "/cardapio/executivos/picanha-grelhada.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "executivo-file-mignon-grelhado": {
+    "arquivo": "/cardapio/executivos/file-mignon-grelhado.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "executivo-baby-beef-grelhado": {
+    "arquivo": "/cardapio/executivos/baby-beef-grelhado.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "executivo-file-mignon-parmegiana": {
+    "arquivo": "/cardapio/executivos/file-mignon-parmegiana.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "executivo-parmegiana-de-frango": {
+    "arquivo": "/cardapio/executivos/parmegiana-de-frango.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "executivo-pescada-dore-ou-grelhada": {
+    "arquivo": "/cardapio/executivos/pescada-dore-ou-grelhada.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "executivo-pescada-molho-de-camarao": {
+    "arquivo": "/cardapio/executivos/pescada-molho-de-camarao.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "executivo-espaguete-vegetariano": {
+    "arquivo": "/cardapio/executivos/espaguete-vegetariano.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  },
+  "executivo-espaguete-bolonhesa": {
+    "arquivo": "/cardapio/executivos/espaguete-bolonhesa.webp",
+    "fonte": "wix",
+    "confianca": "alta"
+  }
+}

@@ -7,8 +7,11 @@ import { HomePage } from '@/pages/HomePage';
 import { ScrollToTopOnRoute } from '@/components/ScrollToTopOnRoute';
 import { initRevealSafetyNet } from '@/lib/reveal';
 
-// Lazy loading da página de cardápio per Vercel Best Practices
-const MenuPage = lazy(() => import('@/pages/MenuPage'));
+// Lazy loading das páginas do cardápio per Vercel Best Practices
+const CardapioIndexPage = lazy(() => import('@/pages/cardapio/IndexPage'));
+const GastronomiaPage = lazy(() => import('@/pages/cardapio/GastronomiaPage'));
+const DrinksPage = lazy(() => import('@/pages/cardapio/DrinksPage'));
+const ExecutivosPage = lazy(() => import('@/pages/cardapio/ExecutivosPage'));
 
 const PageLoader: React.FC = () => (
   <div className="min-h-[60vh] flex items-center justify-center">
@@ -62,14 +65,67 @@ export const App: React.FC = () => {
         {/* Rotas */}
         <Routes>
           <Route path="/" element={<HomePage />} />
+          
+          {/* Rotas do Cardápio Digital Nativo */}
           <Route
             path="/cardapio"
             element={
               <Suspense fallback={<PageLoader />}>
-                <MenuPage />
+                <CardapioIndexPage />
               </Suspense>
             }
           />
+          <Route
+            path="/cardapio/gastronomia"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <GastronomiaPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/cardapio/drinks"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <DrinksPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/cardapio/executivos"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <ExecutivosPage />
+              </Suspense>
+            }
+          />
+
+          {/* Atalhos diretos / aliases */}
+          <Route
+            path="/gastronomia"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <GastronomiaPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/drinks"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <DrinksPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/executivos"
+            element={
+              <Suspense fallback={<PageLoader />}>
+                <ExecutivosPage />
+              </Suspense>
+            }
+          />
+
           {/* Fallback de 404 redirecionando para a Home */}
           <Route path="*" element={<HomePage />} />
         </Routes>

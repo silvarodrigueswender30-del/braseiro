@@ -38,7 +38,7 @@ const FOOTER_NAV_LINKS = [
   { label: 'A casa', href: '/#casa' },
   { label: 'O fogo', href: '/#fogo' },
   { label: 'Pratos', href: '/#pratos' },
-  { label: 'Cardápio', href: '/#cardapio' },
+  { label: 'Cardápio', href: '/cardapio' },
   { label: 'Eventos', href: '/#eventos' },
   { label: 'Ambiente', href: '/#ambiente' },
   { label: 'Reservas', href: '/#contato-reservas' },

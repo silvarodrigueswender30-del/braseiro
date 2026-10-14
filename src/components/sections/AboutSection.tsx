@@ -450,7 +450,7 @@ export const AboutSection: React.FC = () => {
             </a>
 
             <a
-              href="#cardapio"
+              href="/cardapio"
               className="inline-flex items-center justify-center py-2 text-[#14100D] font-text font-semibold uppercase tracking-[0.08em] text-[13px] sm:text-[14px] underline decoration-2 decoration-[var(--brasa-creme-texto)] underline-offset-4 hover:text-[var(--brasa-creme-texto)] transition-colors duration-200"
             >
               VER CARDÁPIO

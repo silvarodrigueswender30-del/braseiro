@@ -1,20 +1,19 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * CONFIGURAÇÃO DOS CARDS DE CARDÁPIO (Único ponto de edição)
- * TODO: trocar os vídeos por clipes definitivos (um por cardápio); o de drinks e o de executivos são provisórios
- * TODO: substituir por visualizador interno do cardápio
+ * CONFIGURAÇÃO DOS CARDS DE CARDÁPIO (Rotas nativas do site)
  */
 export const MENU_CARDS = [
   {
     id: 'gastronomia',
     numero: '01',
     titulo: 'gastronomia',
-    href: 'https://www.braseirocaicara.com/gastronomia-atualizado',
+    href: '/cardapio/gastronomia',
     video: 'https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/carne.mp4',
     poster: '/images/pratos/gastronomia-poster.webp',
     ariaLabel: 'Ver cardápio de gastronomia',
@@ -23,8 +22,7 @@ export const MENU_CARDS = [
     id: 'drinks',
     numero: '02',
     titulo: 'drinks',
-    href: 'https://www.braseirocaicara.com/drinks',
-    // Provisório: vídeo 3 da Hero hospedado no Supabase (trecho / provisório conforme prompt)
+    href: '/cardapio/drinks',
     video: 'https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/vid3.mp4',
     poster: '/images/pratos/drinks-poster.webp',
     ariaLabel: 'Ver cardápio de drinks',
@@ -33,8 +31,7 @@ export const MENU_CARDS = [
     id: 'executivos',
     numero: '03',
     titulo: 'executivos',
-    href: 'https://www.braseirocaicara.com/executivos',
-    // Provisório: clipe mar.mp4 hospedado no Supabase
+    href: '/cardapio/executivos',
     video: 'https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/mar.mp4',
     poster: '/images/pratos/executivos-poster.webp',
     ariaLabel: 'Ver cardápio de executivos',
@@ -572,16 +569,14 @@ export const SignatureDishesSection: React.FC = () => {
                   </div>
 
                   {/* Botão pequeno "VER CARDÁPIO" com pseudo-elemento cobrindo o card */}
-                  <a
-                    href={card.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    to={card.href}
                     aria-label={card.ariaLabel}
                     className="mt-4 inline-flex items-center justify-center rounded-[6px] bg-[#F5E6D0] text-[#14100D] hover:bg-[#E8832A] hover:text-[#14100D] transition-colors duration-200 font-text font-semibold uppercase text-[13px] tracking-[0.08em] py-[10px] px-[22px] select-none shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#E8832A] after:absolute after:inset-0 after:z-10 cursor-pointer"
                     style={{ fontFamily: 'var(--font-text)' }}
                   >
                     VER CARDÁPIO
-                  </a>
+                  </Link>
                 </div>
               </article>
             );
@@ -691,16 +686,14 @@ export const SignatureDishesSection: React.FC = () => {
                       {card.titulo}
                     </h3>
 
-                    <a
-                      href={card.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      to={card.href}
                       aria-label={card.ariaLabel}
                       className="mt-4 inline-flex items-center justify-center rounded-[6px] bg-[#F5E6D0] text-[#14100D] hover:bg-[#E8832A] hover:text-[#14100D] transition-colors duration-200 font-text font-semibold uppercase text-[13px] tracking-[0.08em] py-[10px] px-[22px] select-none shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#E8832A] after:absolute after:inset-0 after:z-10 cursor-pointer"
                       style={{ fontFamily: 'var(--font-text)' }}
                     >
                       VER CARDÁPIO
-                    </a>
+                    </Link>
                   </div>
                 </article>
               );

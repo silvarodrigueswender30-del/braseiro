@@ -246,11 +246,11 @@ export const AtalhosDock: React.FC = () => {
     }
   }, [shouldShow]);
 
-  // Smooth scroll até #pratos
+  // Smooth scroll até #pratos (se estiver na Home) ou navega para /cardapio
   const handleScrollToMenu = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
     const dishesSection = document.getElementById('pratos');
     if (dishesSection) {
+      e.preventDefault();
       dishesSection.scrollIntoView({ behavior: 'smooth' });
       window.history.pushState(null, '', '#pratos');
     }
@@ -273,7 +273,7 @@ export const AtalhosDock: React.FC = () => {
       >
         {/* 1) CARDÁPIO */}
         <a
-          href="#pratos"
+          href="/cardapio"
           onClick={handleScrollToMenu}
           className="dock-btn group flex items-center justify-center gap-2 h-12 lg:h-full px-3 lg:px-5 rounded-[6px] border-[1.5px] border-[#F5E6D0]/55 bg-transparent text-[#F5E6D0] hover:bg-[#F5E6D0]/10 hover:border-[#F5E6D0]/80 transition-colors select-none"
           style={{

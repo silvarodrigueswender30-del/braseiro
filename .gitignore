@@ -39,3 +39,6 @@ img-ideiais/
 # Editor
 .vscode/
 .idea/
+
+# Originais do cardapio (JPG de ~5 MB cada; so os WebP otimizados vao para producao)
+public/cardapio/originais/
