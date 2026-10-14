@@ -58,29 +58,54 @@ export const AtalhosDock: React.FC = () => {
   }, []);
 
   // 2. Observer das seções "Como chegar e reservas" (#contato-reservas) e rodapé (#rodape)
-  // Oculta enquanto qualquer uma estiver >= 20% visível
+  // Oculta assim que a seção atingir a zona do dock (rootMargin negativo na base e threshold 0)
   useEffect(() => {
     const sectionReservas = document.getElementById('contato-reservas');
     const sectionRodape = document.getElementById('rodape');
 
+    const updateVisibility = () => {
+      const vh = window.innerHeight;
+      const dockH = dockRef.current?.offsetHeight || 72;
+      const limitY = vh - dockH;
+
+      if (sectionReservas) {
+        const r = sectionReservas.getBoundingClientRect();
+        setReservasVisible(r.top <= limitY && r.bottom >= 0);
+      }
+      if (sectionRodape) {
+        const r = sectionRodape.getBoundingClientRect();
+        setRodapeVisible(r.top <= limitY && r.bottom >= 0);
+      }
+    };
+
+    const dockHeight = dockRef.current?.offsetHeight || 72;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.target.id === 'contato-reservas') {
-            setReservasVisible(entry.isIntersecting && entry.intersectionRatio >= 0.2);
+            setReservasVisible(entry.isIntersecting);
           }
           if (entry.target.id === 'rodape') {
-            setRodapeVisible(entry.isIntersecting && entry.intersectionRatio >= 0.2);
+            setRodapeVisible(entry.isIntersecting);
           }
         });
       },
-      { threshold: [0, 0.15, 0.2, 0.3, 0.5] }
+      {
+        rootMargin: `0px 0px -${dockHeight}px 0px`,
+        threshold: 0,
+      }
     );
 
     if (sectionReservas) observer.observe(sectionReservas);
     if (sectionRodape) observer.observe(sectionRodape);
 
-    return () => observer.disconnect();
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    updateVisibility();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', updateVisibility);
+    };
   }, []);
 
   // 3. Monitorar drawer de menu aberto (MutationObserver em document.body)

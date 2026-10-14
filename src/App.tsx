@@ -1,10 +1,11 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { AtalhosDock } from '@/components/AtalhosDock';
 import { HomePage } from '@/pages/HomePage';
 import { ScrollToTopOnRoute } from '@/components/ScrollToTopOnRoute';
+import { initRevealSafetyNet } from '@/lib/reveal';
 
 // Lazy loading da página de cardápio per Vercel Best Practices
 const MenuPage = lazy(() => import('@/pages/MenuPage'));
@@ -21,6 +22,10 @@ const PageLoader: React.FC = () => (
 );
 
 export const App: React.FC = () => {
+  useEffect(() => {
+    initRevealSafetyNet();
+  }, []);
+
   return (
     <BrowserRouter>
       {/* Scroll restore on route / anchor change */}

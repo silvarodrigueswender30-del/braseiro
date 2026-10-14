@@ -177,7 +177,12 @@
 html {
   background-color: #05070D;
   color: #F3E6D0;
-  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -375,3 +380,16 @@ body {
     animation: none !important;
   }
 }
+
+/* Degradê suave de borda no header sólido (MAT-01) */
+header.header-scrolled::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: linear-gradient(to bottom, rgba(20, 16, 13, 0.5), transparent);
+  pointer-events: none;
+}
+

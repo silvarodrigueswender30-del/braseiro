@@ -382,6 +382,7 @@ export const LocationReservationsSection: React.FC = () => {
             >
               <span
                 ref={titleLine1InnerRef}
+                data-reveal="true"
                 className="block uppercase text-[#F5E6D0] whitespace-nowrap text-[clamp(1.35rem,4.8vw,2.1rem)] lg:text-[clamp(1.7rem,3.8vw,3.6rem)]"
                 style={{
                   fontFamily: 'var(--font-display)',
@@ -426,6 +427,7 @@ export const LocationReservationsSection: React.FC = () => {
 
               <span
                 ref={titleLine2InnerRef}
+                data-reveal="true"
                 className="block lowercase italic text-[#E8832A] whitespace-nowrap text-[clamp(4.3rem,15vw,6.8rem)] lg:text-[clamp(5.6rem,12.5vw,11.5rem)] relative z-10"
                 style={{
                   fontFamily: 'var(--font-display)',

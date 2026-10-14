@@ -476,6 +476,7 @@ export const Footer: React.FC = () => {
               >
                 <span
                   ref={titleLine1InnerRef}
+                  data-reveal="true"
                   className="block uppercase text-[#14100D] whitespace-nowrap text-[clamp(1.15rem,5.4vw,1.9rem)] lg:text-[clamp(1.6rem,3.4vw,3.1rem)]"
                   style={{
                     fontFamily: 'var(--font-display)',
@@ -502,6 +503,7 @@ export const Footer: React.FC = () => {
                 >
                   <span
                     ref={titleLine2InnerRef}
+                    data-reveal="true"
                     className="block lowercase italic text-[#E8832A] whitespace-nowrap text-[clamp(2.55rem,11.8vw,4.5rem)] lg:text-[clamp(3.4rem,6.9vw,6.3rem)]"
                     style={{
                       fontFamily: 'var(--font-display)',

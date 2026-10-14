@@ -132,6 +132,7 @@ export const ManifestoSection: React.FC = () => {
           >
             <span
               ref={addToLinesRef}
+              data-reveal="true"
               className="block font-display font-[700] uppercase text-[#F5E6D0] whitespace-nowrap tracking-[0.06em] [word-spacing:0.12em] leading-[1.05] text-[clamp(1.25rem,6.4vw,2rem)] sm:text-[clamp(1.8rem,4.2vw,3.8rem)]"
               style={{ fontFamily: 'var(--font-display)' }}
             >
@@ -148,6 +149,7 @@ export const ManifestoSection: React.FC = () => {
           >
             <span
               ref={addToLinesRef}
+              data-reveal="true"
               className="block font-display font-[900] italic text-[#E8832A] leading-[0.8] -mt-[0.08em] text-[clamp(3.6rem,20vw,6.5rem)] sm:text-[clamp(5rem,12vw,11rem)]"
               style={{
                 fontFamily: 'var(--font-display)',
@@ -162,6 +164,7 @@ export const ManifestoSection: React.FC = () => {
         {/* Parágrafo de narrativa com respiro calibrado */}
         <p
           ref={copyRef}
+          data-reveal="true"
           className="font-text font-normal text-[clamp(1.0625rem,1.3vw,1.25rem)] leading-[1.65] max-w-[56ch] text-[#F5E6D0]/85 mx-auto [text-wrap:balance] mt-[clamp(28px,3vw,44px)]"
           style={{ fontFamily: 'var(--font-text)' }}
         >

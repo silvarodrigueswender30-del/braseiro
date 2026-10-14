@@ -78,16 +78,13 @@ export const Header: React.FC = () => {
   const headerBackgroundStyle: React.CSSProperties = isTransparentMode
     ? isScrolled
       ? {
-          backgroundColor: 'rgba(20, 16, 13, 0.97)',
-          borderBottom: '1px solid rgba(243, 230, 208, 0.08)',
+          backgroundColor: 'rgb(20, 16, 13)',
         }
       : {
           background: 'linear-gradient(180deg, rgba(5,7,13,0.70) 0%, rgba(5,7,13,0) 100%)',
-          borderBottom: '1px solid transparent',
         }
     : {
-        backgroundColor: 'rgba(20, 16, 13, 0.97)',
-        borderBottom: '1px solid rgba(243, 230, 208, 0.08)',
+        backgroundColor: 'rgb(20, 16, 13)',
       };
 
   const shadowFilterStyle: React.CSSProperties = isTransparentMode && !isScrolled
@@ -97,7 +94,9 @@ export const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`${headerPositionClass} z-[99] w-full px-5 h-[72px] md:h-[83px] transition-[background-color,border-color] duration-[250ms] ease-out`}
+        className={`${headerPositionClass} z-[99] w-full px-5 h-[72px] md:h-[83px] transition-[background-color] duration-[250ms] ease-out ${
+          isScrolled ? 'header-scrolled relative' : ''
+        }`}
         style={headerBackgroundStyle}
       >
         <div className="w-full h-full flex items-center justify-between">

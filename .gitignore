@@ -20,6 +20,8 @@ scratch/
 # Temporary root screenshots
 screenshot-*.png
 screenshots/
+auditoria/
+.agent/
 
 # Research and original large media assets
 documentos de pesquisas de marca/

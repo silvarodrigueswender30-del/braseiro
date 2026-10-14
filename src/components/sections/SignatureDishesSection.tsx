@@ -393,6 +393,7 @@ export const SignatureDishesSection: React.FC = () => {
             >
               <span
                 ref={titleLine1InnerRef}
+                data-reveal="true"
                 className="block uppercase text-[#14100D] whitespace-nowrap text-[clamp(1.35rem,6.8vw,2.2rem)] lg:text-[clamp(1.75rem,3.8vw,3.6rem)]"
                 style={{
                   fontFamily: 'var(--font-display)',
@@ -418,6 +419,7 @@ export const SignatureDishesSection: React.FC = () => {
             >
               <span
                 ref={titleLine2InnerRef}
+                data-reveal="true"
                 className="block lowercase italic text-[#E8832A] whitespace-nowrap text-[clamp(4.2rem,21vw,7.2rem)] lg:text-[clamp(5rem,11vw,10rem)]"
                 style={{
                   fontFamily: 'var(--font-display)',
