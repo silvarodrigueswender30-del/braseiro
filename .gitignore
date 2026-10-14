@@ -42,3 +42,5 @@ img-ideiais/
 
 # Originais do cardapio (JPG de ~5 MB cada; so os WebP otimizados vao para producao)
 public/cardapio/originais/
+public/cardapio/originais-ifood/
+public/cardapio/novas-fotos/

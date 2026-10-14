@@ -99,6 +99,13 @@ export interface ItemExecutivo {
   foto: Foto;
 }
 
+import fotosMapRaw from './fotos-map.json';
+
+const fotosMap = fotosMapRaw as Record<
+  string,
+  { arquivo: string; arquivo400w?: string; arquivo800w?: string; fonte: string; confianca: string; alt: string }
+>;
+
 // ---------------------------------------------------------------------------
 // Helpers (não precisa mexer)
 // ---------------------------------------------------------------------------
@@ -114,7 +121,20 @@ const slug = (s: string) =>
 
 type ItemSemId = Omit<ItemCardapio, 'id'>;
 const itens = (prefixo: string, lista: ItemSemId[]): ItemCardapio[] =>
-  lista.map((i) => ({ ...i, id: `${prefixo}-${slug(i.nome)}` }));
+  lista.map((i) => {
+    const id = `${prefixo}-${slug(i.nome)}`;
+    const fotoInfo = fotosMap[id];
+    let foto = i.foto;
+    if (!foto && fotoInfo) {
+      foto = {
+        src: fotoInfo.arquivo800w || fotoInfo.arquivo,
+        alt: fotoInfo.alt || i.nome,
+        width: 800,
+        height: 600,
+      };
+    }
+    return { ...i, id, foto };
+  });
 
 const fotoPrato = (arquivo: string, alt: string, width = 1200, height = 600): Foto => ({
   src: `/cardapio/fotos/${arquivo}.webp`,

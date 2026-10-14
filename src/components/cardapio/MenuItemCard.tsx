@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flame, Leaf, Sparkles, Users, User, UtensilsCrossed } from 'lucide-react';
+import { Flame, Leaf, Sparkles, Users, User } from 'lucide-react';
 import { ItemCardapio, formatarPreco } from '@/data/cardapio';
 
 export interface MenuItemCardProps {
@@ -34,54 +34,68 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
           : ''
       }`}
     >
-      <div className={`flex flex-col flex-1 ${destaqueLayout ? 'md:flex-row gap-6' : ''}`}>
-        {/* Foto do Prato (Proporção 4:3) ou Placeholder Ilustrado Dedicado */}
-        <div
-          className={`relative overflow-hidden rounded-[6px] shrink-0 bg-[#05070D]/5 ${
-            destaqueLayout
-              ? 'w-full md:w-2/5 aspect-[4/3] md:aspect-auto md:min-h-[220px]'
-              : 'w-full aspect-[4/3] mb-4'
-          }`}
-        >
-          {temFoto && item.foto ? (
+      <div className={`flex flex-col flex-1 ${destaqueLayout && temFoto ? 'md:flex-row gap-6' : ''}`}>
+        {/* Foto do Prato (Proporção 4:3) - Exibida apenas quando há foto real */}
+        {temFoto && item.foto && (
+          <div
+            className={`relative overflow-hidden rounded-[6px] shrink-0 bg-[#05070D]/5 ${
+              destaqueLayout
+                ? 'w-full md:w-2/5 aspect-[4/3] md:aspect-auto md:min-h-[220px]'
+                : 'w-full aspect-[4/3] mb-4'
+            }`}
+          >
             <img
               src={item.foto.src}
               alt={item.foto.alt || item.nome}
-              width={item.foto.width || 600}
-              height={item.foto.height || 450}
+              width={item.foto.width || 800}
+              height={item.foto.height || 600}
               loading="lazy"
               decoding="async"
               className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
             />
-          ) : (
-            /* Card Ilustrado da Categoria (Sem Foto Falsa) */
-            <div
-              className={`h-full w-full flex flex-col items-center justify-center p-6 text-center select-none ${
-                isDark ? 'bg-[#14100D]' : 'bg-[#F5E6D0]/40'
-              }`}
-            >
-              <div
-                className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 ${
-                  isDark ? 'bg-[#E8832A]/15 text-[#E8832A]' : 'bg-[#9C4108]/10 text-[#9C4108]'
-                }`}
-              >
-                <UtensilsCrossed className="w-6 h-6" />
-              </div>
-              <span
-                className={`font-serif text-xs font-semibold uppercase tracking-wider ${
-                  isDark ? 'text-[#F5E6D0]/60' : 'text-[#14100D]/60'
-                }`}
-              >
-                Braseiro Caiçara
-              </span>
-            </div>
-          )}
 
-          {/* Badges sobre a foto */}
-          <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5 z-10">
+            {/* Badges sobre a foto */}
+            <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5 z-10">
+              {item.assinatura && (
+                <span
+                  className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider shadow-md ${
+                    isDark
+                      ? 'bg-[#E8832A] text-[#14100D]'
+                      : 'bg-[#9C4108] text-white'
+                  }`}
+                >
+                  <Flame className="w-3 h-3" />
+                  Assinatura
+                </span>
+              )}
+              {item.destaque && !item.assinatura && (
+                <span
+                  className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider shadow-md ${
+                    isDark
+                      ? 'bg-[#F5E6D0] text-[#14100D]'
+                      : 'bg-[#14100D] text-[#F5E6D0]'
+                  }`}
+                >
+                  <Sparkles className="w-3 h-3" />
+                  Destaque
+                </span>
+              )}
+              {item.vegetariano && (
+                <span className="inline-flex items-center gap-1 rounded bg-[#2E9C9B] px-2 py-0.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-white shadow-md">
+                  <Leaf className="w-3 h-3" />
+                  Vegetariano
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Badges no topo quando o card NÃO tem foto */}
+        {!temFoto && (item.assinatura || item.destaque || item.vegetariano) && (
+          <div className="flex flex-wrap gap-1.5 mb-2.5">
             {item.assinatura && (
               <span
-                className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider shadow-md ${
+                className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider ${
                   isDark
                     ? 'bg-[#E8832A] text-[#14100D]'
                     : 'bg-[#9C4108] text-white'
@@ -93,7 +107,7 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
             )}
             {item.destaque && !item.assinatura && (
               <span
-                className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider shadow-md ${
+                className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider ${
                   isDark
                     ? 'bg-[#F5E6D0] text-[#14100D]'
                     : 'bg-[#14100D] text-[#F5E6D0]'
@@ -104,37 +118,39 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
               </span>
             )}
             {item.vegetariano && (
-              <span className="inline-flex items-center gap-1 rounded bg-[#2E9C9B] px-2 py-0.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-white shadow-md">
+              <span className="inline-flex items-center gap-1 rounded bg-[#2E9C9B] px-2 py-0.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-white">
                 <Leaf className="w-3 h-3" />
                 Vegetariano
               </span>
             )}
           </div>
-        </div>
+        )}
 
         {/* Informações Textuais do Prato */}
         <div className="flex-1 flex flex-col justify-between">
           <div>
             {/* Linha do Nome e Preço Único */}
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-3">
-              <h3
-                className={`font-serif font-bold text-lg sm:text-xl leading-snug transition-colors ${
-                  isDark
-                    ? 'text-[#F5E6D0] group-hover:text-[#E8832A]'
-                    : 'text-[#14100D] group-hover:text-[#9C4108]'
-                }`}
-              >
-                {item.nome}
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-3">
+              <div>
+                <h3
+                  className={`font-serif font-bold text-lg sm:text-xl leading-snug transition-colors ${
+                    isDark
+                      ? 'text-[#F5E6D0] group-hover:text-[#E8832A]'
+                      : 'text-[#14100D] group-hover:text-[#9C4108]'
+                  }`}
+                >
+                  {item.nome}
+                </h3>
                 {item.detalhe && (
-                  <span
-                    className={`ml-2 font-sans font-normal text-xs ${
+                  <p
+                    className={`mt-0.5 font-sans font-medium text-xs ${
                       isDark ? 'text-[#F5E6D0]/60' : 'text-[#3A322C]/70'
                     }`}
                   >
                     {item.detalhe}
-                  </span>
+                  </p>
                 )}
-              </h3>
+              </div>
 
               {/* Preço único destacado (quando há apenas 1 tamanho) */}
               {!temMultiplosPrecos && item.precos[0] && (

@@ -182,63 +182,65 @@ export const CardapioHeader: React.FC<CardapioHeaderProps> = ({
           </p>
         </div>
 
-        {/* ÚNICA Barra de Navegação entre Seções (Sem duplicações ou cortes) */}
-        <div className="mt-8 pt-2">
-          <nav
-            aria-label="Navegação entre seções do cardápio"
-            className="flex items-center justify-center gap-2 sm:gap-3 overflow-x-auto scrollbar-none py-1"
-          >
-            {secoes.map((secao) => {
-              const isActive = paginaAtual === secao.id;
-              const Icon = secao.icon;
+        {/* Barra de Navegação entre Seções (Exibida apenas nas páginas internas) */}
+        {paginaAtual !== 'indice' && (
+          <div className="mt-8 pt-2">
+            <nav
+              aria-label="Navegação entre seções do cardápio"
+              className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto scrollbar-none py-1.5 px-2 -mx-2"
+            >
+              {secoes.map((secao) => {
+                const isActive = paginaAtual === secao.id;
+                const Icon = secao.icon;
 
-              let botaoClasses = '';
-              if (isActive) {
-                botaoClasses = isDark
-                  ? 'bg-[#E8832A] text-[#14100D] shadow-[0_4px_16px_rgba(232,131,42,0.35)]'
-                  : 'bg-[#14100D] text-[#F5E6D0] shadow-[0_4px_16px_rgba(20,16,13,0.25)]';
-              } else {
-                botaoClasses = isDark
-                  ? 'bg-[#F5E6D0]/[0.06] text-[#F5E6D0]/80 border border-[#F5E6D0]/15 hover:border-[#E8832A]/50 hover:text-[#F5E6D0]'
-                  : 'bg-white/80 text-[#14100D]/80 border border-[#14100D]/10 hover:border-[#B4540F]/50 hover:bg-white hover:text-[#14100D]';
-              }
+                let botaoClasses = '';
+                if (isActive) {
+                  botaoClasses = isDark
+                    ? 'bg-[#E8832A] text-[#14100D] shadow-[0_4px_16px_rgba(232,131,42,0.35)]'
+                    : 'bg-[#14100D] text-[#F5E6D0] shadow-[0_4px_16px_rgba(20,16,13,0.25)]';
+                } else {
+                  botaoClasses = isDark
+                    ? 'bg-[#F5E6D0]/[0.06] text-[#F5E6D0]/80 border border-[#F5E6D0]/15 hover:border-[#E8832A]/50 hover:text-[#F5E6D0]'
+                    : 'bg-white/80 text-[#14100D]/80 border border-[#14100D]/10 hover:border-[#B4540F]/50 hover:bg-white hover:text-[#14100D]';
+                }
 
-              return (
-                <Link
-                  key={secao.id}
-                  to={secao.href}
-                  className={`min-h-[44px] flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-[6px] text-xs sm:text-sm font-semibold tracking-wide transition-all duration-200 shrink-0 select-none ${botaoClasses}`}
-                >
-                  <Icon
-                    className={`w-4 h-4 ${
-                      isActive
-                        ? isDark
-                          ? 'text-[#14100D]'
-                          : 'text-[#E8832A]'
-                        : isDark
-                        ? 'text-[#E8832A]'
-                        : 'text-[#B4540F]'
-                    }`}
-                  />
-                  <span>{secao.label}</span>
-                  <span
-                    className={`hidden sm:inline text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded ${
-                      isActive
-                        ? isDark
-                          ? 'bg-[#14100D]/20 text-[#14100D]'
-                          : 'bg-[#F5E6D0]/20 text-[#F5E6D0]'
-                        : isDark
-                        ? 'bg-[#F5E6D0]/10 text-[#F5E6D0]/60'
-                        : 'bg-[#14100D]/5 text-[#14100D]/60'
-                    }`}
+                return (
+                  <Link
+                    key={secao.id}
+                    to={secao.href}
+                    className={`min-h-[44px] flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-[6px] text-xs sm:text-sm font-semibold tracking-wide transition-all duration-200 shrink-0 select-none ${botaoClasses}`}
                   >
-                    {secao.desc}
-                  </span>
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
+                    <Icon
+                      className={`w-4 h-4 ${
+                        isActive
+                          ? isDark
+                            ? 'text-[#14100D]'
+                            : 'text-[#E8832A]'
+                          : isDark
+                          ? 'text-[#E8832A]'
+                          : 'text-[#B4540F]'
+                      }`}
+                    />
+                    <span>{secao.label}</span>
+                    <span
+                      className={`hidden sm:inline text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded ${
+                        isActive
+                          ? isDark
+                            ? 'bg-[#14100D]/20 text-[#14100D]'
+                            : 'bg-[#F5E6D0]/20 text-[#F5E6D0]'
+                          : isDark
+                          ? 'bg-[#F5E6D0]/10 text-[#F5E6D0]/60'
+                          : 'bg-[#14100D]/5 text-[#14100D]/60'
+                      }`}
+                    >
+                      {secao.desc}
+                    </span>
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );

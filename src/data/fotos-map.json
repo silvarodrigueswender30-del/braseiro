@@ -1,117 +1,454 @@
 {
-  "entradas-tentaculos-de-polvo": {
-    "arquivo": "/cardapio/fotos/tentaculos-de-polvo.webp",
-    "fonte": "wix",
-    "confianca": "alta"
+  "entradas-casquinha-de-siri": {
+    "arquivo": "/cardapio/fotos/casquinha-de-siri.webp",
+    "arquivo400w": "/cardapio/fotos/casquinha-de-siri-400w.webp",
+    "arquivo800w": "/cardapio/fotos/casquinha-de-siri-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Casquinha de siri gratinada servida na concha com farofinha"
+  },
+  "entradas-casquinha-de-lagosta": {
+    "arquivo": "/cardapio/fotos/casquinha-de-lagosta.webp",
+    "arquivo400w": "/cardapio/fotos/casquinha-de-lagosta-400w.webp",
+    "arquivo800w": "/cardapio/fotos/casquinha-de-lagosta-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Casquinha de lagosta cremosa e gratinada"
+  },
+  "entradas-ceviche-de-banana-da-terra": {
+    "arquivo": "/cardapio/fotos/ceviche-de-banana-da-terra.webp",
+    "arquivo400w": "/cardapio/fotos/ceviche-de-banana-da-terra-400w.webp",
+    "arquivo800w": "/cardapio/fotos/ceviche-de-banana-da-terra-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Ceviche caiçara de banana da terra marinada com cebola roxa e coentro"
+  },
+  "entradas-ceviche-de-salmao-e-peixe-branco": {
+    "arquivo": "/cardapio/fotos/ceviche-de-salmao-e-peixe-branco.webp",
+    "arquivo400w": "/cardapio/fotos/ceviche-de-salmao-e-peixe-branco-400w.webp",
+    "arquivo800w": "/cardapio/fotos/ceviche-de-salmao-e-peixe-branco-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Ceviche misto de salmão e peixe branco fresco marinado em cítricos"
+  },
+  "entradas-antepastos-braseiro": {
+    "arquivo": "/cardapio/fotos/antepastos-braseiro.webp",
+    "arquivo400w": "/cardapio/fotos/antepastos-braseiro-400w.webp",
+    "arquivo800w": "/cardapio/fotos/antepastos-braseiro-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Seleção de antepastos artesanais da casa acompanhados de torradas"
+  },
+  "porcoes-batata-frita": {
+    "arquivo": "/cardapio/fotos/batata-frita.webp",
+    "arquivo400w": "/cardapio/fotos/batata-frita-400w.webp",
+    "arquivo800w": "/cardapio/fotos/batata-frita-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Porção de batatas fritas crocantes e douradas"
+  },
+  "porcoes-linguica-artesanal": {
+    "arquivo": "/cardapio/fotos/linguica-artesanal.webp",
+    "arquivo400w": "/cardapio/fotos/linguica-artesanal-400w.webp",
+    "arquivo800w": "/cardapio/fotos/linguica-artesanal-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Linguiça artesanal grelhada na brasa fatiada com chimichurri"
+  },
+  "porcoes-pescada-a-dore": {
+    "arquivo": "/cardapio/fotos/pescada-a-dore.webp",
+    "arquivo400w": "/cardapio/fotos/pescada-a-dore-400w.webp",
+    "arquivo800w": "/cardapio/fotos/pescada-a-dore-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Iscas de pescada à dorê crocantes servidas com molho tártaro e limão"
+  },
+  "porcoes-torresmo-de-rolo": {
+    "arquivo": "/cardapio/fotos/torresmo-de-rolo.webp",
+    "arquivo400w": "/cardapio/fotos/torresmo-de-rolo-400w.webp",
+    "arquivo800w": "/cardapio/fotos/torresmo-de-rolo-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Torresmo de rolo crocante e pururucado"
+  },
+  "saladas-completona": {
+    "arquivo": "/cardapio/fotos/completona.webp",
+    "arquivo400w": "/cardapio/fotos/completona-400w.webp",
+    "arquivo800w": "/cardapio/fotos/completona-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Salada completona com mix de folhas verdes frescas, legumes e palmito"
   },
   "saladas-salada-caicara": {
     "arquivo": "/cardapio/fotos/salada-caicara.webp",
+    "arquivo400w": "/cardapio/fotos/salada-caicara-400w.webp",
+    "arquivo800w": "/cardapio/fotos/salada-caicara-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Salada Caiçara com folhas frescas, tomates selecionados e tempero artesanal"
+  },
+  "carnes-file-mignon-a-parmegiana": {
+    "arquivo": "/cardapio/fotos/file-mignon-a-parmegiana.webp",
+    "arquivo400w": "/cardapio/fotos/file-mignon-a-parmegiana-400w.webp",
+    "arquivo800w": "/cardapio/fotos/file-mignon-a-parmegiana-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Filé mignon à parmegiana gratinado com queijo derretido e molho de tomate rústico"
+  },
+  "hamburguer-burguer-na-brasa": {
+    "arquivo": "/cardapio/fotos/burguer-na-brasa.webp",
+    "arquivo400w": "/cardapio/fotos/burguer-na-brasa-400w.webp",
+    "arquivo800w": "/cardapio/fotos/burguer-na-brasa-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Hambúrguer artesanal 100% Angus selado na brasa com queijo derretido"
+  },
+  "hamburguer-sanduiche-de-costela": {
+    "arquivo": "/cardapio/fotos/sanduiche-de-costela.webp",
+    "arquivo400w": "/cardapio/fotos/sanduiche-de-costela-400w.webp",
+    "arquivo800w": "/cardapio/fotos/sanduiche-de-costela-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Sanduíche de costela bovina desfiada marinada na brasa com queijo"
+  },
+  "peixes-pescada-cambucu": {
+    "arquivo": "/cardapio/fotos/pescada-cambucu.webp",
+    "arquivo400w": "/cardapio/fotos/pescada-cambucu-400w.webp",
+    "arquivo800w": "/cardapio/fotos/pescada-cambucu-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Posta nobre de pescada Cambucu grelhada na brasa com ervas finas"
+  },
+  "peixes-pescada-ao-molho-de-camarao": {
+    "arquivo": "/cardapio/fotos/pescada-ao-molho-de-camarao.webp",
+    "arquivo400w": "/cardapio/fotos/pescada-ao-molho-de-camarao-400w.webp",
+    "arquivo800w": "/cardapio/fotos/pescada-ao-molho-de-camarao-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Filé de pescada grelhado coberto com rico molho cremoso de camarões frescos"
+  },
+  "peixes-salmao-na-brasa": {
+    "arquivo": "/cardapio/fotos/salmao-na-brasa.webp",
+    "arquivo400w": "/cardapio/fotos/salmao-na-brasa-400w.webp",
+    "arquivo800w": "/cardapio/fotos/salmao-na-brasa-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Filé de salmão grelhado na brasa viva com crosta dourada e maciez interna"
+  },
+  "peixes-abadejo-ao-molho-de-camarao": {
+    "arquivo": "/cardapio/fotos/abadejo-ao-molho-de-camarao.webp",
+    "arquivo400w": "/cardapio/fotos/abadejo-ao-molho-de-camarao-400w.webp",
+    "arquivo800w": "/cardapio/fotos/abadejo-ao-molho-de-camarao-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Posta de abadejo na brasa coberta com molho aveludado de camarão"
+  },
+  "peixes-abadejo-do-chef": {
+    "arquivo": "/cardapio/fotos/abadejo-do-chef.webp",
+    "arquivo400w": "/cardapio/fotos/abadejo-do-chef-400w.webp",
+    "arquivo800w": "/cardapio/fotos/abadejo-do-chef-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Abadejo do Chef selado na grelha com azeite de ervas e alcaparras"
+  },
+  "peixes-robalo-do-chef": {
+    "arquivo": "/cardapio/fotos/robalo-do-chef.webp",
+    "arquivo400w": "/cardapio/fotos/robalo-do-chef-400w.webp",
+    "arquivo800w": "/cardapio/fotos/robalo-do-chef-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Robalo do Chef grelhado na lenha servido com guarnições da costa"
+  },
+  "frutos-do-mar-camarao-ao-catupiry": {
+    "arquivo": "/cardapio/fotos/camarao-ao-catupiry.webp",
+    "arquivo400w": "/cardapio/fotos/camarao-ao-catupiry-400w.webp",
+    "arquivo800w": "/cardapio/fotos/camarao-ao-catupiry-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Camarões rosa selecionados salteados e gratinados com Catupiry cremoso"
+  },
+  "frutos-do-mar-camarao-do-chefe": {
+    "arquivo": "/cardapio/fotos/camarao-do-chefe.webp",
+    "arquivo400w": "/cardapio/fotos/camarao-do-chefe-400w.webp",
+    "arquivo800w": "/cardapio/fotos/camarao-do-chefe-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Camarão do Chefe preparado na grelha com tempero exclusivo da casa"
+  },
+  "frutos-do-mar-camarao-na-moranga-a-moda-braseiro": {
+    "arquivo": "/cardapio/fotos/camarao-na-moranga-a-moda-braseiro.webp",
+    "arquivo400w": "/cardapio/fotos/camarao-na-moranga-a-moda-braseiro-400w.webp",
+    "arquivo800w": "/cardapio/fotos/camarao-na-moranga-a-moda-braseiro-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Camarão na moranga à moda caiçara servido na abóbora moranga com camarões pistola"
+  },
+  "frutos-do-mar-chiclete-de-camarao": {
+    "arquivo": "/cardapio/fotos/chiclete-de-camarao.webp",
+    "arquivo400w": "/cardapio/fotos/chiclete-de-camarao-400w.webp",
+    "arquivo800w": "/cardapio/fotos/chiclete-de-camarao-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Chiclete de camarão com abundância de queijo puxa derretido e camarões salteados"
+  },
+  "frutos-do-mar-moqueca-de-peixe": {
+    "arquivo": "/cardapio/fotos/moqueca-de-peixe.webp",
+    "arquivo400w": "/cardapio/fotos/moqueca-de-peixe-400w.webp",
+    "arquivo800w": "/cardapio/fotos/moqueca-de-peixe-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Moqueca tradicional de peixe fresco cozida em panela de barro com leite de coco e dendê"
+  },
+  "frutos-do-mar-moqueca-mista": {
+    "arquivo": "/cardapio/fotos/moqueca-mista.webp",
+    "arquivo400w": "/cardapio/fotos/moqueca-mista-400w.webp",
+    "arquivo800w": "/cardapio/fotos/moqueca-mista-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Moqueca mista de peixe e camarões com pimentões coloridos e ervas frescas"
+  },
+  "frutos-do-mar-caldeirada-de-frutos-do-mar": {
+    "arquivo": "/cardapio/fotos/caldeirada-de-frutos-do-mar.webp",
+    "arquivo400w": "/cardapio/fotos/caldeirada-de-frutos-do-mar-400w.webp",
+    "arquivo800w": "/cardapio/fotos/caldeirada-de-frutos-do-mar-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Caldeirada rica de frutos do mar com camarões, lulas, mariscos e peixe"
+  },
+  "aves-file-de-frango": {
+    "arquivo": "/cardapio/fotos/file-de-frango.webp",
+    "arquivo400w": "/cardapio/fotos/file-de-frango-400w.webp",
+    "arquivo800w": "/cardapio/fotos/file-de-frango-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Filé de peito de frango grelhado na brasa bem suculento e dourado"
+  },
+  "aves-file-de-frango-a-parmegiana": {
+    "arquivo": "/cardapio/fotos/file-de-frango-a-parmegiana.webp",
+    "arquivo400w": "/cardapio/fotos/file-de-frango-a-parmegiana-400w.webp",
+    "arquivo800w": "/cardapio/fotos/file-de-frango-a-parmegiana-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Filé de frango empanado crocante coberto com molho de tomate artesanal e queijo"
+  },
+  "massas-massa-a-bolonhesa": {
+    "arquivo": "/cardapio/fotos/massa-a-bolonhesa.webp",
+    "arquivo400w": "/cardapio/fotos/massa-a-bolonhesa-400w.webp",
+    "arquivo800w": "/cardapio/fotos/massa-a-bolonhesa-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Massa artesanal servida com clássico molho à bolonhesa de carne cozida lentamente"
+  },
+  "massas-massa-de-frutos-do-mar": {
+    "arquivo": "/cardapio/fotos/massa-de-frutos-do-mar.webp",
+    "arquivo400w": "/cardapio/fotos/massa-de-frutos-do-mar-400w.webp",
+    "arquivo800w": "/cardapio/fotos/massa-de-frutos-do-mar-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Massa linguine com frutos do mar frescos na manteiga de ervas e vinho branco"
+  },
+  "massas-risoto-de-frutos-do-mar": {
+    "arquivo": "/cardapio/fotos/risoto-de-frutos-do-mar.webp",
+    "arquivo400w": "/cardapio/fotos/risoto-de-frutos-do-mar-400w.webp",
+    "arquivo800w": "/cardapio/fotos/risoto-de-frutos-do-mar-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Risoto cremoso de frutos do mar com camarões e lulas aromatizados"
+  },
+  "kids-frango": {
+    "arquivo": "/cardapio/fotos/frango.webp",
+    "arquivo400w": "/cardapio/fotos/frango-400w.webp",
+    "arquivo800w": "/cardapio/fotos/frango-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Prato kids individual com tirinhas de filé de frango grelhado, arroz e batatinha"
+  },
+  "kids-peixe": {
+    "arquivo": "/cardapio/fotos/peixe.webp",
+    "arquivo400w": "/cardapio/fotos/peixe-400w.webp",
+    "arquivo800w": "/cardapio/fotos/peixe-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Prato kids com iscas de peixe fresco grelhado suave, arroz branco e feijãozinho"
+  },
+  "bebidas-sucos": {
+    "arquivo": "/cardapio/fotos/sucos.webp",
+    "arquivo400w": "/cardapio/fotos/sucos-400w.webp",
+    "arquivo800w": "/cardapio/fotos/sucos-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Jarra de suco natural da fruta preparado na hora bem gelado"
+  },
+  "acomp-arroz-biro-biro": {
+    "arquivo": "/cardapio/fotos/arroz-biro-biro.webp",
+    "arquivo400w": "/cardapio/fotos/arroz-biro-biro-400w.webp",
+    "arquivo800w": "/cardapio/fotos/arroz-biro-biro-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Arroz biro-biro com ovos mexidos, bacon crocante e batata palha"
+  },
+  "acomp-farofa-de-banana": {
+    "arquivo": "/cardapio/fotos/farofa-de-banana.webp",
+    "arquivo400w": "/cardapio/fotos/farofa-de-banana-400w.webp",
+    "arquivo800w": "/cardapio/fotos/farofa-de-banana-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Farofa crocante com pedaços de banana da terra caramelizada"
+  },
+  "acomp-arroz-a-grega": {
+    "arquivo": "/cardapio/fotos/arroz-a-grega.webp",
+    "arquivo400w": "/cardapio/fotos/arroz-a-grega-400w.webp",
+    "arquivo800w": "/cardapio/fotos/arroz-a-grega-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Arroz à grega colorido com legumes picados"
+  },
+  "acomp-arroz-de-alho-poro": {
+    "arquivo": "/cardapio/fotos/arroz-de-alho-poro.webp",
+    "arquivo400w": "/cardapio/fotos/arroz-de-alho-poro-400w.webp",
+    "arquivo800w": "/cardapio/fotos/arroz-de-alho-poro-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Arroz aromatizado salteado com alho-poró"
+  },
+  "acomp-batata-saute": {
+    "arquivo": "/cardapio/fotos/batata-saute.webp",
+    "arquivo400w": "/cardapio/fotos/batata-saute-400w.webp",
+    "arquivo800w": "/cardapio/fotos/batata-saute-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Batatas douradas na manteiga com salsinha fresca"
+  },
+  "acomp-salada-de-batata-com-maionese": {
+    "arquivo": "/cardapio/fotos/salada-de-batata-com-maionese.webp",
+    "arquivo400w": "/cardapio/fotos/salada-de-batata-com-maionese-400w.webp",
+    "arquivo800w": "/cardapio/fotos/salada-de-batata-com-maionese-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Salada tradicional de batata com maionese artesanal cremosa"
+  },
+  "acomp-pure-de-batata": {
+    "arquivo": "/cardapio/fotos/pure-de-batata.webp",
+    "arquivo400w": "/cardapio/fotos/pure-de-batata-400w.webp",
+    "arquivo800w": "/cardapio/fotos/pure-de-batata-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Purê de batata caseiro amanteigado e cremoso"
+  },
+  "acomp-pure-de-mandioquinha": {
+    "arquivo": "/cardapio/fotos/pure-de-mandioquinha.webp",
+    "arquivo400w": "/cardapio/fotos/pure-de-mandioquinha-400w.webp",
+    "arquivo800w": "/cardapio/fotos/pure-de-mandioquinha-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Purê aveludado de mandioquinha da terra"
+  },
+  "acomp-farofa-de-torresmo": {
+    "arquivo": "/cardapio/fotos/farofa-de-torresmo.webp",
+    "arquivo400w": "/cardapio/fotos/farofa-de-torresmo-400w.webp",
+    "arquivo800w": "/cardapio/fotos/farofa-de-torresmo-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Farofa tostada temperada com pedacinhos de torresmo pururuca"
+  },
+  "acomp-vegetais-na-brasa": {
+    "arquivo": "/cardapio/fotos/vegetais-na-brasa.webp",
+    "arquivo400w": "/cardapio/fotos/vegetais-na-brasa-400w.webp",
+    "arquivo800w": "/cardapio/fotos/vegetais-na-brasa-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Seleção de vegetais frescos selados e tostados na grelha da parrilla"
+  },
+  "acomp-omelete": {
+    "arquivo": "/cardapio/fotos/omelete.webp",
+    "arquivo400w": "/cardapio/fotos/omelete-400w.webp",
+    "arquivo800w": "/cardapio/fotos/omelete-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Omelete fofinha feita na hora"
+  },
+  "entradas-tentaculos-de-polvo": {
+    "arquivo": "/cardapio/fotos/tentaculos-de-polvo.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Tentáculos de polvo grelhados com tomatinhos confit e batatas ao murro"
   },
   "carnes-picanha-angus": {
     "arquivo": "/images/pratos/prato-corte-nobre.webp",
     "fonte": "site",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Picanha Angus fatiada grelhada no ponto com chimichurri artesanal"
   },
-  "carnes-file-mignon-angus": {
-    "arquivo": "/public/cardapio/executivos/file-mignon-grelhado.webp",
-    "fonte": "wix",
-    "confianca": "media"
-  },
-  "carnes-trio-braseiro": {
-    "arquivo": "/images/pratos/prato-circular-duas-brasas.webp",
-    "fonte": "site",
-    "confianca": "media"
-  },
-  "hamburguer-sanduiche-de-costela": {
-    "arquivo": "/cardapio/fotos/sanduiche-de-costela.webp",
-    "fonte": "wix",
-    "confianca": "alta"
-  },
-  "monte-o-prato-picanha-angus": {
-    "arquivo": "/cardapio/fotos/monte-o-prato.webp",
-    "fonte": "wix",
-    "confianca": "alta"
-  },
-  "peixes-churrasco-do-mar": {
+  "frutos-do-mar-churrasco-do-mar": {
     "arquivo": "/cardapio/fotos/churrasco-do-mar.webp",
     "fonte": "wix",
-    "confianca": "alta"
-  },
-  "peixes-pescada-cambucu-grelhada": {
-    "arquivo": "/images/pratos/prato-prancha-mar.webp",
-    "fonte": "site",
-    "confianca": "media"
-  },
-  "peixes-pescada-ao-molho-de-camarao": {
-    "arquivo": "/cardapio/executivos/pescada-molho-de-camarao.webp",
-    "fonte": "wix",
-    "confianca": "media"
-  },
-  "frutos-do-mar-camarao-na-moranga": {
-    "arquivo": "/cardapio/fotos/camarao-na-moranga.webp",
-    "fonte": "wix",
-    "confianca": "alta"
-  },
-  "frutos-do-mar-camarao-do-chefe": {
-    "arquivo": "/images/pratos/prato-polvo-camarao.webp",
-    "fonte": "site",
-    "confianca": "media"
+    "confianca": "alta",
+    "alt": "Churrasco do Mar com polvo grelhado, peixe do dia e camarões na brasa"
   },
   "bebidas-soda-italiana": {
     "arquivo": "/cardapio/fotos/soda-italiana.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Soda italiana refrescante com xarope de frutas e água gaseificada"
   },
   "executivo-frango-grelhado": {
     "arquivo": "/cardapio/executivos/frango-grelhado.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Prato executivo de frango grelhado"
   },
   "executivo-picanha-grelhada": {
     "arquivo": "/cardapio/executivos/picanha-grelhada.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Prato executivo de picanha grelhada"
   },
   "executivo-file-mignon-grelhado": {
     "arquivo": "/cardapio/executivos/file-mignon-grelhado.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Prato executivo de file mignon grelhado"
   },
   "executivo-baby-beef-grelhado": {
     "arquivo": "/cardapio/executivos/baby-beef-grelhado.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Prato executivo de baby beef grelhado"
   },
   "executivo-file-mignon-parmegiana": {
     "arquivo": "/cardapio/executivos/file-mignon-parmegiana.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Prato executivo de file mignon parmegiana"
   },
   "executivo-parmegiana-de-frango": {
     "arquivo": "/cardapio/executivos/parmegiana-de-frango.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Prato executivo de parmegiana de frango"
   },
   "executivo-pescada-dore-ou-grelhada": {
     "arquivo": "/cardapio/executivos/pescada-dore-ou-grelhada.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Prato executivo de pescada dore ou grelhada"
   },
   "executivo-pescada-molho-de-camarao": {
     "arquivo": "/cardapio/executivos/pescada-molho-de-camarao.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Prato executivo de pescada molho de camarao"
   },
   "executivo-espaguete-vegetariano": {
     "arquivo": "/cardapio/executivos/espaguete-vegetariano.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Prato executivo de espaguete vegetariano"
   },
   "executivo-espaguete-bolonhesa": {
     "arquivo": "/cardapio/executivos/espaguete-bolonhesa.webp",
     "fonte": "wix",
-    "confianca": "alta"
+    "confianca": "alta",
+    "alt": "Prato executivo de espaguete bolonhesa"
   }
 }
