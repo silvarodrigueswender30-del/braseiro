@@ -276,8 +276,8 @@ export const LocationReservationsSection: React.FC = () => {
         isolation: 'isolate',
         overflow: 'hidden',
         backgroundColor: '#14100D',
-        paddingTop: 'clamp(96px, 10vw, 150px)',
-        paddingBottom: 'clamp(100px, 10vw, 160px)',
+        paddingTop: 'clamp(80px, 8vw, 120px)',
+        paddingBottom: 'clamp(80px, 8vw, 120px)',
         paddingLeft: 'var(--pad, clamp(24px, 5vw, 80px))',
         paddingRight: 'var(--pad, clamp(24px, 5vw, 80px))',
         ['--pad' as any]: 'clamp(24px, 5vw, 80px)',
@@ -435,7 +435,7 @@ export const LocationReservationsSection: React.FC = () => {
               {!prefersReducedMotion && (
                 <span
                   aria-hidden="true"
-                  className="absolute inset-0 block lowercase italic text-[#E8832A] whitespace-nowrap text-[clamp(4.3rem,15vw,6.8rem)] lg:text-[clamp(5.6rem,12.5vw,11.5rem)] select-none pointer-events-none filter blur-[18px] animate-pulse z-0"
+                  className="absolute inset-0 block lowercase italic text-[#E8832A] whitespace-nowrap tracking-[-0.02em] text-[clamp(4.3rem,15vw,6.8rem)] lg:text-[clamp(5.6rem,12.5vw,11.5rem)] select-none pointer-events-none filter blur-[18px] animate-pulse z-0"
                   style={{
                     fontFamily: 'var(--font-display)',
                     fontWeight: 900,
@@ -452,7 +452,7 @@ export const LocationReservationsSection: React.FC = () => {
               <span
                 ref={titleLine2InnerRef}
                 data-reveal="true"
-                className="block lowercase italic text-[#E8832A] whitespace-nowrap text-[clamp(4.3rem,15vw,6.8rem)] lg:text-[clamp(5.6rem,12.5vw,11.5rem)] relative z-10"
+                className="block lowercase italic text-[#E8832A] whitespace-nowrap tracking-[-0.02em] text-[clamp(4.3rem,15vw,6.8rem)] lg:text-[clamp(5.6rem,12.5vw,11.5rem)] relative z-10"
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontWeight: 900,

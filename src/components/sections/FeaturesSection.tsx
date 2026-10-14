@@ -422,7 +422,7 @@ export const FeaturesSection: React.FC = () => {
           >
             <span
               ref={titleLine2InnerRef}
-              className="block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap text-[clamp(4rem,19vw,6.5rem)] lg:text-[clamp(5rem,11.5vw,10.5rem)]"
+              className="block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap tracking-[-0.02em] text-[clamp(4rem,19vw,6.5rem)] lg:text-[clamp(5rem,11.5vw,10.5rem)]"
               style={{
                 fontFamily: 'var(--font-display)',
                 fontWeight: 900,

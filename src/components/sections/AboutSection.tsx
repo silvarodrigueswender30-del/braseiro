@@ -373,7 +373,7 @@ export const AboutSection: React.FC = () => {
             >
               <span
                 ref={addToLinesRef}
-                className="inline-flex items-baseline font-display font-[900] italic text-[var(--brasa-creme-grande)] leading-[0.8] -mt-[0.08em] text-[clamp(4.8rem,24vw,7.5rem)] sm:text-[clamp(5rem,9.5vw,8.5rem)]"
+                className="inline-flex items-baseline font-display font-[900] italic text-[var(--brasa-creme-grande)] leading-[0.8] -mt-[0.08em] tracking-[-0.02em] text-[clamp(4.8rem,24vw,7.5rem)] sm:text-[clamp(5rem,9.5vw,8.5rem)]"
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',

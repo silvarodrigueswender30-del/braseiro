@@ -378,7 +378,7 @@ export const Hero: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-hero-cta="true"
-                className="hero-btn-instrument inline-flex items-center justify-center text-[#1A1411] bg-[#F3E6D0] hover:bg-[#D9741C] hover:-translate-y-2 active:-translate-y-2 px-8 py-2.5 rounded-[8px] transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D9741C] shadow-lg text-[clamp(19px,1.52vw,22px)] min-h-[46px]"
+                className="hero-btn-instrument inline-flex items-center justify-center text-[#1A1411] bg-[#F3E6D0] hover:bg-[#D9741C] hover:-translate-y-2 active:-translate-y-2 px-8 py-2.5 rounded-[6px] transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D9741C] shadow-lg text-[clamp(19px,1.52vw,22px)] min-h-[46px]"
               >
                 RESERVAR MINHA MESA
               </a>
@@ -528,7 +528,7 @@ export const Hero: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-hero-cta="true"
-                className="hero-btn-instrument inline-flex items-center justify-center text-[#1A1411] bg-[#D9741C] hover:bg-[#F3E6D0] text-[22px] px-9 py-2.5 rounded-[10px] shadow-lg transition-transform duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#D9741C] min-w-[210px] min-h-[52px]"
+                className="hero-btn-instrument inline-flex items-center justify-center text-[#1A1411] bg-[#D9741C] hover:bg-[#F3E6D0] text-[22px] px-9 py-2.5 rounded-[6px] shadow-lg transition-transform duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#D9741C] min-w-[210px] min-h-[52px]"
               >
                 RESERVAR
               </a>

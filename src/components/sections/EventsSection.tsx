@@ -508,7 +508,7 @@ export const EventsSection: React.FC = () => {
                     }}
                   >
                     <span
-                      className="inline-block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap"
+                      className="inline-block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap tracking-[-0.02em]"
                       style={{
                         fontWeight: 900,
                         fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',

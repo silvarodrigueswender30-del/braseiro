@@ -264,7 +264,7 @@ export const AtalhosDock: React.FC = () => {
         <a
           href="#pratos"
           onClick={handleScrollToMenu}
-          className="dock-btn group flex items-center justify-center gap-2 h-12 lg:h-full px-3 lg:px-5 rounded-[6px] lg:rounded-[4px] border-[1.5px] border-[#F5E6D0]/55 bg-transparent text-[#F5E6D0] hover:bg-[#F5E6D0]/10 hover:border-[#F5E6D0]/80 transition-colors select-none"
+          className="dock-btn group flex items-center justify-center gap-2 h-12 lg:h-full px-3 lg:px-5 rounded-[6px] border-[1.5px] border-[#F5E6D0]/55 bg-transparent text-[#F5E6D0] hover:bg-[#F5E6D0]/10 hover:border-[#F5E6D0]/80 transition-colors select-none"
           style={{
             fontFamily: 'var(--font-ui, "Instrument Sans", sans-serif)',
             fontWeight: 600,
@@ -285,7 +285,7 @@ export const AtalhosDock: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Falar com o restaurante pelo WhatsApp"
-            className="dock-btn group flex items-center justify-center gap-2 h-12 lg:h-full px-3 lg:px-5 rounded-[6px] lg:rounded-[4px] bg-[#E8832A] text-[#14100D] hover:bg-[#F5E6D0] transition-colors select-none"
+            className="dock-btn group flex items-center justify-center gap-2 h-12 lg:h-full px-3 lg:px-5 rounded-[6px] bg-[#E8832A] text-[#14100D] hover:bg-[#F5E6D0] transition-colors select-none"
             style={{
               fontFamily: 'var(--font-ui, "Instrument Sans", sans-serif)',
               fontWeight: 600,

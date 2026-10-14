@@ -334,7 +334,7 @@ export const AmbianceSection: React.FC = () => {
           >
             <span
               ref={titleLine2InnerRef}
-              className="block lowercase italic text-[#E8832A] whitespace-nowrap text-[clamp(4.1rem,14vw,6.5rem)] lg:text-[clamp(5.2rem,11.8vw,10.8rem)]"
+              className="block lowercase italic text-[#E8832A] whitespace-nowrap tracking-[-0.02em] text-[clamp(4.1rem,14vw,6.5rem)] lg:text-[clamp(5.2rem,11.8vw,10.8rem)]"
               style={{
                 fontFamily: 'var(--font-display)',
                 fontWeight: 900,

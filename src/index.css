@@ -61,6 +61,7 @@
   font-weight: 900;
   text-transform: lowercase;
   color: #E8832A;
+  letter-spacing: -0.02em;
   font-size: clamp(7rem, 18vw, 16rem);
   line-height: 0.8;
   margin-top: -0.08em;
@@ -116,6 +117,7 @@
   font-weight: 900;
   font-style: italic;
   color: var(--brasa);
+  letter-spacing: -0.02em;
   font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
   text-transform: lowercase;
   display: inline-block;

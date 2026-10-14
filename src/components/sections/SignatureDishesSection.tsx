@@ -420,7 +420,7 @@ export const SignatureDishesSection: React.FC = () => {
               <span
                 ref={titleLine2InnerRef}
                 data-reveal="true"
-                className="block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap text-[clamp(4.2rem,21vw,7.2rem)] lg:text-[clamp(5rem,11vw,10rem)]"
+                className="block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap tracking-[-0.02em] text-[clamp(4.2rem,21vw,7.2rem)] lg:text-[clamp(5rem,11vw,10rem)]"
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontWeight: 900,

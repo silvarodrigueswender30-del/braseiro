@@ -442,11 +442,11 @@ export const Footer: React.FC = () => {
           {/* ---------------------------------------------------------- */}
           {/* COLUNA ESQUERDA: EYEBROW + H2 (2 LINHAS + CHAMA) + BOTÃO    */}
           {/* ---------------------------------------------------------- */}
-          <div className="w-full flex flex-col items-center text-center">
+          <div className="w-full flex flex-col items-center text-center lg:items-start lg:text-left">
             {/* Eyebrow "ATÉ A PRÓXIMA" com fios laterais de 1px */}
             <div
               ref={eyebrowRef}
-              className="flex items-center justify-center gap-3 sm:gap-4 mb-2 sm:mb-3"
+              className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-2 sm:mb-3"
             >
               <span className="w-6 sm:w-8 h-[1px] bg-[#14100D]/35 inline-block shrink-0" />
               <span
@@ -461,7 +461,7 @@ export const Footer: React.FC = () => {
             {/* H2 com 2 Linhas: "ACENDA O FOGO," + "sente à mesa" + Chama */}
             <h2
               id="footer-heading"
-              className="mt-2 sm:mt-3 flex flex-col items-center text-center m-0 select-none"
+              className="mt-2 sm:mt-3 flex flex-col items-center text-center lg:items-start lg:text-left m-0 select-none"
               aria-label="Acenda o fogo, sente à mesa"
             >
               {/* Linha 1: "ACENDA O FOGO," */}
@@ -491,7 +491,7 @@ export const Footer: React.FC = () => {
               </span>
 
               {/* Linha 2: "sente à mesa" + ChamaIcon (inline-flex; máscara só na palavra) */}
-              <span className="inline-flex items-baseline justify-center whitespace-nowrap">
+              <span className="inline-flex items-baseline justify-center lg:justify-start whitespace-nowrap">
                 <span
                   ref={titleLine2WrapperRef}
                   className="line-wrapper block"
@@ -504,7 +504,7 @@ export const Footer: React.FC = () => {
                   <span
                     ref={titleLine2InnerRef}
                     data-reveal="true"
-                    className="block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap text-[clamp(2.55rem,11.8vw,4.5rem)] lg:text-[clamp(3.4rem,6.9vw,6.3rem)]"
+                    className="block lowercase italic text-[var(--brasa-creme-grande)] whitespace-nowrap tracking-[-0.02em] text-[clamp(2.55rem,11.8vw,4.5rem)] lg:text-[clamp(3.4rem,6.9vw,6.3rem)]"
                     style={{
                       fontFamily: 'var(--font-display)',
                       fontWeight: 900,
@@ -540,7 +540,7 @@ export const Footer: React.FC = () => {
             {/* Botão "RESERVAR MESA" */}
             <div
               ref={reserveBtnWrapperRef}
-              className="w-full flex justify-center"
+              className="w-full flex justify-center lg:justify-start"
               style={{
                 marginTop: 'clamp(28px, 3vw, 44px)',
               }}
