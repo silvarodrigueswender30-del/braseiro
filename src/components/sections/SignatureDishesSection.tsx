@@ -7,17 +7,28 @@ import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
 
+export interface MenuCardItem {
+  id: 'gastronomia' | 'drinks' | 'executivos';
+  numero: string;
+  titulo: string;
+  href: string;
+  poster: string;
+  avif?: string;
+  video?: string;
+  ariaLabel: string;
+}
+
 /**
  * CONFIGURAÇÃO DOS CARDS DE CARDÁPIO (Rotas nativas do site)
  */
-export const MENU_CARDS = [
+export const MENU_CARDS: readonly MenuCardItem[] = [
   {
     id: 'gastronomia',
     numero: '01',
     titulo: 'gastronomia',
     href: '/cardapio/gastronomia',
-    video: 'https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/carne.mp4',
-    poster: '/images/pratos/gastronomia-poster.webp',
+    poster: '/images/pratos/polvo.webp',
+    avif: '/images/pratos/polvo.avif',
     ariaLabel: 'Ver cardápio de gastronomia',
   },
   {
@@ -25,7 +36,7 @@ export const MENU_CARDS = [
     numero: '02',
     titulo: 'drinks',
     href: '/cardapio/drinks',
-    video: 'https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/vid3.mp4',
+    video: 'https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/drink.mp4',
     poster: '/images/pratos/drinks-poster.webp',
     ariaLabel: 'Ver cardápio de drinks',
   },
@@ -34,8 +45,8 @@ export const MENU_CARDS = [
     numero: '03',
     titulo: 'executivos',
     href: '/cardapio/executivos',
-    video: 'https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/mar.mp4',
-    poster: '/images/pratos/executivos-poster.webp',
+    poster: '/images/pratos/executivo.webp',
+    avif: '/images/pratos/executivo.avif',
     ariaLabel: 'Ver cardápio de executivos',
   },
 ] as const;
@@ -159,15 +170,17 @@ export const SignatureDishesSection: React.FC = () => {
           if (entry.isIntersecting && !isSectionNear) {
             isSectionNear = true;
             MENU_CARDS.forEach((card, idx) => {
-              const dVid = desktopVideoRefs.current[idx];
-              if (dVid && !dVid.src && !videoErrors[card.id]) {
-                dVid.src = card.video;
-                dVid.load();
-              }
-              const mVid = mobileVideoRefs.current[idx];
-              if (mVid && !mVid.src && !videoErrors[card.id]) {
-                mVid.src = card.video;
-                mVid.load();
+              if (card.video) {
+                const dVid = desktopVideoRefs.current[idx];
+                if (dVid && !dVid.src && !videoErrors[card.id]) {
+                  dVid.src = card.video;
+                  dVid.load();
+                }
+                const mVid = mobileVideoRefs.current[idx];
+                if (mVid && !mVid.src && !videoErrors[card.id]) {
+                  mVid.src = card.video;
+                  mVid.load();
+                }
               }
             });
           }
@@ -500,20 +513,24 @@ export const SignatureDishesSection: React.FC = () => {
                   containerType: 'inline-size',
                 }}
               >
-                {/* Poster fixo WebP de fallback e carregamento inicial */}
-                <img
-                  src={card.poster}
-                  alt=""
-                  width={900}
-                  height={1600}
-                  loading="lazy"
-                  decoding="async"
-                  className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
-                  style={{ filter: filterStyle }}
-                />
+                {/* Imagem de Fundo (com suporte AVIF e WebP) */}
+                <picture className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+                  {card.avif && <source srcSet={card.avif} type="image/avif" />}
+                  <source srcSet={card.poster} type="image/webp" />
+                  <img
+                    src={card.poster}
+                    alt=""
+                    width={900}
+                    height={1600}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover pointer-events-none select-none"
+                    style={{ filter: filterStyle }}
+                  />
+                </picture>
 
-                {/* Vídeo remoto em looping silencioso */}
-                {!prefersReducedMotion && !videoErrors[card.id] && (
+                {/* Vídeo remoto em looping silencioso (apenas quando houver vídeo configurado) */}
+                {!prefersReducedMotion && Boolean(card.video) && !videoErrors[card.id] && (
                   <video
                     ref={(el) => {
                       desktopVideoRefs.current[idx] = el;
@@ -639,20 +656,24 @@ export const SignatureDishesSection: React.FC = () => {
                     containerType: 'inline-size',
                   }}
                 >
-                  {/* Poster WebP */}
-                  <img
-                    src={card.poster}
-                    alt=""
-                    width={900}
-                    height={1600}
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
-                    style={{ filter: filterStyle }}
-                  />
+                  {/* Imagem de Fundo (com suporte AVIF e WebP) */}
+                  <picture className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+                    {card.avif && <source srcSet={card.avif} type="image/avif" />}
+                    <source srcSet={card.poster} type="image/webp" />
+                    <img
+                      src={card.poster}
+                      alt=""
+                      width={900}
+                      height={1600}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover pointer-events-none select-none"
+                      style={{ filter: filterStyle }}
+                    />
+                  </picture>
 
-                  {/* Vídeo remoto: só toca se for o card mais visível */}
-                  {!prefersReducedMotion && !videoErrors[card.id] && (
+                  {/* Vídeo remoto: só toca se for o card mais visível e tiver vídeo configurado */}
+                  {!prefersReducedMotion && Boolean(card.video) && !videoErrors[card.id] && (
                     <video
                       ref={(el) => {
                         mobileVideoRefs.current[idx] = el;
