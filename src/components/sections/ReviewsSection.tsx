@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChamaIcon } from '@/components/icons/ChamaIcon';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -649,11 +651,15 @@ export const ReviewsSection: React.FC = () => {
       ref={sectionRef}
       id="depoimentos"
       aria-labelledby="depoimentos-heading"
-      className="relative w-full overflow-x-clip bg-[#14100D] text-[#F5E6D0] py-[clamp(72px,8vw,120px)] px-[clamp(24px,5vw,80px)] scroll-mt-16"
+      className="relative has-shapes w-full overflow-x-clip bg-[#14100D] text-[#F5E6D0] py-[clamp(72px,8vw,120px)] px-[clamp(24px,5vw,80px)] scroll-mt-16"
       style={{
         backgroundColor: '#14100D',
       }}
     >
+      {/* Formas de marca decorativas (camada de fundo z-0) */}
+      {formasLayoutConfig['home-reviews']?.shapes.map((s, idx) => (
+        <BrandShape key={`reviews-shape-${idx}`} {...s} />
+      ))}
       {/* ============================================================== */}
       {/* TEXTURA DE GRÃO (.grao) 3% OPACIDADE                           */}
       {/* ============================================================== */}

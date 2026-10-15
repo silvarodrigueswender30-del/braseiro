@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CarneIcon } from '@/components/icons/CarneIcon';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -251,8 +253,13 @@ export const FireSection: React.FC = () => {
     <section
       id="fogo"
       ref={sectionRef}
-      className="relative w-full min-h-[100svh] lg:min-h-[clamp(640px,100svh,960px)] overflow-hidden bg-[#14100D] flex flex-col justify-between scroll-mt-20"
+      className="relative has-shapes w-full min-h-[100svh] lg:min-h-[clamp(640px,100svh,960px)] overflow-hidden bg-[#14100D] flex flex-col justify-between scroll-mt-20"
     >
+      {/* Formas de marca decorativas (camada z-[6] entre os fundos e o conteúdo z-10) */}
+      {formasLayoutConfig['home-fire']?.shapes.map((s, idx) => (
+        <BrandShape key={`fire-shape-${idx}`} {...s} className="z-[6]" />
+      ))}
+
       {/* ============================================================== */}
       {/* IMAGEM DE FUNDO (PICTURE RESPONSIVO)                           */}
       {/* ============================================================== */}

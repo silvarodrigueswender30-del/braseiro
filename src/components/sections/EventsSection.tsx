@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight } from 'lucide-react';
 import { siteConfig } from '@/config';
 import { TacasIcon } from '@/components/icons/TacasIcon';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -313,12 +315,17 @@ export const EventsSection: React.FC = () => {
     <section
       id="eventos"
       ref={sectionRef}
-      className="relative w-full overflow-x-clip bg-[#F5E6D0] text-[#14100D] py-[clamp(72px,8vw,120px)] px-[clamp(24px,5vw,80px)] scroll-mt-16"
+      className="relative has-shapes w-full overflow-x-clip bg-[#F5E6D0] text-[#14100D] py-[clamp(72px,8vw,120px)] px-[clamp(24px,5vw,80px)] scroll-mt-16"
       style={{
         // Transição limpa com a seção anterior e posterior (sem linhas ou sombras)
         backgroundColor: '#F5E6D0',
       }}
     >
+      {/* Formas de marca decorativas (camada de fundo z-0) */}
+      {formasLayoutConfig['home-events']?.shapes.map((s, idx) => (
+        <BrandShape key={`events-shape-${idx}`} {...s} />
+      ))}
+
       {/* ============================================================== */}
       {/* TEXTURA DE GRÃO (.grao) 3% OPACIDADE                           */}
       {/* ============================================================== */}

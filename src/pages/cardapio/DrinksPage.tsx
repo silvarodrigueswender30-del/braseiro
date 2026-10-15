@@ -2,12 +2,19 @@ import React, { useState } from 'react';
 import { CardapioHeader } from '@/components/cardapio/CardapioHeader';
 import { drinks, caipirinhas, cervejas, doses, nossoBar, cardapioMeta, formatarPreco } from '@/data/cardapio';
 import { Wine, Beer, Sparkles, Flame, GlassWater, Droplets } from 'lucide-react';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 export const DrinksPage: React.FC = () => {
   const [abaAtiva, setAbaAtiva] = useState<'coqueteis' | 'caipirinhas' | 'cervejas' | 'doses'>('coqueteis');
 
   return (
-    <div className="relative min-h-screen bg-[#14100D] text-[#F5E6D0] transition-colors duration-200">
+    <div className="relative has-shapes overflow-x-clip min-h-screen bg-[#14100D] text-[#F5E6D0] transition-colors duration-200">
+      {/* Formas de marca decorativas (camada de fundo z-0) */}
+      {formasLayoutConfig['cardapio-drinks']?.shapes.map((s, idx) => (
+        <BrandShape key={`drinks-shape-${idx}`} {...s} />
+      ))}
+
       {/* Header Editorial Escuro */}
       <CardapioHeader
         tituloParte1="Alquimia &"

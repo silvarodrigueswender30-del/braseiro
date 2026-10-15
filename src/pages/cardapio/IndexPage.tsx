@@ -4,6 +4,8 @@ import { CardapioHeader } from '@/components/cardapio/CardapioHeader';
 import { cardapioMeta } from '@/data/cardapio';
 import { ArrowRight, Clock, Sparkles, MapPin, Phone } from 'lucide-react';
 import { siteConfig } from '@/config';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 export const IndexPage: React.FC = () => {
   const cards = [
@@ -49,7 +51,12 @@ export const IndexPage: React.FC = () => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#FBF4E8] text-[#14100D] transition-colors duration-200">
+    <div className="relative has-shapes overflow-x-clip min-h-screen bg-[#FBF4E8] text-[#14100D] transition-colors duration-200">
+      {/* Formas de marca decorativas (camada de fundo z-0) */}
+      {formasLayoutConfig['cardapio-hub']?.shapes.map((s, idx) => (
+        <BrandShape key={`hub-shape-${idx}`} {...s} />
+      ))}
+
       {/* Header Editorial da Página */}
       <CardapioHeader
         tituloParte1="O Cardápio da"

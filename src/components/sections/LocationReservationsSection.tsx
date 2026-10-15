@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight } from 'lucide-react';
 import { siteConfig } from '@/config';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -301,7 +303,7 @@ export const LocationReservationsSection: React.FC = () => {
       ref={sectionRef}
       id="contato-reservas"
       aria-labelledby="reservas-heading"
-      className="relative w-full overflow-hidden bg-[#14100D] text-[#F5E6D0] scroll-mt-20"
+      className="relative has-shapes w-full overflow-hidden bg-[#14100D] text-[#F5E6D0] scroll-mt-20"
       style={{
         position: 'relative',
         isolation: 'isolate',
@@ -314,6 +316,10 @@ export const LocationReservationsSection: React.FC = () => {
         ['--pad' as any]: 'clamp(24px, 5vw, 80px)',
       }}
     >
+      {/* Formas de marca decorativas (camada z-[1] entre fundo e conteúdo z-[2]) */}
+      {formasLayoutConfig['home-location-reservations']?.shapes.map((s, idx) => (
+        <BrandShape key={`location-shape-${idx}`} {...s} className="z-[1]" />
+      ))}
       {/* ============================================================== */}
       {/* WRAPPER DE FUNDO: INSET-0, OVERFLOW-HIDDEN, Z-0                */}
       {/* ============================================================== */}

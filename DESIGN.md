@@ -92,3 +92,31 @@ Diretrizes visuais e tokens de design oficiais para a experiência nativa do Bra
 - **Easing:** `ease-out` ou `cubic-bezier(0.16, 1, 0.3, 1)`.
 - **Acessibilidade Obrigatória:** respeito estrito a `prefers-reduced-motion: reduce` (desativa transições de deslocamento físico e mantém apenas crossfade suave de opacidade).
 - **Alvos de Toque no Mobile:** mínimo estrito de **44x44px** em todos os botões, abas e seletores clicáveis.
+
+---
+
+## 8. Formas de Marca (Brand Shapes & CSS Masks)
+
+Sistema de formas decorativas da identidade visual do Braseiro Caiçara (`public/images/formas/*.svg` e componente `<BrandShape />`).
+
+### 8.1 Catálogo de Formas
+- **`nuvem-a`:** Silhueta globular densa com 7 lóbulos e fissuras radiais (proporção `870 / 740`). Ideal para cantos superiores e laterais de seções monumentais.
+- **`nuvem-b`:** Silhueta horizontal alongada em bloco rochoso com 5 rachaduras verticais profundas (proporção `1310 / 733`). Ideal como plano de fundo atrás de colagens, polaroids e listas.
+- **`mancha-c`:** Silhueta fluida e dinâmica de fogo orgânico com labareda ascendente (proporção `997 / 739`). Excelente para laterais opostas a blocos de texto.
+- **`pincelada-d`:** Faixa horizontal com textura de cerdas ásperas desfiadas nas pontas e fendas de terra no centro (proporção `1489 / 534`). Usada como elemento horizontal entre blocos e carrosséis.
+- **`faiscas`:** Revoada horizontal ondulante de 35 partículas/diamantes geométricos (proporção `2213 / 477`). Usada para pontuar calor e transições entre blocos escuros.
+- **`selo`:** Emblema circular com anel duplo rústico vazado, chama central e ondas do mar (proporção `879 / 881`). Usado como sinete de chancela e acento em CTAs de fechamento.
+- **`sal`:** Constelação de 42 grãos dispersos de sal grosso artesanal (proporção `683 / 552`). Acento textural discreto perto de títulos e subtítulos.
+
+### 8.2 Regras de Composição (Estilo Bonança)
+1. **Sangramento Orgânico:** As peças grandes sangram pela borda da seção (20% a 40% da forma fora do viewport). A seção hospedeira deve conter a classe `.has-shapes` (`overflow-x: clip; isolation: isolate;`).
+2. **Profundidade sem Competição:** Formas ficam estritamente em `z-index: 0` (ou camada inferior aos cartões). O texto nunca fica sobre regiões de alto contraste das formas. Cards, fotos e post-its mantêm fundos sólidos e as formas passam por trás deles, saindo pelos cantos (efeito de sobreposição).
+3. **Densidade e Respiro:** Máximo de 1 peça principal grande (35–70% da largura da seção) e no máximo 1 peça pequena de apoio. Seções com foto full-bleed ou grande destaque visual (Hero, "Duas Brasas" e "Por que o fogo é diferente") ficam **sem** formas para garantir respiro editorial.
+4. **Regra de Ouro da Brasa:** O tom `brasa` (`#E8832A`) é reservado para no máximo **UMA** forma pequena por página (ex.: o selo no CTA final da Home).
+5. **Calibração Cromática & Opacidades:**
+   - **Fundo Creme (`#FBF4E8` / `#F5E6D0`):** tons `areia` e `terracota` com opacidade reduzida ($0.10$ a $0.20$). `carvao` apenas muito sutil ($0.05$ a $0.08$).
+   - **Fundo Escuro (`#14100D`):** tom `carvao` ($0.30$ a $0.45$), `terracota` ($0.25$ a $0.35$) e `creme` ($0.05$ a $0.15$).
+6. **Contraste WCAG AA Obrigatório:** A relação de contraste calculada entre texto e o fundo (mesmo quando sobreposto à forma com opacidade) deve permanecer estritamente $\ge 4.5:1$ (texto normal) e $\ge 3:1$ (texto grande).
+7. **Responsividade & Acessibilidade:**
+   - Em telas móveis ($\le 640\text{px}$), peças secundárias recebem `hideOnMobile={true}` e peças principais reduzem escala automaticamente via `clamp()`.
+   - Elementos decorativos possuem `aria-hidden="true"`, `pointer-events: none` e não interferem em cliques.

@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChamaIcon } from '@/components/icons/ChamaIcon';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -103,8 +105,13 @@ export const ManifestoSection: React.FC = () => {
       ref={sectionRef}
       id="quem-somos"
       aria-label="Quem Somos - Sal, Fogo e Paciência"
-      className="relative bg-[#14100D] text-[#F5E6D0] grao overflow-hidden py-[clamp(72px,8vw,120px)] border-t border-[#F5E6D0]/10 flex flex-col items-center justify-center text-center px-6 sm:px-10"
+      className="relative has-shapes bg-[#14100D] text-[#F5E6D0] grao overflow-hidden py-[clamp(72px,8vw,120px)] border-t border-[#F5E6D0]/10 flex flex-col items-center justify-center text-center px-6 sm:px-10"
     >
+      {/* Formas de marca decorativas (camada de fundo z-0) */}
+      {formasLayoutConfig['home-manifesto']?.shapes.map((s, idx) => (
+        <BrandShape key={`manifesto-shape-${idx}`} {...s} />
+      ))}
+
       <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center">
         {/* Chama pequena (altura 44px) acima do eyebrow */}
         <div

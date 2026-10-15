@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export type BrandShapeType =
   | 'nuvem-a'
@@ -26,7 +26,11 @@ export interface BrandShapeProps {
   left?: string;
   rotate?: number;
   flipX?: boolean;
+  opacity?: number;
+  hideOnMobile?: boolean;
+  parallax?: boolean;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 /**
@@ -60,16 +64,49 @@ export const BrandShape: React.FC<BrandShapeProps> = ({
   left,
   rotate,
   flipX,
+  opacity,
+  hideOnMobile = false,
+  parallax = false,
   className = '',
+  style: userStyle,
 }) => {
   const maskUrl = `url(/images/formas/${shape}.svg)`;
   const aspectRatio = SHAPE_ASPECT_RATIOS[shape] || '1 / 1';
 
+  // Parallax leve (≤ 20px) apenas quando habilitado, respeitando prefers-reduced-motion e desktop
+  const [parallaxOffset, setParallaxOffset] = useState<number>(0);
+
+  useEffect(() => {
+    if (!parallax || typeof window === 'undefined') return;
+
+    // Verificar se o usuário prefere movimento reduzido
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || window.innerWidth < 768) return;
+
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Deslocamento máximo muito suave de até 20px
+          const scrollY = window.scrollY;
+          const offset = Math.sin(scrollY * 0.0015) * 16;
+          setParallaxOffset(Math.round(offset));
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [parallax]);
+
   const transforms: string[] = [];
+  if (parallaxOffset !== 0) transforms.push(`translateY(${parallaxOffset}px)`);
   if (rotate) transforms.push(`rotate(${rotate}deg)`);
   if (flipX) transforms.push('scaleX(-1)');
 
-  const style: React.CSSProperties = {
+  const inlineStyle: React.CSSProperties = {
     position: 'absolute',
     pointerEvents: 'none',
     zIndex: 0,
@@ -79,6 +116,7 @@ export const BrandShape: React.FC<BrandShapeProps> = ({
     right,
     bottom,
     left,
+    opacity: opacity !== undefined ? opacity : undefined,
     transform: transforms.length > 0 ? transforms.join(' ') : undefined,
     WebkitMaskImage: maskUrl,
     maskImage: maskUrl,
@@ -89,14 +127,16 @@ export const BrandShape: React.FC<BrandShapeProps> = ({
     WebkitMaskPosition: 'center',
     maskPosition: 'center',
     backgroundColor: `var(--shape-${tone})`,
-    // Sem animação e sem will-change para evitar consumo desnecessário de GPU/composição
+    ...userStyle,
   };
+
+  const responsiveClasses = hideOnMobile ? 'hidden sm:inline-block' : 'inline-block';
 
   return (
     <span
       aria-hidden="true"
-      className={`brand-shape ${className}`.trim()}
-      style={style}
+      className={`brand-shape ${responsiveClasses} ${className}`.trim()}
+      style={inlineStyle}
     />
   );
 };

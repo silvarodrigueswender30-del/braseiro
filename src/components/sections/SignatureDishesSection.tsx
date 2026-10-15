@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -344,7 +346,7 @@ export const SignatureDishesSection: React.FC = () => {
     <section
       id="pratos"
       ref={sectionRef}
-      className="grao relative w-full overflow-x-clip bg-[#F5E6D0] text-[#14100D] scroll-mt-20"
+      className="grao relative has-shapes w-full overflow-x-clip bg-[#F5E6D0] text-[#14100D] scroll-mt-20"
       style={{
         backgroundColor: '#F5E6D0',
         paddingTop: 'clamp(72px, 8vw, 120px)',
@@ -353,6 +355,10 @@ export const SignatureDishesSection: React.FC = () => {
         paddingRight: 'clamp(24px, 5vw, 80px)',
       }}
     >
+      {/* Formas de marca decorativas (camada de fundo z-0) */}
+      {formasLayoutConfig['home-signature-dishes']?.shapes.map((s, idx) => (
+        <BrandShape key={`signature-dishes-shape-${idx}`} {...s} />
+      ))}
       {/* ============================================================== */}
       {/* TEXTURA DE GRÃO 3% OPACIDADE                                   */}
       {/* ============================================================== */}

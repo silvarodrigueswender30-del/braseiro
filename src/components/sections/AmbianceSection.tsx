@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -255,11 +257,15 @@ export const AmbianceSection: React.FC = () => {
       ref={sectionRef}
       id="ambiente"
       aria-labelledby="ambiente-heading"
-      className="relative w-full overflow-x-clip bg-[#14100D] text-[#F5E6D0] scroll-mt-20 pb-0"
+      className="relative has-shapes w-full overflow-x-clip bg-[#14100D] text-[#F5E6D0] scroll-mt-20 pb-0"
       style={{
         backgroundColor: '#14100D',
       }}
     >
+      {/* Formas de marca decorativas (camada de fundo z-0) */}
+      {formasLayoutConfig['home-ambiance']?.shapes.map((s, idx) => (
+        <BrandShape key={`ambiance-shape-${idx}`} {...s} />
+      ))}
       {/* ============================================================== */}
       {/* TEXTURA DE GRÃO (.grao) 3% OPACIDADE                           */}
       {/* ============================================================== */}

@@ -3,10 +3,17 @@ import { CardapioHeader } from '@/components/cardapio/CardapioHeader';
 import { executivos, cardapioMeta, formatarPreco } from '@/data/cardapio';
 import { Clock, AlertCircle, Plus, Utensils, MessageSquare } from 'lucide-react';
 import { siteConfig } from '@/config';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 export const ExecutivosPage: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-[#FBF4E8] text-[#14100D] transition-colors duration-200">
+    <div className="relative has-shapes overflow-x-clip min-h-screen bg-[#FBF4E8] text-[#14100D] transition-colors duration-200">
+      {/* Formas de marca decorativas (camada de fundo z-0) */}
+      {formasLayoutConfig['cardapio-executivos']?.shapes.map((s, idx) => (
+        <BrandShape key={`exec-shape-${idx}`} {...s} />
+      ))}
+
       {/* Header Editorial Claro */}
       <CardapioHeader
         tituloParte1="Almoço de"

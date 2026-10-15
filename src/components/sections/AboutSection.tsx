@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChamaIcon } from '@/components/icons/ChamaIcon';
 import { heroVideos, siteConfig } from '@/config';
 import { Volume2, VolumeX, Play } from 'lucide-react';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -243,8 +245,13 @@ export const AboutSection: React.FC = () => {
       ref={sectionRef}
       id="casa"
       aria-labelledby="churrasco-mar-heading"
-      className="relative flex flex-col lg:flex-row items-stretch bg-[#F5E6D0] text-[#14100D] grao overflow-hidden border-t border-[#14100D]/15 scroll-mt-24"
+      className="relative has-shapes flex flex-col lg:flex-row items-stretch bg-[#F5E6D0] text-[#14100D] grao overflow-hidden border-t border-[#14100D]/15 scroll-mt-24"
     >
+      {/* Formas de marca decorativas (camada de fundo z-0) */}
+      {formasLayoutConfig['home-about']?.shapes.map((s, idx) => (
+        <BrandShape key={`about-shape-${idx}`} {...s} />
+      ))}
+
       {/* ============================================================== */}
       {/* COLUNA ESQUERDA: Vídeo 2 (Full-Bleed 9:16 com som interativo)   */}
       {/* ============================================================== */}

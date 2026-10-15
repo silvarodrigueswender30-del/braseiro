@@ -5,6 +5,8 @@ import { MenuItemCard } from '@/components/cardapio/MenuItemCard';
 import { gastronomia, cardapioMeta, ItemCardapio } from '@/data/cardapio';
 import { Search, X, Flame, Info, ChevronRight, MessageSquare, AlertCircle } from 'lucide-react';
 import { siteConfig } from '@/config';
+import { BrandShape } from '@/components/BrandShape';
+import { formasLayoutConfig } from '@/data/formas-layout';
 
 export const GastronomiaPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -87,7 +89,12 @@ export const GastronomiaPage: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#FBF4E8] text-[#14100D] transition-colors duration-200">
+    <div className="relative has-shapes overflow-x-clip min-h-screen bg-[#FBF4E8] text-[#14100D] transition-colors duration-200">
+      {/* Formas de marca decorativas (camada de fundo z-0) */}
+      {formasLayoutConfig['cardapio-gastronomia']?.shapes.map((s, idx) => (
+        <BrandShape key={`gastro-shape-${idx}`} {...s} />
+      ))}
+
       {/* Header Editorial Claro */}
       <CardapioHeader
         tituloParte1="Do mar para a"
