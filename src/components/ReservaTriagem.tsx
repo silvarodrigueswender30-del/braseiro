@@ -344,7 +344,12 @@ export const ReservaTriagem: React.FC<ReservaTriagemProps> = ({
         </div>
       ) : (
         // FORMULÁRIO DE 3 PASSOS
-        <form onSubmit={handleSendWhatsApp} noValidate className="space-y-6">
+        <form
+          onSubmit={handleSendWhatsApp}
+          noValidate
+          aria-label="Reserva de mesa no Braseiro Caiçara"
+          className="space-y-6"
+        >
           {/* Indicador de Passo */}
           <div className="flex items-center justify-between border-b border-[#F5E6D0]/15 pb-3">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#E8832A]">

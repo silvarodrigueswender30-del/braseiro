@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-15T20:41:20.684Z",
+  "results": [
+    {
+      "name": "Chromium Desktop",
+      "homepageStatus": 200,
+      "reservaSheetFlow": true,
+      "reservaInlineFlow": true,
+      "cardapioNavFlow": true,
+      "ifoodLinkValid": true,
+      "mapsLinkValid": true,
+      "errors": [],
+      "axeViolations": 1,
+      "axeCriticalSerious": 0
+    },
+    {
+      "name": "Firefox Desktop",
+      "homepageStatus": 200,
+      "reservaSheetFlow": true,
+      "reservaInlineFlow": true,
+      "cardapioNavFlow": true,
+      "ifoodLinkValid": true,
+      "mapsLinkValid": true,
+      "errors": []
+    },
+    {
+      "name": "WebKit Desktop",
+      "homepageStatus": 200,
+      "reservaSheetFlow": true,
+      "reservaInlineFlow": true,
+      "cardapioNavFlow": true,
+      "ifoodLinkValid": true,
+      "mapsLinkValid": true,
+      "errors": []
+    },
+    {
+      "name": "Pixel 7 Mobile",
+      "homepageStatus": 200,
+      "reservaSheetFlow": true,
+      "reservaInlineFlow": true,
+      "cardapioNavFlow": true,
+      "ifoodLinkValid": true,
+      "mapsLinkValid": true,
+      "errors": []
+    },
+    {
+      "name": "iPhone 13 Mobile",
+      "homepageStatus": 200,
+      "reservaSheetFlow": true,
+      "reservaInlineFlow": true,
+      "cardapioNavFlow": true,
+      "ifoodLinkValid": true,
+      "mapsLinkValid": true,
+      "errors": []
+    }
+  ],
+  "axeResultsSummary": {
+    "totalViolations": 1,
+    "criticalOrSerious": 0,
+    "homeViolations": [],
+    "cardapioViolations": [
+      {
+        "id": "landmark-no-duplicate-banner",
+        "impact": "moderate",
+        "description": "Ensure the document has at most one banner landmark",
+        "nodes": [
+          [
+            ".top-0"
+          ]
+        ]
+      }
+    ]
+  }
+}

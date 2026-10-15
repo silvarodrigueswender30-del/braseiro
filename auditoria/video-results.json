@@ -1,0 +1,39 @@
+{
+  "results": [
+    {
+      "id": "vid01",
+      "url": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/vid01.mp4",
+      "origKb": 12706.1,
+      "optKb": 11032.3,
+      "savingsPercent": 13.2,
+      "ssim": 0.990555
+    },
+    {
+      "id": "vid2",
+      "url": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/vid2.mp4",
+      "origKb": 8006.8,
+      "optKb": 6654.8,
+      "savingsPercent": 16.9,
+      "ssim": 0.982551
+    },
+    {
+      "id": "vid3",
+      "url": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/vid3.mp4",
+      "origKb": 4984.5,
+      "optKb": 3926.9,
+      "savingsPercent": 21.2,
+      "ssim": 0.986028
+    },
+    {
+      "id": "drink",
+      "url": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/drink.mp4",
+      "origKb": 4168.2,
+      "optKb": 3422.2,
+      "savingsPercent": 17.9,
+      "ssim": 0.986362
+    }
+  ],
+  "totalOrigKb": "29865.6",
+  "totalOptKb": "25036.2",
+  "totalSavings": "16.2"
+}

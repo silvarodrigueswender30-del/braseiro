@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-15T20:48:43.058Z",
+  "targetUrl": "http://localhost:5173",
+  "mobile": {
+    "runs": [
+      {
+        "perf": 39,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 100,
+        "lcp": "6.15s",
+        "lcpNum": 6150.79,
+        "lcpElement": "N/A"
+      },
+      {
+        "perf": 43,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 100,
+        "lcp": "5.69s",
+        "lcpNum": 5694.851,
+        "lcpElement": "N/A"
+      },
+      {
+        "perf": 43,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 100,
+        "lcp": "5.36s",
+        "lcpNum": 5357.975,
+        "lcpElement": "N/A"
+      }
+    ],
+    "median": {
+      "performance": 43,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp": "5.69s",
+      "lcpElement": "N/A"
+    }
+  },
+  "desktop": {
+    "runs": [
+      {
+        "perf": 32,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 100,
+        "lcp": "3.25s",
+        "lcpNum": 3253.815,
+        "lcpElement": "N/A"
+      },
+      {
+        "perf": 42,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 100,
+        "lcp": "2.15s",
+        "lcpNum": 2145.412,
+        "lcpElement": "N/A"
+      },
+      {
+        "perf": 41,
+        "a11y": 100,
+        "bp": 100,
+        "seo": 100,
+        "lcp": "2.24s",
+        "lcpNum": 2244.504,
+        "lcpElement": "N/A"
+      }
+    ],
+    "median": {
+      "performance": 41,
+      "accessibility": 100,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcp": "2.24s",
+      "lcpElement": "N/A"
+    }
+  }
+}

@@ -21,7 +21,10 @@ scratch/
 # Temporary root screenshots and test scripts
 screenshot-*.png
 screenshots/
-auditoria/
+auditoria/*
+!auditoria/*.md
+!auditoria/**/*.md
+!auditoria/*.json
 scripts/
 .agent/
 .impeccable/

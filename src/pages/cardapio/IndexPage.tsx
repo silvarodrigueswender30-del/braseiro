@@ -157,7 +157,7 @@ export const IndexPage: React.FC = () => {
               href={siteConfig.ifoodUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="min-h-[44px] shrink-0 inline-flex items-center gap-2 rounded-[6px] bg-[#EA1D2C] hover:bg-[#C81926] text-white px-6 py-3 text-sm font-semibold tracking-wide transition-colors shadow-sm"
+              className="min-h-[44px] shrink-0 inline-flex items-center gap-2 rounded-[6px] bg-[#BE1823] hover:bg-[#9E141D] text-white px-6 py-3 text-sm font-bold tracking-wide transition-colors shadow-sm"
             >
               <span>Pedir no iFood</span>
               <ArrowRight className="w-4 h-4" />
