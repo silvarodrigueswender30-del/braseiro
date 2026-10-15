@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight } from 'lucide-react';
-import { siteConfig } from '@/config';
 import { TacasIcon } from '@/components/icons/TacasIcon';
 import { BrandShape } from '@/components/BrandShape';
 import { formasLayoutConfig } from '@/data/formas-layout';
+import { useReservationModal } from '@/context/ReservationModalContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,6 +35,7 @@ const EVENT_PHOTOS = {
 };
 
 export const EventsSection: React.FC = () => {
+  const { openReservationModal } = useReservationModal();
   const sectionRef = useRef<HTMLElement>(null);
 
   // Colagem e cards
@@ -638,9 +639,11 @@ export const EventsSection: React.FC = () => {
             {/* Botão de Ação (Carvão #14100D com texto Creme #F5E6D0) */}
             <div ref={buttonContainerRef} className="mt-8 pt-1">
               <a
-                href={siteConfig.whatsappEventUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/#contato-reservas"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openReservationModal({ ocasiao: 'Comemoração' });
+                }}
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-[6px] bg-[#14100D] text-[#F5E6D0] hover:bg-[#E8832A] hover:text-[#14100D] active:translate-y-0.5 transition-all duration-300 font-text font-semibold uppercase tracking-[0.08em] text-[14px] sm:text-[15px] shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8832A]"
                 style={{ fontFamily: 'var(--font-text)' }}
               >

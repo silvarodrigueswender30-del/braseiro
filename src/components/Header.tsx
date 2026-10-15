@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { siteConfig } from '@/config';
+import { useReservationModal } from '@/context/ReservationModalContext';
 
 export const Header: React.FC = () => {
+  const { openReservationModal } = useReservationModal();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -161,6 +163,10 @@ export const Header: React.FC = () => {
               </a>
               <a
                 href="/#contato-reservas"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openReservationModal();
+                }}
                 className="inline-flex items-center justify-center font-text font-semibold uppercase tracking-[0.08em] text-[13px] xl:text-[14px] text-[#14100D] bg-[#E8832A] hover:bg-[#F5E6D0] px-6 py-2.5 rounded-[6px] transition-all duration-200 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8832A] select-none"
               >
                 RESERVAR
@@ -193,6 +199,10 @@ export const Header: React.FC = () => {
             <div className="flex items-center justify-end gap-3 sm:gap-4" style={shadowFilterStyle}>
               <a
                 href="/#contato-reservas"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openReservationModal();
+                }}
                 className="hidden sm:inline-flex items-center justify-center font-text font-semibold uppercase tracking-[0.08em] text-[13px] text-[#14100D] bg-[#E8832A] hover:bg-[#F5E6D0] px-4 py-2 rounded-[6px] transition-all duration-200 shadow-sm select-none"
               >
                 RESERVAR
@@ -286,16 +296,17 @@ export const Header: React.FC = () => {
 
           {/* Bottom WhatsApp CTA in Drawer */}
           <div className="w-full flex flex-col items-center justify-center pt-4 border-t border-[#F3E6D0]/10">
-            <a
-              href={siteConfig.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMenuOpen(false)}
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                openReservationModal();
+              }}
               className="w-full sm:w-auto text-center font-ui font-semibold uppercase text-[#1A1411] bg-[#D9741C] hover:bg-[#F3E6D0] text-xl px-8 py-3 rounded-[8px] transition-colors duration-300"
               style={{ backgroundColor: '#D9741C', color: '#1A1411' }}
             >
               RESERVAR PELO WHATSAPP
-            </a>
+            </button>
             <span className="font-sans text-xs text-[#F3E6D0]/60 mt-3">
               {siteConfig.hoursShort}
             </span>

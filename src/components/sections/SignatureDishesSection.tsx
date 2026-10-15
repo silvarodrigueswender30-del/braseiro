@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { ShoppingBag } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { siteConfig } from '@/config';
 import { BrandShape } from '@/components/BrandShape';
 import { CarouselIndicator } from '@/components/CarouselIndicator';
 import { formasLayoutConfig } from '@/data/formas-layout';
@@ -734,6 +736,26 @@ export const SignatureDishesSection: React.FC = () => {
             onChange={scrollMobileTo}
             theme="light"
           />
+        </div>
+
+        {/* Atalho do iFood per Prompt A */}
+        <div className="mt-12 sm:mt-16 w-full max-w-[720px] flex flex-col items-center text-center px-4">
+          <p
+            className="font-text text-[#14100D]/85 text-[15px] sm:text-[16px] leading-relaxed mb-4 max-w-[48ch]"
+            style={{ fontFamily: 'var(--font-text)', textWrap: 'balance' }}
+          >
+            Prefere pedir em casa? Nosso cardápio completo está no iFood com entrega em Ubatuba.
+          </p>
+          <a
+            href={siteConfig.ifoodUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2.5 rounded-[6px] border-[1.5px] border-[#14100D] bg-transparent text-[#14100D] hover:bg-[#14100D] hover:text-[#F5E6D0] active:scale-[0.99] transition-all duration-200 font-text font-semibold uppercase text-[13px] tracking-[0.08em] px-6 py-3 min-h-[44px] shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8832A] select-none"
+            style={{ fontFamily: 'var(--font-text)' }}
+          >
+            <ShoppingBag className="w-4 h-4 shrink-0" aria-hidden="true" />
+            <span>PEDIR NO IFOOD</span>
+          </a>
         </div>
       </div>
     </section>

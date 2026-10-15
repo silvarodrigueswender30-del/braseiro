@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { siteConfig } from '@/config';
 import { ChamaIcon } from '@/components/icons/ChamaIcon';
+import { useReservationModal } from '@/context/ReservationModalContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,6 +51,7 @@ const COURIER_FONT_STACK = '"Courier Prime", "Courier New", ui-monospace, monosp
 const ZIGZAG_TOOTH_MASK = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10' viewBox='0 0 12 10'%3E%3Cpolygon points='0,0 12,0 6,9' fill='black'/%3E%3C/svg%3E")`;
 
 export const Footer: React.FC = () => {
+  const { openReservationModal } = useReservationModal();
   const footerRef = useRef<HTMLElement>(null);
 
   // Refs de animação da coluna esquerda (Título + Chama + Botão)
@@ -547,6 +549,10 @@ export const Footer: React.FC = () => {
             >
               <a
                 href="/#contato-reservas"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openReservationModal();
+                }}
                 className="inline-flex items-center justify-center bg-[#14100D] text-[#F5E6D0] hover:bg-[#E8832A] hover:text-[#14100D] transition-colors duration-200 font-text font-semibold uppercase text-[14px] tracking-[0.08em] rounded-[6px] py-[16px] px-[28px] w-full max-w-[420px] lg:w-auto lg:min-w-[240px] select-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#E8832A]"
                 style={{ fontFamily: 'var(--font-text)' }}
               >

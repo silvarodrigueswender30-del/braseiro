@@ -3,6 +3,7 @@ import { Pause, Play } from 'lucide-react';
 import { siteConfig, heroVideos } from '@/config';
 import { RotatingWord } from '@/components/RotatingWord';
 import { useVideosPaused } from '@/lib/videoState';
+import { useReservationModal } from '@/context/ReservationModalContext';
 
 interface DesktopPanelProps {
   videoSrc: string;
@@ -99,6 +100,7 @@ const DesktopPanel: React.FC<DesktopPanelProps> = ({
 };
 
 export const Hero: React.FC = () => {
+  const { openReservationModal } = useReservationModal();
   const [isMobile, setIsMobile] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       return window.innerWidth <= 767;
@@ -409,9 +411,11 @@ export const Hero: React.FC = () => {
             {/* Botão CTA Desktop */}
             <div className="mt-2 flex flex-col items-center">
               <a
-                href={siteConfig.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/#contato-reservas"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openReservationModal();
+                }}
                 data-hero-cta="true"
                 className="hero-btn-instrument inline-flex items-center justify-center text-[#1A1411] bg-[#F3E6D0] hover:bg-[#D9741C] hover:-translate-y-2 active:-translate-y-2 px-8 py-2.5 rounded-[6px] transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D9741C] shadow-lg text-[clamp(19px,1.52vw,22px)] min-h-[46px]"
               >
@@ -561,9 +565,11 @@ export const Hero: React.FC = () => {
             {/* Botão Mobile "RESERVAR" */}
             <div className="w-full flex justify-center animate-[fadeInUp_0.9s_ease-out_forwards]">
               <a
-                href={siteConfig.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/#contato-reservas"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openReservationModal();
+                }}
                 data-hero-cta="true"
                 className="hero-btn-instrument inline-flex items-center justify-center text-[#1A1411] bg-[#D9741C] hover:bg-[#F3E6D0] text-[22px] px-9 py-2.5 rounded-[6px] shadow-lg transition-transform duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#D9741C] min-w-[210px] min-h-[52px]"
               >

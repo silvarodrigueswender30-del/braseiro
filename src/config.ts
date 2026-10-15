@@ -49,6 +49,8 @@ export interface SiteConfig {
   instagramHandle: string;
   instagramUrl: string;
   ifoodUrl: string;
+  reservationSlots: string[];
+  reservationAreas: string[];
   navLinks: Array<{ label: string; href: string }>;
   stats: Array<{ value: number; suffix?: string; label: string }>;
   reviews: ReviewItem[];
@@ -92,6 +94,16 @@ const GOOGLE_MAPS_URL = 'https://maps.google.com/?q=Braseiro+Caiçara+Ubatuba';
 const IFOOD_URL = 'https://www.ifood.com.br/delivery/ubatuba-sp/braseiro-caicara-parrilla-frutos-do-mar-barra-da-lagoa/4a688dc8-9630-4e1a-a7b0-8ce115c7f96c';
 const PARKING_INFO = 'Vagas na rua e estacionamento próximo';
 
+// Horários de reserva de 11:30 a 22:00, de 30 em 30 min (TODO: o dono confirma o último horário; funcionamento 11h30–23h30, cozinha até 23h00)
+export const RESERVATION_SLOTS = [
+  '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+  '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00',
+  '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00',
+];
+
+// Áreas do restaurante (TODO: áreas confirmadas; vazio = a pergunta não aparece)
+export const RESERVATION_AREAS: string[] = [];
+
 const MSG_RESERVA = 'Oi! Quero reservar uma mesa no Braseiro Caiçara.';
 const MSG_EVENTO = 'Oi! Gostaria de planejar um evento / mesa de grupo no Braseiro Caiçara.';
 
@@ -119,6 +131,8 @@ export const siteConfig: SiteConfig = {
   instagramHandle: INSTAGRAM_HANDLE,
   instagramUrl: '',
   ifoodUrl: IFOOD_URL,
+  reservationSlots: RESERVATION_SLOTS,
+  reservationAreas: RESERVATION_AREAS,
   navLinks: [
     { label: 'Início', href: '/#inicio' },
     { label: 'A Casa', href: '/#casa' },

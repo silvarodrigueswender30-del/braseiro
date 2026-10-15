@@ -6,6 +6,21 @@ import { AtalhosDock } from '@/components/AtalhosDock';
 import { HomePage } from '@/pages/HomePage';
 import { ScrollToTopOnRoute } from '@/components/ScrollToTopOnRoute';
 import { initRevealSafetyNet } from '@/lib/reveal';
+import { ReservationModalProvider, useReservationModal } from '@/context/ReservationModalContext';
+import { ReservaTriagem } from '@/components/ReservaTriagem';
+
+// Modal Sheet global acionado por botões de reserva
+const GlobalReservationSheet: React.FC = () => {
+  const { isOpen, closeReservationModal, initialOcasiao } = useReservationModal();
+  return (
+    <ReservaTriagem
+      variant="sheet"
+      isOpen={isOpen}
+      onClose={closeReservationModal}
+      initialOcasiao={initialOcasiao}
+    />
+  );
+};
 
 // Lazy loading das páginas do cardápio per Vercel Best Practices
 const CardapioIndexPage = lazy(() => import('@/pages/cardapio/IndexPage'));
@@ -30,11 +45,15 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      {/* Scroll restore on route / anchor change */}
-      <ScrollToTopOnRoute />
+    <ReservationModalProvider>
+      <BrowserRouter>
+        {/* Scroll restore on route / anchor change */}
+        <ScrollToTopOnRoute />
 
-      {/* Acessibilidade: Skip Link para leitores de tela e navegação via teclado */}
+        {/* Modal de Triagem de Reserva (Sheet / Dialog global) */}
+        <GlobalReservationSheet />
+
+        {/* Acessibilidade: Skip Link para leitores de tela e navegação via teclado */}
       <a
         href="#conteudo-principal"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#D9741C] focus:text-[#05070D] focus:font-bold focus:rounded-md focus:shadow-xl focus:outline-none"
@@ -137,7 +156,8 @@ export const App: React.FC = () => {
         <AtalhosDock />
       </div>
     </BrowserRouter>
-  );
+  </ReservationModalProvider>
+);
 };
 
 export default App;
