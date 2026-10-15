@@ -32,6 +32,20 @@
   --vermelho: #D6232B;
   --azul: #3A86C8;
   --ouro-pedra: #B78A4A;
+
+  /* Formas de Marca (Brand Shapes) */
+  --shape-terracota: #A83A2A;
+  --shape-areia: #D9C4A0;
+  --shape-carvao: #2A1C14;
+  --shape-creme: #F5E6D0;
+  --shape-brasa: #E8832A;
+}
+
+/* Utilitário para seções com BrandShape decorativo */
+.has-shapes {
+  position: relative;
+  overflow-x: clip;
+  isolation: isolate;
 }
 
 /* Tipografia Hero: Fraunces Display & Instrument Sans */
