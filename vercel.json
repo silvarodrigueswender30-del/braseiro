@@ -1,7 +1,49 @@
 {
+  "redirects": [
+    {
+      "source": "/menu",
+      "destination": "/cardapio",
+      "permanent": true
+    },
+    {
+      "source": "/menu/:path*",
+      "destination": "/cardapio",
+      "permanent": true
+    },
+    {
+      "source": "/reservas",
+      "destination": "/#contato-reservas",
+      "permanent": true
+    },
+    {
+      "source": "/contato",
+      "destination": "/#contato-reservas",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cardapio",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cardapio/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/gastronomia",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/drinks",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/executivos",
       "destination": "/index.html"
     }
   ]

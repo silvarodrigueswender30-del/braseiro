@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node tools/generate-seo.mjs",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

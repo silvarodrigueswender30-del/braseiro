@@ -14,6 +14,7 @@ scratch/
 # Environment & credentials
 .env
 .env.*
+!.env.production
 *.pem
 *.key
 
