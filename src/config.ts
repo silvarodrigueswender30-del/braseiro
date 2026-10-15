@@ -48,6 +48,7 @@ export interface SiteConfig {
   googleMapsUrl: string;
   instagramHandle: string;
   instagramUrl: string;
+  ifoodUrl: string;
   navLinks: Array<{ label: string; href: string }>;
   stats: Array<{ value: number; suffix?: string; label: string }>;
   reviews: ReviewItem[];
@@ -88,6 +89,7 @@ const ADDRESS_FULL = 'Rua Guarani, 370 - Itaguá, Ubatuba - SP';
 // Instagram: mantido vazio para ocultar o item até confirmação do perfil oficial
 const INSTAGRAM_HANDLE = ''; 
 const GOOGLE_MAPS_URL = 'https://maps.google.com/?q=Braseiro+Caiçara+Ubatuba';
+const IFOOD_URL = 'https://www.ifood.com.br/delivery/ubatuba-sp/braseiro-caicara-parrilla-frutos-do-mar-barra-da-lagoa/4a688dc8-9630-4e1a-a7b0-8ce115c7f96c';
 const PARKING_INFO = 'Vagas na rua e estacionamento próximo';
 
 const MSG_RESERVA = 'Oi! Quero reservar uma mesa no Braseiro Caiçara.';
@@ -116,6 +118,7 @@ export const siteConfig: SiteConfig = {
   googleMapsUrl: GOOGLE_MAPS_URL,
   instagramHandle: INSTAGRAM_HANDLE,
   instagramUrl: '',
+  ifoodUrl: IFOOD_URL,
   navLinks: [
     { label: 'Início', href: '/#inicio' },
     { label: 'A Casa', href: '/#casa' },

@@ -692,6 +692,34 @@ export const Footer: React.FC = () => {
                       </div>
                     </div>
 
+                    {/* ITEM: DELIVERY / IFOOD */}
+                    {siteConfig.ifoodUrl && (
+                      <div
+                        className="pb-[14px] mb-[14px] border-b border-dashed border-[#14100D]/45"
+                      >
+                        <div
+                          className="font-bold uppercase tracking-[0.08em] text-[#14100D]"
+                          style={{ fontSize: 'clamp(0.9rem, 1vw, 1.0625rem)' }}
+                        >
+                          DELIVERY / IFOOD
+                        </div>
+                        <div
+                          className="mt-0.5 font-normal text-[#14100D] leading-[1.45]"
+                          style={{ fontSize: 'clamp(0.9rem, 1vw, 1.0625rem)' }}
+                        >
+                          <a
+                            href={siteConfig.ifoodUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 font-semibold text-[#A83A2A] hover:underline focus-visible:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8832A] rounded-[2px]"
+                          >
+                            <span>Pedir no iFood</span>
+                            <span aria-hidden="true">→</span>
+                          </a>
+                        </div>
+                      </div>
+                    )}
+
                     {/* ITEM 4: INSTAGRAM */}
                     {/* TODO: confirmar o @ do Instagram com o restaurante */}
                     {hasInstagram && (

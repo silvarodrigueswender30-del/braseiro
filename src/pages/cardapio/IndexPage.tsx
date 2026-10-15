@@ -139,6 +139,32 @@ export const IndexPage: React.FC = () => {
           ))}
         </div>
 
+        {/* Banner de Delivery iFood */}
+        {siteConfig.ifoodUrl && (
+          <div className="mt-10 rounded-2xl bg-white border border-[#14100D]/10 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+            <div className="text-center sm:text-left">
+              <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#9C4108] bg-[#9C4108]/10 px-2.5 py-0.5 rounded-full mb-2">
+                Delivery Oficial
+              </span>
+              <h3 className="font-serif font-bold text-xl sm:text-2xl text-[#14100D]">
+                Prefere saborear em casa?
+              </h3>
+              <p className="mt-1 text-sm text-[#3A322C] max-w-xl leading-relaxed">
+                Nossos principais cortes, peixes grelhados e pratos executivos chegam quentes pelo iFood.
+              </p>
+            </div>
+            <a
+              href={siteConfig.ifoodUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="min-h-[44px] shrink-0 inline-flex items-center gap-2 rounded-[6px] bg-[#EA1D2C] hover:bg-[#C81926] text-white px-6 py-3 text-sm font-semibold tracking-wide transition-colors shadow-sm"
+            >
+              <span>Pedir no iFood</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        )}
+
         {/* Informações Complementares da Casa */}
         <section
           aria-label="Informações Adicionais"
