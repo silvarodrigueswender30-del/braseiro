@@ -112,7 +112,7 @@ export const CardapioHeader: React.FC<CardapioHeaderProps> = ({
                   Cardápio
                 </Link>
                 <span>/</span>
-                <span className="text-[#B4540F] font-semibold capitalize">{paginaAtual}</span>
+                <span className="text-[#9C4108] font-semibold capitalize">{paginaAtual}</span>
               </>
             )}
           </nav>
@@ -123,7 +123,7 @@ export const CardapioHeader: React.FC<CardapioHeaderProps> = ({
               className={`inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider rounded px-3 py-1.5 transition-colors group focus:outline-none focus:ring-1 focus:ring-[#E8832A] ${
                 isDark
                   ? 'text-[#F5E6D0]/80 bg-[#F5E6D0]/5 border border-[#F5E6D0]/10 hover:border-[#E8832A]/40 hover:text-[#E8832A]'
-                  : 'text-[#14100D]/80 bg-[#14100D]/5 border border-[#14100D]/10 hover:border-[#B4540F]/40 hover:text-[#B4540F]'
+                  : 'text-[#14100D]/80 bg-[#14100D]/5 border border-[#14100D]/10 hover:border-[#9C4108]/40 hover:text-[#9C4108]'
               }`}
             >
               <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
@@ -138,19 +138,19 @@ export const CardapioHeader: React.FC<CardapioHeaderProps> = ({
           <div className="flex items-center justify-center gap-3 mb-3">
             <span
               className={`h-[1px] w-6 sm:w-10 ${
-                isDark ? 'bg-[#E8832A]/50' : 'bg-[#B4540F]/40'
+                isDark ? 'bg-[#E8832A]/50' : 'bg-[#9C4108]/40'
               }`}
             />
             <span
               className={`font-sans font-bold uppercase tracking-[0.22em] text-xs sm:text-sm select-none ${
-                isDark ? 'text-[#E8832A]' : 'text-[#B4540F]'
+                isDark ? 'text-[#E8832A]' : 'text-[#9C4108]'
               }`}
             >
               CARDÁPIO DO BRASEIRO CAIÇARA
             </span>
             <span
               className={`h-[1px] w-6 sm:w-10 ${
-                isDark ? 'bg-[#E8832A]/50' : 'bg-[#B4540F]/40'
+                isDark ? 'bg-[#E8832A]/50' : 'bg-[#9C4108]/40'
               }`}
             />
           </div>

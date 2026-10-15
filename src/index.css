@@ -36,9 +36,40 @@
   /* Formas de Marca (Brand Shapes) */
   --shape-terracota: #A83A2A;
   --shape-areia: #D9C4A0;
-  --shape-carvao: #2A1C14;
+  --shape-carvao: #14100D;
+  --shape-marrom-fogo: #2A1C14;
   --shape-creme: #F5E6D0;
   --shape-brasa: #E8832A;
+}
+
+/* Elemento de emenda para formas atravessando a divisa entre seções (escuro <-> creme) */
+.seam {
+  position: relative;
+  height: 0;
+  width: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Revelação suave ao rolar para formas decorativas (<= 400ms, transform/opacity apenas) */
+.brand-shape-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 380ms cubic-bezier(0.16, 1, 0.3, 1), transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.brand-shape-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-shape-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* Utilitário para seções com BrandShape decorativo */

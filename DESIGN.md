@@ -21,16 +21,17 @@ Diretrizes visuais e tokens de design oficiais para a experiência nativa do Bra
 - **Carvão Profundo (Texto):** `#14100D` (contraste > 12:1 sobre papel creme)
 - **Carvão Médio (Texto Secundário):** `#3A322C` (contraste > 7:1 sobre papel creme)
 - **Brasa Viva (Acento Primário):** `#E8832A` (títulos destacados em itálico, botões principais e ícones)
-- **Terracota Queimado (Preços e Rótulos Pequenos):** `#B4540F`
-  > *Atenção WCAG:* `#B4540F` possui contraste medido de **5,12:1** sobre `#FBF4E8` e **4,79:1** sobre `#F5E6D0`, aprovado com folga para texto pequeno (mínimo WCAG AA é 4.5:1).
+- **Terracota Queimado (Preços e Rótulos Pequenos):** `#9C4108`
+  > *Conformidade WCAG AA:* `#9C4108` possui contraste real medido de **5,4:1** sobre `#F5E6D0` e **5,8:1** sobre `#FBF4E8`, aprovado com folga para texto pequeno (mínimo WCAG AA é 4.5:1). O token anterior `#B4540F` foi aposentado por reprovar no limiar de 4.5:1.
 - **Verde Mar / Costa:** `#2E9C9B` (badges vegetarianos e acentos de frescor marítimo)
 - **Bordas Sutis:** `rgba(20, 16, 13, 0.08)` e `rgba(20, 16, 13, 0.14)`
 
 ### 2.2 Tema Escuro (Drinks & Bar e Home Hero)
 - **Carvão Noite:** `#14100D` (fundo principal)
+- **Marrom-Fogo (Tom sobre tom):** `#2A1C14` (formas de marca e blocos tonais em fundo escuro)
 - **Carvão Superfície:** `#1A1411` (cards e barras elevadas)
 - **Creme Texto:** `#F5E6D0` (texto principal com contraste > 10:1 sobre carvão)
-- **Creme Secundário:** `#F5E6D0]/80` (descrições e legendas)
+- **Creme Secundário:** `rgba(245, 230, 208, 0.80)` (descrições e legendas)
 - **Brasa Dourada:** `#E8832A` (preços, chips e botões de destaque)
 
 ---
@@ -73,7 +74,7 @@ Diretrizes visuais e tokens de design oficiais para a experiência nativa do Bra
 - **Sombras no Tema Claro:**
   - Card repouso: `0 4px 18px rgba(20, 16, 13, 0.05)`
   - Card hover: `0 12px 28px rgba(20, 16, 13, 0.10)`
-  - Botão Brasa: `0 4px 16px rgba(180, 84, 15, 0.25)`
+  - Botão Brasa: `0 4px 16px rgba(156, 65, 8, 0.25)`
 
 ---
 
@@ -88,35 +89,49 @@ Diretrizes visuais e tokens de design oficiais para a experiência nativa do Bra
 
 ## 7. Movimento e Interação (Motion)
 
-- **Duração Máxima:** ≤ 300ms para transições de interface e hover.
-- **Easing:** `ease-out` ou `cubic-bezier(0.16, 1, 0.3, 1)`.
-- **Acessibilidade Obrigatória:** respeito estrito a `prefers-reduced-motion: reduce` (desativa transições de deslocamento físico e mantém apenas crossfade suave de opacidade).
+- **Duração Máxima:** ≤ 380ms para revelação viewport e ≤ 300ms para hover de interface.
+- **Easing:** `cubic-bezier(0.16, 1, 0.3, 1)` ou `ease-out`.
+- **Acessibilidade Obrigatória:** respeito estrito a `prefers-reduced-motion: reduce` (desativa transições de deslocamento físico e mantém apenas opacidade imediata).
 - **Alvos de Toque no Mobile:** mínimo estrito de **44x44px** em todos os botões, abas e seletores clicáveis.
 
 ---
 
-## 8. Formas de Marca (Brand Shapes & CSS Masks)
+## 8. Formas de Marca (Brand Shapes — Prompt v7)
 
-Sistema de formas decorativas da identidade visual do Braseiro Caiçara (`public/images/formas/*.svg` e componente `<BrandShape />`).
+Sistema de formas decorativas em bloco de cor sólida e textura artesanal viva (`public/images/formas-raster/*.webp`, `public/images/formas/*.svg` e componente `<BrandShape />`).
 
-### 8.1 Catálogo de Formas
-- **`nuvem-a`:** Silhueta globular densa com 7 lóbulos e fissuras radiais (proporção `870 / 740`). Ideal para cantos superiores e laterais de seções monumentais.
-- **`nuvem-b`:** Silhueta horizontal alongada em bloco rochoso com 5 rachaduras verticais profundas (proporção `1310 / 733`). Ideal como plano de fundo atrás de colagens, polaroids e listas.
-- **`mancha-c`:** Silhueta fluida e dinâmica de fogo orgânico com labareda ascendente (proporção `997 / 739`). Excelente para laterais opostas a blocos de texto.
-- **`pincelada-d`:** Faixa horizontal com textura de cerdas ásperas desfiadas nas pontas e fendas de terra no centro (proporção `1489 / 534`). Usada como elemento horizontal entre blocos e carrosséis.
-- **`faiscas`:** Revoada horizontal ondulante de 35 partículas/diamantes geométricos (proporção `2213 / 477`). Usada para pontuar calor e transições entre blocos escuros.
-- **`selo`:** Emblema circular com anel duplo rústico vazado, chama central e ondas do mar (proporção `879 / 881`). Usado como sinete de chancela e acento em CTAs de fechamento.
-- **`sal`:** Constelação de 42 grãos dispersos de sal grosso artesanal (proporção `683 / 552`). Acento textural discreto perto de títulos e subtítulos.
+### 8.1 Catálogo de Formas e Texturas
+- **`nuvem-a`:** Silhueta globular densa com textura de xilogravura e rachaduras finas de carimbo (proporção `870 / 740`).
+- **`nuvem-b`:** Silhueta horizontal alongada em bloco rochoso com fissuras verticais profundas (proporção `1310 / 733`). Ideal como fundo para polaroids e murais.
+- **`mancha-c`:** Silhueta fluida e dinâmica de fogo orgânico com labareda ascendente (proporção `997 / 739`).
+- **`pincelada-d`:** Faixa horizontal com textura de cerdas ásperas desfiadas nas pontas e fendas de terra no centro (proporção `1489 / 534`).
+- **`faiscas`:** Revoada de partículas e diamantes incandescentes (proporção `2213 / 477`). Ideal para cruzar emendas e pontuar calor.
+- **`selo`:** Emblema circular com anel duplo rústico vazado, chama central e ondas do mar (proporção `879 / 881`). Acoplado aos CTAs finais.
+- **`sal`:** Constelação de grãos dispersos de sal marinho grosso artesanal (proporção `683 / 552`).
+- **`chama-traco`:** Labareda artesanal em traço expressivo (proporção `320 / 400`), posicionada junto aos títulos de destaque.
 
-### 8.2 Regras de Composição (Estilo Bonança)
-1. **Sangramento Orgânico:** As peças grandes sangram pela borda da seção (20% a 40% da forma fora do viewport). A seção hospedeira deve conter a classe `.has-shapes` (`overflow-x: clip; isolation: isolate;`).
-2. **Profundidade sem Competição:** Formas ficam estritamente em `z-index: 0` (ou camada inferior aos cartões). O texto nunca fica sobre regiões de alto contraste das formas. Cards, fotos e post-its mantêm fundos sólidos e as formas passam por trás deles, saindo pelos cantos (efeito de sobreposição).
-3. **Densidade e Respiro:** Máximo de 1 peça principal grande (35–70% da largura da seção) e no máximo 1 peça pequena de apoio. Seções com foto full-bleed ou grande destaque visual (Hero, "Duas Brasas" e "Por que o fogo é diferente") ficam **sem** formas para garantir respiro editorial.
-4. **Regra de Ouro da Brasa:** O tom `brasa` (`#E8832A`) é reservado para no máximo **UMA** forma pequena por página (ex.: o selo no CTA final da Home).
-5. **Calibração Cromática & Opacidades:**
-   - **Fundo Creme (`#FBF4E8` / `#F5E6D0`):** tons `areia` e `terracota` com opacidade reduzida ($0.10$ a $0.20$). `carvao` apenas muito sutil ($0.05$ a $0.08$).
-   - **Fundo Escuro (`#14100D`):** tom `carvao` ($0.30$ a $0.45$), `terracota` ($0.25$ a $0.35$) e `creme` ($0.05$ a $0.15$).
-6. **Contraste WCAG AA Obrigatório:** A relação de contraste calculada entre texto e o fundo (mesmo quando sobreposto à forma com opacidade) deve permanecer estritamente $\ge 4.5:1$ (texto normal) e $\ge 3:1$ (texto grande).
-7. **Responsividade & Acessibilidade:**
-   - Em telas móveis ($\le 640\text{px}$), peças secundárias recebem `hideOnMobile={true}` e peças principais reduzem escala automaticamente via `clamp()`.
-   - Elementos decorativos possuem `aria-hidden="true"`, `pointer-events: none` e não interferem em cliques.
+### 8.2 Diretrizes Cromáticas (Do "Watermark" para "Bloco de Cor")
+1. **Cor Sólida e Saturada (Proibido Opacidade Baixa):**
+   - É **terminantemente proibido** usar `opacity < 0.85` para esmaecer formas. As formas operam como blocos de cor sólidos da paleta editorial.
+   - Para sutileza no fundo escuro (`#14100D`), usa-se o tom sólido **marrom-fogo (`#2A1C14`)**, obtendo sofisticação tom sobre tom sem lavar a textura.
+2. **Distribuição Harmônica 60-30-10 por Página:**
+   - **~60% Fundos:** Carvão (`#14100D`) ou Papel Creme (`#F5E6D0` / `#FBF4E8`).
+   - **~30% Blocos Médios:** Terracota (`#A83A2A`), Areia (`#D9C4A0`) e Marrom-fogo (`#2A1C14`).
+   - **~10% Brasa (`#E8832A`):** Acento focal de máxima energia. No máximo **1 peça grande em brasa por tela (viewport)**.
+3. **Pares Cromáticos Eficazes:**
+   - `terracota` e `brasa` leem bem com contraste garantido tanto no fundo escuro quanto no creme.
+   - `areia` opera exclusivamente em fundos creme.
+   - `marrom-fogo` opera exclusivamente em fundos escuros.
+
+### 8.3 Orçamento de Área e Ritmo
+1. **Orçamento de Área:** As formas ocupam **≤ 15–20%** da área de cada seção.
+2. **Composição por Seção:** No máximo **1 peça principal saturada** + **até 1 peça de apoio** (tonal ou menor). Seções com foto full-bleed continuam sem formas.
+3. **Não Competição Visual:** Se o título da seção possui palavra em itálico laranja (`#E8832A`), a forma vizinha é obrigatoriamente terracota, areia ou marrom-fogo. As peças em brasa são posicionadas em áreas neutras, ecoando o tom à distância.
+4. **Camadas e Profundidade (Estilo Bonança):** As formas passam por trás de cartões, polaroids e murais de avaliações, espiando pelas bordas. Os cartões mantêm fundos sólidos e legibilidade intocada.
+5. **Emendas entre Seções (`.seam`):** Transições entre blocos escuros e claros utilizam o container `.seam` (`position: relative; height: 0; z-index: 5`) permitindo que uma única peça atravesse a divisa entre dois fundos de maneira limpa.
+6. **Alternância e Ritmo:** Alterne lados (esquerda / direita), escalas e rotações ao longo da página. No máximo 2 usos da mesma peça em toda a home.
+
+### 8.4 Movimento e Desempenho
+- **Revelação Viewport:** Fade-in suave com deslocamento vertical ≤ 24px e duração ≤ 380ms (`ease-out`), acionado via IntersectionObserver.
+- **Acessibilidade:** Desativado sob `prefers-reduced-motion: reduce`.
+- **Performance e CLS:** Zero Layout Shift (CLS 0.00), imagens com dimensões explícitas, `loading="lazy"`, `decoding="async"`. Masks geradas em WebP ultraleve (10–25 KB cada).

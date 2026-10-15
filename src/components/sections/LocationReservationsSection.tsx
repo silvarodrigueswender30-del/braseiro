@@ -748,8 +748,16 @@ export const LocationReservationsSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Botão de Envio */}
-                <div className="mt-9 flex flex-col items-start w-full">
+                {/* Botão de Envio com selo carimbo acoplado */}
+                <div className="mt-9 flex flex-col items-start w-full relative">
+                  {/* Selo carimbo brasa acoplado ao CTA final per Prompt v7 */}
+                  <BrandShape
+                    shape="selo"
+                    tone="brasa"
+                    size="clamp(80px, 10vw, 115px)"
+                    style={{ top: '-38px', right: '15px', zIndex: 10 }}
+                    rotate={-8}
+                  />
                   <button
                     type="submit"
                     disabled={isDummyNumber}

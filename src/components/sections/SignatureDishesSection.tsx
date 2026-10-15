@@ -373,7 +373,25 @@ export const SignatureDishesSection: React.FC = () => {
         {/* ============================================================ */}
         {/* CABEÇALHO DA SEÇÃO (EYEBROW + TÍTULO EM 2 LINHAS)            */}
         {/* ============================================================ */}
-        <div className="flex flex-col items-center text-center">
+        <div className="relative flex flex-col items-center text-center">
+          {/* Chama em traço perto do título (Prompt v7) */}
+          <BrandShape
+            shape="chama-traco"
+            tone="terracota"
+            size="clamp(70px, 8vw, 100px)"
+            style={{ top: '15px', right: '-45px' }}
+            rotate={8}
+          />
+          {/* Faíscas laranja suspensas perto do título (Prompt v7) */}
+          <BrandShape
+            shape="faiscas"
+            tone="brasa"
+            size="clamp(120px, 15vw, 180px)"
+            style={{ top: '30px', left: '-50px' }}
+            rotate={-6}
+            hideOnMobile={true}
+          />
+
           {/* Eyebrow: DA BRASA PRA MESA */}
           <span className="eyebrow text-[#14100D] select-none">
             DA BRASA PRA MESA

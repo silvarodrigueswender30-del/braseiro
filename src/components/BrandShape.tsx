@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export type BrandShapeType =
   | 'nuvem-a'
@@ -7,14 +7,16 @@ export type BrandShapeType =
   | 'pincelada-d'
   | 'faiscas'
   | 'selo'
-  | 'sal';
+  | 'sal'
+  | 'chama-traco';
 
 export type BrandShapeTone =
   | 'terracota'
   | 'areia'
   | 'carvao'
   | 'creme'
-  | 'brasa';
+  | 'brasa'
+  | 'marrom-fogo';
 
 export interface BrandShapeProps {
   shape: BrandShapeType;
@@ -29,12 +31,13 @@ export interface BrandShapeProps {
   opacity?: number;
   hideOnMobile?: boolean;
   parallax?: boolean;
+  reveal?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
 
 /**
- * Aspect ratio nativo de cada vetor de forma de marca
+ * Aspect ratio nativo de cada vetor/raster de forma de marca
  * para garantir escalabilidade perfeita sem distorção.
  */
 const SHAPE_ASPECT_RATIOS: Record<BrandShapeType, string> = {
@@ -45,14 +48,27 @@ const SHAPE_ASPECT_RATIOS: Record<BrandShapeType, string> = {
   'faiscas': '2213 / 477',
   'selo': '879 / 881',
   'sal': '683 / 552',
+  'chama-traco': '320 / 400',
 };
 
 /**
- * BrandShape - Formas decorativas da marca como máscara CSS.
+ * Determina o caminho da máscara (raster WebP com grão para silhuetas ricas, ou SVG para traços).
+ */
+function getMaskUrl(shape: BrandShapeType): string {
+  if (shape === 'chama-traco') {
+    return 'url(/images/formas/chama-traco.svg)';
+  }
+  return `url(/images/formas-raster/${shape}.webp)`;
+}
+
+/**
+ * BrandShape - Formas decorativas da marca em cor sólida saturada com textura de carimbo/xilogravura.
  * 
- * REGRA DE OURO DA MARCA:
- * O tom "brasa" (#E8832A) só deve ser usado em formas pequenas,
- * no máximo UMA por página, para preservar o contraste e a elegância editorial.
+ * DIRETRIZES DA MARCA (Prompt v7):
+ * - Cor sólida e saturada (sem marcas d'água transparentes: opacity >= 0.85 ou sólido 1.0).
+ * - Tom sobre tom feito com cores sólidas (ex: marrom-fogo no fundo escuro).
+ * - Textura e grão preservados via máscara WebP de luminância do original artesanal.
+ * - Revelação suave ao entrar na viewport (<= 400ms, transform/opacity apenas).
  */
 export const BrandShape: React.FC<BrandShapeProps> = ({
   shape,
@@ -67,19 +83,51 @@ export const BrandShape: React.FC<BrandShapeProps> = ({
   opacity,
   hideOnMobile = false,
   parallax = false,
+  reveal = true,
   className = '',
   style: userStyle,
 }) => {
-  const maskUrl = `url(/images/formas/${shape}.svg)`;
+  const elRef = useRef<HTMLSpanElement>(null);
+  const maskUrl = getMaskUrl(shape);
   const aspectRatio = SHAPE_ASPECT_RATIOS[shape] || '1 / 1';
 
-  // Parallax leve (≤ 20px) apenas quando habilitado, respeitando prefers-reduced-motion e desktop
+  // Revelação viewport (<= 400ms, ease-out, transform/opacity apenas)
+  const [isRevealed, setIsRevealed] = useState<boolean>(!reveal);
+
+  // Parallax leve (<= 20px) apenas quando habilitado, respeitando prefers-reduced-motion e desktop
   const [parallaxOffset, setParallaxOffset] = useState<number>(0);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setIsRevealed(true);
+      return;
+    }
+
+    if (!reveal) {
+      setIsRevealed(true);
+    } else if (elRef.current && typeof IntersectionObserver !== 'undefined') {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            setIsRevealed(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
+      );
+      observer.observe(elRef.current);
+      return () => observer.disconnect();
+    } else {
+      setIsRevealed(true);
+    }
+  }, [reveal]);
 
   useEffect(() => {
     if (!parallax || typeof window === 'undefined') return;
 
-    // Verificar se o usuário prefere movimento reduzido
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion || window.innerWidth < 768) return;
 
@@ -87,7 +135,6 @@ export const BrandShape: React.FC<BrandShapeProps> = ({
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          // Deslocamento máximo muito suave de até 20px
           const scrollY = window.scrollY;
           const offset = Math.sin(scrollY * 0.0015) * 16;
           setParallaxOffset(Math.round(offset));
@@ -101,8 +148,16 @@ export const BrandShape: React.FC<BrandShapeProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, [parallax]);
 
+  // Garante conformidade estrita com a regra "Proibido opacity < 0.85"
+  const finalOpacity = opacity !== undefined ? Math.max(0.85, opacity) : 1;
+
+  // Montagem de transforms combinando rotação, flip, parallax e reveal
   const transforms: string[] = [];
-  if (parallaxOffset !== 0) transforms.push(`translateY(${parallaxOffset}px)`);
+  if (!isRevealed) {
+    transforms.push('translateY(20px)');
+  } else if (parallaxOffset !== 0) {
+    transforms.push(`translateY(${parallaxOffset}px)`);
+  }
   if (rotate) transforms.push(`rotate(${rotate}deg)`);
   if (flipX) transforms.push('scaleX(-1)');
 
@@ -116,8 +171,9 @@ export const BrandShape: React.FC<BrandShapeProps> = ({
     right,
     bottom,
     left,
-    opacity: opacity !== undefined ? opacity : undefined,
+    opacity: isRevealed ? finalOpacity : 0,
     transform: transforms.length > 0 ? transforms.join(' ') : undefined,
+    transition: 'opacity 380ms cubic-bezier(0.16, 1, 0.3, 1), transform 380ms cubic-bezier(0.16, 1, 0.3, 1)',
     WebkitMaskImage: maskUrl,
     maskImage: maskUrl,
     WebkitMaskSize: 'contain',
@@ -134,6 +190,7 @@ export const BrandShape: React.FC<BrandShapeProps> = ({
 
   return (
     <span
+      ref={elRef}
       aria-hidden="true"
       className={`brand-shape ${responsiveClasses} ${className}`.trim()}
       style={inlineStyle}

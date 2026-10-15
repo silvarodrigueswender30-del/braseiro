@@ -291,7 +291,7 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
                   {preco.serve && (
                     <span
                       className={`inline-flex items-center gap-0.5 text-[11px] ${
-                        isDark ? 'text-[#E8832A]' : 'text-[#B4540F]'
+                        isDark ? 'text-[#E8832A]' : 'text-[#9C4108]'
                       }`}
                     >
                       {preco.serve === 1 ? <User className="w-3 h-3" /> : <Users className="w-3 h-3" />}
@@ -300,7 +300,7 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
                   )}
                   <span
                     className={`font-sans font-bold text-sm sm:text-base tabular-nums ${
-                      isDark ? 'text-[#E8832A]' : 'text-[#B4540F]'
+                      isDark ? 'text-[#E8832A]' : 'text-[#9C4108]'
                     }`}
                   >
                     {formatarPreco(preco.valor)}

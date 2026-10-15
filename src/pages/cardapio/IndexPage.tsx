@@ -74,7 +74,7 @@ export const IndexPage: React.FC = () => {
           {cards.map((card) => (
             <article
               key={card.id}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-[8px] border border-[#14100D]/10 bg-white transition-all duration-300 hover:border-[#B4540F]/50 hover:shadow-[0_12px_36px_rgba(20,16,13,0.12)]"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-[8px] border border-[#14100D]/10 bg-white transition-all duration-300 hover:border-[#9C4108]/50 hover:shadow-[0_12px_36px_rgba(20,16,13,0.12)]"
             >
               {/* Imagem de Fundo / Destaque */}
               <div className="relative w-full aspect-[4/3] overflow-hidden bg-[#05070D]">
@@ -100,10 +100,10 @@ export const IndexPage: React.FC = () => {
               {/* Conteúdo do Card */}
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#14100D] group-hover:text-[#B4540F] transition-colors">
+                  <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#14100D] group-hover:text-[#9C4108] transition-colors">
                     {card.titulo}
                   </h2>
-                  <p className="mt-1 text-xs font-bold uppercase tracking-wider text-[#B4540F]">
+                  <p className="mt-1 text-xs font-bold uppercase tracking-wider text-[#9C4108]">
                     {card.subtitulo}
                   </p>
 
@@ -128,7 +128,7 @@ export const IndexPage: React.FC = () => {
                 <div className="mt-6 pt-4 border-t border-[#14100D]/10">
                   <Link
                     to={card.link}
-                    className="min-h-[44px] inline-flex items-center justify-center gap-2 w-full rounded-[6px] bg-[#14100D] py-3 px-4 text-xs sm:text-sm font-semibold tracking-wide text-[#F5E6D0] transition-all duration-200 hover:bg-[#B4540F] hover:text-white shadow-sm"
+                    className="min-h-[44px] inline-flex items-center justify-center gap-2 w-full rounded-[6px] bg-[#14100D] py-3 px-4 text-xs sm:text-sm font-semibold tracking-wide text-[#F5E6D0] transition-all duration-200 hover:bg-[#9C4108] hover:text-white shadow-sm"
                   >
                     <span>{card.botaoTexto}</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -146,7 +146,7 @@ export const IndexPage: React.FC = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
             <div className="rounded-[8px] bg-white border border-[#14100D]/10 p-6 flex flex-col items-center md:items-start shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-[#B4540F]/10 flex items-center justify-center text-[#B4540F] mb-3">
+              <div className="w-10 h-10 rounded-full bg-[#9C4108]/10 flex items-center justify-center text-[#9C4108] mb-3">
                 <MapPin className="w-5 h-5" />
               </div>
               <h3 className="font-serif font-bold text-lg text-[#14100D]">Onde Estamos</h3>
@@ -158,7 +158,7 @@ export const IndexPage: React.FC = () => {
             </div>
 
             <div className="rounded-[8px] bg-white border border-[#14100D]/10 p-6 flex flex-col items-center md:items-start shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-[#B4540F]/10 flex items-center justify-center text-[#B4540F] mb-3">
+              <div className="w-10 h-10 rounded-full bg-[#9C4108]/10 flex items-center justify-center text-[#9C4108] mb-3">
                 <Clock className="w-5 h-5" />
               </div>
               <h3 className="font-serif font-bold text-lg text-[#14100D]">Horários da Brasa</h3>
@@ -170,7 +170,7 @@ export const IndexPage: React.FC = () => {
             </div>
 
             <div className="rounded-[8px] bg-white border border-[#14100D]/10 p-6 flex flex-col items-center md:items-start shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-[#B4540F]/10 flex items-center justify-center text-[#B4540F] mb-3">
+              <div className="w-10 h-10 rounded-full bg-[#9C4108]/10 flex items-center justify-center text-[#9C4108] mb-3">
                 <Phone className="w-5 h-5" />
               </div>
               <h3 className="font-serif font-bold text-lg text-[#14100D]">Reservas & Eventos</h3>
@@ -181,7 +181,7 @@ export const IndexPage: React.FC = () => {
                 href={siteConfig.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 text-xs font-semibold uppercase tracking-wider text-[#B4540F] hover:underline"
+                className="mt-3 text-xs font-semibold uppercase tracking-wider text-[#9C4108] hover:underline"
               >
                 Falar pelo WhatsApp →
               </a>

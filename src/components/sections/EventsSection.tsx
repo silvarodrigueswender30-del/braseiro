@@ -350,6 +350,15 @@ export const EventsSection: React.FC = () => {
               ref={collageRef}
               className="relative w-full max-w-[560px] aspect-[1/1.02] sm:aspect-[1/0.95]"
             >
+              {/* Nuvem brasa grande atrás das polaroids (Prompt v7) */}
+              <BrandShape
+                shape="nuvem-b"
+                tone="brasa"
+                size="clamp(320px, 44vw, 560px)"
+                style={{ top: '4%', left: '-20%', zIndex: 0 }}
+                flipX={true}
+                rotate={-6}
+              />
               {/* FOTO A (Topo Esquerda): rotate(-4deg), proporção 4:5, ~46% largura */}
               <div
                 ref={cardARef}

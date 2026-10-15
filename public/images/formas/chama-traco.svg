@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <!-- Chama em traço principal: contorno orgânico e artesanal -->
+  <path d="M 160 40 
+           C 145 75, 110 115, 100 155 
+           C 92 187, 98 215, 82 245 
+           C 68 272, 45 295, 52 330 
+           C 60 370, 105 385, 160 385 
+           C 220 385, 268 365, 272 320 
+           C 275 285, 248 260, 235 230 
+           C 218 190, 225 155, 210 120 
+           C 198 92, 172 65, 160 40 Z" />
+  <!-- Labareda interna em traço -->
+  <path d="M 160 160 
+           C 142 195, 125 230, 132 270 
+           C 138 305, 165 330, 192 315 
+           C 212 305, 218 275, 208 245 
+           C 198 215, 175 185, 160 160 Z" />
+  <!-- Faísca suspensa 1 (direita superior) -->
+  <path d="M 235 60 C 238 68, 245 75, 248 85 C 245 92, 238 98, 232 94 C 228 85, 230 72, 235 60 Z" fill="currentColor" stroke="none" />
+  <!-- Faísca suspensa 2 (esquerda) -->
+  <path d="M 85 130 C 88 136, 92 142, 94 150 C 90 155, 84 158, 80 154 C 77 148, 79 138, 85 130 Z" fill="currentColor" stroke="none" />
+</svg>

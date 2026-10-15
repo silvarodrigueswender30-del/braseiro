@@ -11,6 +11,7 @@ import { ReviewsSection } from '@/components/sections/ReviewsSection';
 import { FeaturesSection } from '@/components/sections/FeaturesSection';
 import { AmbianceSection } from '@/components/sections/AmbianceSection';
 import { LocationReservationsSection } from '@/components/sections/LocationReservationsSection';
+import { BrandShape } from '@/components/BrandShape';
 
 export const HomePage: React.FC = () => {
   return (
@@ -36,14 +37,34 @@ export const HomePage: React.FC = () => {
       {/* 4) Duas Brasas (Cardápio & Cozinha) */}
       <KitchenSection />
 
-      {/* Tarefa 3: Pratos Assinatura (Carrossel Horizontal) */}
+      {/* Tarefa 3: Pratos Assinatura (Carrossel Horizontal - Creme #F5E6D0) */}
       <SignatureDishesSection />
 
-      {/* 5) Quem Já Sentou à Mesa (Avaliações Google) */}
+      {/* Emenda Creme <-> Escuro: Forma de marca cobrindo a divisa */}
+      <div className="seam" aria-hidden="true">
+        <BrandShape
+          shape="nuvem-b"
+          tone="terracota"
+          size="clamp(280px, 34vw, 480px)"
+          style={{ top: '-100px', right: '-8%', transform: 'rotate(-4deg)' }}
+        />
+      </div>
+
+      {/* 5) Quem Já Sentou à Mesa (Avaliações Google - Escuro #14100D) */}
       <ReviewsSection />
 
       {/* 6) Por que o Fogo é Diferente */}
       <FeaturesSection />
+
+      {/* Emenda: faíscas laranja cruzando a divisa para Ambiente */}
+      <div className="seam" aria-hidden="true">
+        <BrandShape
+          shape="faiscas"
+          tone="brasa"
+          size="clamp(220px, 26vw, 360px)"
+          style={{ top: '-40px', right: '6%', transform: 'rotate(-6deg)' }}
+        />
+      </div>
 
       {/* 7) Ambiente & Vida Caiçara */}
       <AmbianceSection />

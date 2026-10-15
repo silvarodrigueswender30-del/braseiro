@@ -322,7 +322,7 @@ export const GastronomiaPage: React.FC = () => {
           aria-label="Reservas e Atendimento"
           className="mt-20 pt-12 border-t border-[#14100D]/10 text-center max-w-2xl mx-auto"
         >
-          <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#B4540F] block mb-2">
+          <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#9C4108] block mb-2">
             EXPERIÊNCIA BRASEIRO
           </span>
           <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#14100D]">
@@ -336,7 +336,7 @@ export const GastronomiaPage: React.FC = () => {
               href={siteConfig.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="min-h-[44px] inline-flex items-center justify-center gap-2 rounded-[6px] bg-[#14100D] text-[#F5E6D0] hover:bg-[#B4540F] hover:text-white transition-colors duration-200 px-6 py-3 text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-sm select-none"
+              className="min-h-[44px] inline-flex items-center justify-center gap-2 rounded-[6px] bg-[#14100D] text-[#F5E6D0] hover:bg-[#9C4108] hover:text-white transition-colors duration-200 px-6 py-3 text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-sm select-none"
             >
               <MessageSquare className="w-4 h-4" />
               <span>Falar pelo WhatsApp</span>
