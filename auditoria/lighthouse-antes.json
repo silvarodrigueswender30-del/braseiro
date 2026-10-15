@@ -1,0 +1,20 @@
+{
+  "home": {
+    "label": "home-antes",
+    "url": "http://localhost:5173/",
+    "perf": 25,
+    "lcp": 36.55,
+    "cls": 0,
+    "fcp": 23.47,
+    "tbt": 6673
+  },
+  "gastronomia": {
+    "label": "gastronomia-antes",
+    "url": "http://localhost:5173/cardapio/gastronomia",
+    "perf": 26,
+    "lcp": 36.4,
+    "cls": 0.4,
+    "fcp": 24.55,
+    "tbt": 429
+  }
+}

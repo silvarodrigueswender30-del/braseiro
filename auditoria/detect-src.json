@@ -1,0 +1,12 @@
+﻿[
+  {
+    "antipattern": "gradient-text",
+    "name": "Gradient text",
+    "description": "Gradient text is decorative rather than meaningful ÔÇö a common AI tell, especially on headings and metrics. Use solid colors for text.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "C:\\Users\\Teste\\Downloads\\braseiro\\src\\components\\_legacy\\HeroOld.tsx",
+    "line": 134,
+    "snippet": "bg-clip-text + bg-gradient"
+  }
+]

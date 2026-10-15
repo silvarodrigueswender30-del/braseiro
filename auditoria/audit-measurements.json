@@ -1,0 +1,1894 @@
+{
+  "url": "http://localhost:4173/",
+  "timestamp": "2026-10-13T23:00:51.919Z",
+  "viewports": {
+    "1440x900": {
+      "initialOverflow": {
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "hasOverflow": false
+      },
+      "sectionMetrics": {
+        "inicio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(5, 7, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "quem-somos": {
+          "paddingTop": "115.2px",
+          "paddingBottom": "115.2px",
+          "paddingLeft": "40px",
+          "paddingRight": "40px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "fogo": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "eventos": {
+          "paddingTop": "115.2px",
+          "paddingBottom": "115.2px",
+          "paddingLeft": "72px",
+          "paddingRight": "72px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "cardapio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "pratos": {
+          "paddingTop": "115.2px",
+          "paddingBottom": "115.2px",
+          "paddingLeft": "72px",
+          "paddingRight": "72px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "depoimentos": {
+          "paddingTop": "115.2px",
+          "paddingBottom": "115.2px",
+          "paddingLeft": "72px",
+          "paddingRight": "72px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "diferenciais": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "ambiente": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "contato-reservas": {
+          "paddingTop": "144px",
+          "paddingBottom": "144px",
+          "paddingLeft": "72px",
+          "paddingRight": "72px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "rodape": {
+          "paddingTop": "115.2px",
+          "paddingBottom": "167.2px",
+          "paddingLeft": "72px",
+          "paddingRight": "72px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        }
+      }
+    },
+    "1280x720": {
+      "initialOverflow": {
+        "scrollWidth": 1280,
+        "innerWidth": 1280,
+        "hasOverflow": false
+      },
+      "sectionMetrics": {
+        "inicio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(5, 7, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "quem-somos": {
+          "paddingTop": "102.4px",
+          "paddingBottom": "102.4px",
+          "paddingLeft": "40px",
+          "paddingRight": "40px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "fogo": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "eventos": {
+          "paddingTop": "102.4px",
+          "paddingBottom": "102.4px",
+          "paddingLeft": "64px",
+          "paddingRight": "64px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "cardapio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "pratos": {
+          "paddingTop": "102.4px",
+          "paddingBottom": "102.4px",
+          "paddingLeft": "64px",
+          "paddingRight": "64px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "depoimentos": {
+          "paddingTop": "102.4px",
+          "paddingBottom": "102.4px",
+          "paddingLeft": "64px",
+          "paddingRight": "64px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "diferenciais": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "ambiente": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "contato-reservas": {
+          "paddingTop": "128px",
+          "paddingBottom": "128px",
+          "paddingLeft": "64px",
+          "paddingRight": "64px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "rodape": {
+          "paddingTop": "102.4px",
+          "paddingBottom": "154.4px",
+          "paddingLeft": "64px",
+          "paddingRight": "64px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        }
+      }
+    },
+    "1024x768": {
+      "initialOverflow": {
+        "scrollWidth": 1024,
+        "innerWidth": 1024,
+        "hasOverflow": false
+      },
+      "sectionMetrics": {
+        "inicio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(5, 7, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "quem-somos": {
+          "paddingTop": "81.92px",
+          "paddingBottom": "81.92px",
+          "paddingLeft": "40px",
+          "paddingRight": "40px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "fogo": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "eventos": {
+          "paddingTop": "81.92px",
+          "paddingBottom": "81.92px",
+          "paddingLeft": "51.2px",
+          "paddingRight": "51.2px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "cardapio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "pratos": {
+          "paddingTop": "81.92px",
+          "paddingBottom": "81.92px",
+          "paddingLeft": "51.2px",
+          "paddingRight": "51.2px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "depoimentos": {
+          "paddingTop": "81.92px",
+          "paddingBottom": "81.92px",
+          "paddingLeft": "51.2px",
+          "paddingRight": "51.2px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "diferenciais": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "ambiente": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "contato-reservas": {
+          "paddingTop": "102.4px",
+          "paddingBottom": "102.4px",
+          "paddingLeft": "51.2px",
+          "paddingRight": "51.2px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "rodape": {
+          "paddingTop": "81.92px",
+          "paddingBottom": "133.92px",
+          "paddingLeft": "51.2px",
+          "paddingRight": "51.2px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        }
+      }
+    },
+    "768x1024": {
+      "initialOverflow": {
+        "scrollWidth": 768,
+        "innerWidth": 768,
+        "hasOverflow": false
+      },
+      "sectionMetrics": {
+        "inicio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(5, 7, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "quem-somos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "40px",
+          "paddingRight": "40px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "fogo": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "eventos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "38.4px",
+          "paddingRight": "38.4px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "cardapio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "pratos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "38.4px",
+          "paddingRight": "38.4px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "depoimentos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "38.4px",
+          "paddingRight": "38.4px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "diferenciais": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "ambiente": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "contato-reservas": {
+          "paddingTop": "96px",
+          "paddingBottom": "100px",
+          "paddingLeft": "38.4px",
+          "paddingRight": "38.4px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "rodape": {
+          "paddingTop": "72px",
+          "paddingBottom": "141px",
+          "paddingLeft": "38.4px",
+          "paddingRight": "38.4px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        }
+      }
+    },
+    "390x844": {
+      "initialOverflow": {
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "hasOverflow": false
+      },
+      "sectionMetrics": {
+        "inicio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(5, 7, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "quem-somos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "fogo": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "eventos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "cardapio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "pratos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "depoimentos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "diferenciais": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "ambiente": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "contato-reservas": {
+          "paddingTop": "96px",
+          "paddingBottom": "100px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "rodape": {
+          "paddingTop": "72px",
+          "paddingBottom": "141px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        }
+      }
+    },
+    "360x740": {
+      "initialOverflow": {
+        "scrollWidth": 360,
+        "innerWidth": 360,
+        "hasOverflow": false
+      },
+      "sectionMetrics": {
+        "inicio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(5, 7, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "quem-somos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "fogo": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "eventos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "cardapio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "pratos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "depoimentos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "diferenciais": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "ambiente": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "contato-reservas": {
+          "paddingTop": "96px",
+          "paddingBottom": "100px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "rodape": {
+          "paddingTop": "72px",
+          "paddingBottom": "141px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        }
+      }
+    },
+    "320x640": {
+      "initialOverflow": {
+        "scrollWidth": 320,
+        "innerWidth": 320,
+        "hasOverflow": false
+      },
+      "sectionMetrics": {
+        "inicio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(5, 7, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "quem-somos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "fogo": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(243, 230, 208)"
+        },
+        "eventos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "cardapio": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "pratos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "depoimentos": {
+          "paddingTop": "72px",
+          "paddingBottom": "72px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "diferenciais": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        },
+        "ambiente": {
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "contato-reservas": {
+          "paddingTop": "96px",
+          "paddingBottom": "100px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(20, 16, 13)",
+          "color": "rgb(245, 230, 208)"
+        },
+        "rodape": {
+          "paddingTop": "72px",
+          "paddingBottom": "141px",
+          "paddingLeft": "24px",
+          "paddingRight": "24px",
+          "backgroundColor": "rgb(245, 230, 208)",
+          "color": "rgb(20, 16, 13)"
+        }
+      }
+    }
+  },
+  "suspectedBugs": {
+    "1440x900": {
+      "dishCards": [
+        {
+          "text": "01\ngastronomia\nVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/carne.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/gastronomia-poster.webp",
+          "imgComplete": true,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        },
+        {
+          "text": "02\ndrinks\nVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/vid3.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/drinks-poster.webp",
+          "imgComplete": true,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        },
+        {
+          "text": "03\nexecutivos\nVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/mar.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/executivos-poster.webp",
+          "imgComplete": true,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        },
+        {
+          "text": "01gastronomiaVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/carne.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/gastronomia-poster.webp",
+          "imgComplete": false,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        },
+        {
+          "text": "02drinksVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/vid3.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/drinks-poster.webp",
+          "imgComplete": false,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        },
+        {
+          "text": "03executivosVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/mar.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/executivos-poster.webp",
+          "imgComplete": false,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        }
+      ],
+      "difPanels": [],
+      "ambImgs": [
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-salao-mobile.webp",
+          "complete": true,
+          "naturalWidth": 900,
+          "naturalHeight": 1200
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-adega-mobile.webp",
+          "complete": true,
+          "naturalWidth": 382,
+          "naturalHeight": 510
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-bar-mobile.webp",
+          "complete": true,
+          "naturalWidth": 978,
+          "naturalHeight": 1200
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-varanda-mobile.webp",
+          "complete": true,
+          "naturalWidth": 750,
+          "naturalHeight": 1000
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-mesa-mobile.webp",
+          "complete": true,
+          "naturalWidth": 1050,
+          "naturalHeight": 1400
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-salao-mobile.webp",
+          "complete": false,
+          "naturalWidth": 800,
+          "naturalHeight": 1066
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-adega-mobile.webp",
+          "complete": false,
+          "naturalWidth": 382,
+          "naturalHeight": 510
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-bar-mobile.webp",
+          "complete": false,
+          "naturalWidth": 800,
+          "naturalHeight": 982
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-varanda-mobile.webp",
+          "complete": false,
+          "naturalWidth": 750,
+          "naturalHeight": 1000
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-mesa-mobile.webp",
+          "complete": false,
+          "naturalWidth": 800,
+          "naturalHeight": 1066
+        }
+      ],
+      "header": {
+        "position": "fixed",
+        "backgroundColor": "rgba(20, 16, 13, 0.97)",
+        "zIndex": "99",
+        "backdropFilter": "none"
+      }
+    },
+    "390x844": {
+      "dishCards": [
+        {
+          "text": "01gastronomiaVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/carne.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/gastronomia-poster.webp",
+          "imgComplete": false,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        },
+        {
+          "text": "02drinksVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/vid3.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/drinks-poster.webp",
+          "imgComplete": false,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        },
+        {
+          "text": "03executivosVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/mar.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/executivos-poster.webp",
+          "imgComplete": false,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        },
+        {
+          "text": "01\ngastronomia\nVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/carne.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/gastronomia-poster.webp",
+          "imgComplete": true,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        },
+        {
+          "text": "02\ndrinks\nVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/vid3.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/drinks-poster.webp",
+          "imgComplete": true,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        },
+        {
+          "text": "03\nexecutivos\nVER CARDÁPIO",
+          "hasVideo": true,
+          "videoSrc": "https://jszueizwowynhekpsfii.supabase.co/storage/v1/object/public/braseiro/mar.mp4",
+          "videoReadyState": 4,
+          "hasImg": true,
+          "imgSrc": "http://localhost:4173/images/pratos/executivos-poster.webp",
+          "imgComplete": false,
+          "imgNaturalWidth": 900,
+          "bg": "rgb(20, 16, 13)"
+        }
+      ],
+      "difPanels": [],
+      "ambImgs": [
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-salao-mobile.webp",
+          "complete": false,
+          "naturalWidth": 800,
+          "naturalHeight": 1066
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-adega-mobile.webp",
+          "complete": false,
+          "naturalWidth": 382,
+          "naturalHeight": 510
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-bar-mobile.webp",
+          "complete": false,
+          "naturalWidth": 0,
+          "naturalHeight": 0
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-varanda-mobile.webp",
+          "complete": false,
+          "naturalWidth": 0,
+          "naturalHeight": 0
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-mesa-mobile.webp",
+          "complete": false,
+          "naturalWidth": 0,
+          "naturalHeight": 0
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-salao-mobile.webp",
+          "complete": true,
+          "naturalWidth": 800,
+          "naturalHeight": 1066
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-adega-mobile.webp",
+          "complete": true,
+          "naturalWidth": 382,
+          "naturalHeight": 510
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-bar-mobile.webp",
+          "complete": false,
+          "naturalWidth": 0,
+          "naturalHeight": 0
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-varanda-mobile.webp",
+          "complete": false,
+          "naturalWidth": 0,
+          "naturalHeight": 0
+        },
+        {
+          "src": "http://localhost:4173/images/ambiente/mosaico-mesa-mobile.webp",
+          "complete": false,
+          "naturalWidth": 0,
+          "naturalHeight": 0
+        }
+      ],
+      "header": {
+        "position": "fixed",
+        "backgroundColor": "rgba(20, 16, 13, 0.97)",
+        "zIndex": "99",
+        "backdropFilter": "none"
+      }
+    }
+  },
+  "dockAudit": {
+    "1440x900": {
+      "dockAtHero": {
+        "exists": true,
+        "visibility": "visible",
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "isInert": false
+      },
+      "dockAfterHero": {
+        "exists": true,
+        "visibility": "visible",
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "isInert": false,
+        "width": 376.640625,
+        "height": 52
+      },
+      "dockAtReservas": {
+        "exists": true,
+        "visibility": "visible",
+        "opacity": "1",
+        "isInert": false
+      },
+      "dockWithInputFocused": {
+        "exists": true,
+        "visibility": "hidden",
+        "opacity": "0",
+        "isInert": true
+      },
+      "dockWithMenuOpen": {
+        "exists": true,
+        "visibility": "hidden",
+        "opacity": "0",
+        "isInert": true,
+        "dialogOpen": true
+      }
+    },
+    "390x844": {
+      "dockAtHero": {
+        "exists": true,
+        "visibility": "hidden",
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 0, 82.8)",
+        "isInert": true
+      },
+      "dockAfterHero": {
+        "exists": true,
+        "visibility": "visible",
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "isInert": false,
+        "width": 390,
+        "height": 69
+      },
+      "dockAtReservas": {
+        "exists": true,
+        "visibility": "visible",
+        "opacity": "1",
+        "isInert": false
+      },
+      "dockWithInputFocused": {
+        "exists": true,
+        "visibility": "hidden",
+        "opacity": "0",
+        "isInert": true
+      },
+      "dockWithMenuOpen": {
+        "exists": true,
+        "visibility": "hidden",
+        "opacity": "0",
+        "isInert": true,
+        "dialogOpen": true
+      }
+    }
+  },
+  "typography": [
+    {
+      "tag": "h1",
+      "text": "TODO DIA É DIA DE brasa mar",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "400",
+      "fontSize": "17px",
+      "lineHeight": "17px",
+      "letterSpacing": "normal",
+      "color": "rgb(243, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Carnes e frutos do mar na brasa, num can",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "500",
+      "fontSize": "24px",
+      "lineHeight": "33.6px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "a",
+      "text": "RESERVAR MINHA MESA",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "600",
+      "fontSize": "21.888px",
+      "lineHeight": "32.832px",
+      "letterSpacing": "0.43776px",
+      "color": "rgb(26, 20, 17)"
+    },
+    {
+      "tag": "span",
+      "text": "QUEM SOMOS",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "600",
+      "fontSize": "13px",
+      "lineHeight": "19.5px",
+      "letterSpacing": "3.25px",
+      "color": "rgba(245, 230, 208, 0.7)"
+    },
+    {
+      "tag": "h2",
+      "text": "SAL, FOGO E paciência",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif, \"DM Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "17px",
+      "lineHeight": "25.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Nascemos do encontro das águas do litora",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "18.72px",
+      "lineHeight": "30.888px",
+      "letterSpacing": "normal",
+      "color": "rgba(245, 230, 208, 0.85)"
+    },
+    {
+      "tag": "span",
+      "text": "O CHURRASCO DO MAR",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "600",
+      "fontSize": "13px",
+      "lineHeight": "19.5px",
+      "letterSpacing": "3.25px",
+      "color": "rgba(20, 16, 13, 0.75)"
+    },
+    {
+      "tag": "h2",
+      "text": "DO MAR PARA A BRASA, DA BRASA PARA A SUA",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif, \"DM Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "17px",
+      "lineHeight": "25.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "O Churrasco do Mar do Braseiro é para qu",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "18px",
+      "lineHeight": "28.8px",
+      "letterSpacing": "normal",
+      "color": "rgba(20, 16, 13, 0.85)"
+    },
+    {
+      "tag": "p",
+      "text": "Peixes e frutos do mar chegam frescos do",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "18px",
+      "lineHeight": "28.8px",
+      "letterSpacing": "normal",
+      "color": "rgba(20, 16, 13, 0.85)"
+    },
+    {
+      "tag": "p",
+      "text": "Todos os dias · 11h30–23h30",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif, \"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "Rua Guarani, 370 - Itaguá, Ubatuba - SP",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif, \"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "h2",
+      "text": "Brasa é ponto, tempo e olho de quem faz",
+      "fontFamily": "Fraunces, Georgia, serif, Fraunces, Georgia, serif",
+      "fontWeight": "400",
+      "fontSize": "17px",
+      "lineHeight": "25.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(243, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "“Não tem pressa que acelere o carvão, ne",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "24.48px",
+      "lineHeight": "33.048px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Aqui o fogo sela o suco, caramela a cros",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "16.56px",
+      "lineHeight": "27.324px",
+      "letterSpacing": "normal",
+      "color": "rgba(245, 230, 208, 0.9)"
+    },
+    {
+      "tag": "h2",
+      "text": "Sempre cabe mais um SEMPRE CABE mais um",
+      "fontFamily": "Fraunces, Georgia, serif, Fraunces, Georgia, serif",
+      "fontWeight": "400",
+      "fontSize": "17px",
+      "lineHeight": "25.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "Aniversário, família depois da praia ou",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "16.56px",
+      "lineHeight": "27.324px",
+      "letterSpacing": "normal",
+      "color": "rgba(20, 16, 13, 0.9)"
+    },
+    {
+      "tag": "h3",
+      "text": "terra",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "187.2px",
+      "lineHeight": "159.12px",
+      "letterSpacing": "normal",
+      "color": "rgb(232, 131, 42)"
+    },
+    {
+      "tag": "p",
+      "text": "Picanha, chorizo e assado de tira no pon",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "500",
+      "fontSize": "15.84px",
+      "lineHeight": "23.76px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h3",
+      "text": "mar",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "187.2px",
+      "lineHeight": "159.12px",
+      "letterSpacing": "normal",
+      "color": "rgb(232, 131, 42)"
+    },
+    {
+      "tag": "p",
+      "text": "Polvo tenro grelhado, camarões e peixe f",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "500",
+      "fontSize": "15.84px",
+      "lineHeight": "23.76px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h2",
+      "text": "DUAS BRASAS, UMA MESA",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "700",
+      "fontSize": "20.16px",
+      "lineHeight": "30.24px",
+      "letterSpacing": "1.2096px",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Picanha, chorizo e assado de tira no pon",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "500",
+      "fontSize": "15px",
+      "lineHeight": "22.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "“A força do pasto encontra a maresia do",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "17.28px",
+      "lineHeight": "24.192px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Polvo tenro grelhado, camarões e peixe f",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "500",
+      "fontSize": "15px",
+      "lineHeight": "22.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "“A força do pasto encontra a maresia do",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "20px",
+      "lineHeight": "28px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "span",
+      "text": "DA BRASA PRA MESA",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "600",
+      "fontSize": "13px",
+      "lineHeight": "19.5px",
+      "letterSpacing": "3.25px",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "h2",
+      "text": "OS PRATOS da casa",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif, \"DM Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "17px",
+      "lineHeight": "25.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "h3",
+      "text": "gastronomia",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "60.7052px",
+      "lineHeight": "54.6346px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h3",
+      "text": "drinks",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "92.8px",
+      "lineHeight": "83.52px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h3",
+      "text": "executivos",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "66.9875px",
+      "lineHeight": "60.2888px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h3",
+      "text": "gastronomia",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "54.4px",
+      "lineHeight": "48.96px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h3",
+      "text": "drinks",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "83.2px",
+      "lineHeight": "74.88px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h3",
+      "text": "executivos",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "60.8px",
+      "lineHeight": "54.72px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h2",
+      "text": "QUEM JÁ SENTOU À mesa",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif, \"DM Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "17px",
+      "lineHeight": "25.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "“A experiência no restaurante foi ótima",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16.56px",
+      "lineHeight": "22.8528px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“Melhor restaurante da cidade! Alguns pr",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16.56px",
+      "lineHeight": "22.8528px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“Superou as expectativas! […] Ambiente d",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16.56px",
+      "lineHeight": "22.8528px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“Excelente! Preço muito justo, porções m",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16.56px",
+      "lineHeight": "22.8528px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“Tudo 5 estrelas!! Comida MARAVILHOSA, a",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16.56px",
+      "lineHeight": "22.8528px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“A comida estava maravilhosa, pedimos as",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16.56px",
+      "lineHeight": "22.8528px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“[…] a comida estava impecável! Tudo mui",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16.56px",
+      "lineHeight": "22.8528px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“Comida excelente, ambiente super aconch",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16.56px",
+      "lineHeight": "22.8528px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“A experiência no restaurante foi ótima",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22.08px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“Melhor restaurante da cidade! Alguns pr",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22.08px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“Superou as expectativas! […] Ambiente d",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22.08px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“Excelente! Preço muito justo, porções m",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22.08px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“Tudo 5 estrelas!! Comida MARAVILHOSA, a",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22.08px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“A comida estava maravilhosa, pedimos as",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22.08px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“[…] a comida estava impecável! Tudo mui",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22.08px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "“Comida excelente, ambiente super aconch",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22.08px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "h2",
+      "text": "POR QUE O FOGO É diferente",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif, \"DM Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "17px",
+      "lineHeight": "25.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "h3",
+      "text": "brasa",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "95.04px",
+      "lineHeight": "85.536px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h3",
+      "text": "brasa",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "95.04px",
+      "lineHeight": "85.536px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Sem atalhos de gás. Fogo lento alimentad",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "16.56px",
+      "lineHeight": "26.496px",
+      "letterSpacing": "normal",
+      "color": "rgba(245, 230, 208, 0.95)"
+    },
+    {
+      "tag": "h3",
+      "text": "mar",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "95.04px",
+      "lineHeight": "85.536px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h3",
+      "text": "mar",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "95.04px",
+      "lineHeight": "85.536px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Pescadores artesanais de Ubatuba entrega",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "16.56px",
+      "lineHeight": "26.496px",
+      "letterSpacing": "normal",
+      "color": "rgba(245, 230, 208, 0.95)"
+    },
+    {
+      "tag": "h3",
+      "text": "mata",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "95.04px",
+      "lineHeight": "85.536px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h3",
+      "text": "mata",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "95.04px",
+      "lineHeight": "85.536px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Construção rústica com elementos de cano",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "16.56px",
+      "lineHeight": "26.496px",
+      "letterSpacing": "normal",
+      "color": "rgba(245, 230, 208, 0.95)"
+    },
+    {
+      "tag": "h3",
+      "text": "mesa",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "95.04px",
+      "lineHeight": "85.536px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h3",
+      "text": "mesa",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "95.04px",
+      "lineHeight": "85.536px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Aqui ninguém come com pressa. Bancadas e",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "16.56px",
+      "lineHeight": "26.496px",
+      "letterSpacing": "normal",
+      "color": "rgba(245, 230, 208, 0.95)"
+    },
+    {
+      "tag": "h3",
+      "text": "brasa",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "57.6px",
+      "lineHeight": "51.84px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Sem atalhos de gás. Fogo lento alimentad",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "15.2px",
+      "lineHeight": "23.56px",
+      "letterSpacing": "normal",
+      "color": "rgba(245, 230, 208, 0.95)"
+    },
+    {
+      "tag": "h3",
+      "text": "mar",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "57.6px",
+      "lineHeight": "51.84px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Pescadores artesanais de Ubatuba entrega",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "15.2px",
+      "lineHeight": "23.56px",
+      "letterSpacing": "normal",
+      "color": "rgba(245, 230, 208, 0.95)"
+    },
+    {
+      "tag": "h3",
+      "text": "mata",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "57.6px",
+      "lineHeight": "51.84px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Construção rústica com elementos de cano",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "15.2px",
+      "lineHeight": "23.56px",
+      "letterSpacing": "normal",
+      "color": "rgba(245, 230, 208, 0.95)"
+    },
+    {
+      "tag": "h3",
+      "text": "mesa",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "900",
+      "fontSize": "57.6px",
+      "lineHeight": "51.84px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Aqui ninguém come com pressa. Bancadas e",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "15.2px",
+      "lineHeight": "23.56px",
+      "letterSpacing": "normal",
+      "color": "rgba(245, 230, 208, 0.95)"
+    },
+    {
+      "tag": "h2",
+      "text": "AMBIENTE & VIDA caiçara",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif, \"DM Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "17px",
+      "lineHeight": "25.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "“Um refúgio rústico em Ubatuba para desa",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "21.6px",
+      "lineHeight": "31.32px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h2",
+      "text": "A BRASA JÁ ESTÁ acesa acesa",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif, \"DM Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "17px",
+      "lineHeight": "25.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "“Avise antes para prepararmos a melhor m",
+      "fontFamily": "Fraunces, Georgia, serif",
+      "fontWeight": "500",
+      "fontSize": "22.4px",
+      "lineHeight": "32.48px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "A reserva é confirmada por mensagem do r",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "14px",
+      "lineHeight": "21px",
+      "letterSpacing": "normal",
+      "color": "rgba(245, 230, 208, 0.75)"
+    },
+    {
+      "tag": "p",
+      "text": "Rua Guarani, 370 · Itaguá, Ubatuba - SP",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22.4px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Todos os dias · 11h30–23h30",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22.4px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "p",
+      "text": "Vagas na rua e estacionamento próximo",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "500",
+      "fontSize": "16px",
+      "lineHeight": "22.4px",
+      "letterSpacing": "normal",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "h2",
+      "text": "ACENDA O FOGO, sente à mesa",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif, \"DM Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "17px",
+      "lineHeight": "25.5px",
+      "letterSpacing": "normal",
+      "color": "rgb(20, 16, 13)"
+    },
+    {
+      "tag": "p",
+      "text": "© 2026 Braseiro Caiçara. Todos os direit",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "13px",
+      "lineHeight": "18.85px",
+      "letterSpacing": "normal",
+      "color": "rgba(20, 16, 13, 0.75)"
+    },
+    {
+      "tag": "p",
+      "text": "© 2026 Braseiro Caiçara. Todos os direit",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "400",
+      "fontSize": "13px",
+      "lineHeight": "19.5px",
+      "letterSpacing": "normal",
+      "color": "rgba(20, 16, 13, 0.75)"
+    },
+    {
+      "tag": "a",
+      "text": "",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "600",
+      "fontSize": "13px",
+      "lineHeight": "13px",
+      "letterSpacing": "0.78px",
+      "color": "rgb(245, 230, 208)"
+    },
+    {
+      "tag": "a",
+      "text": "",
+      "fontFamily": "\"Instrument Sans\", system-ui, sans-serif",
+      "fontWeight": "600",
+      "fontSize": "13px",
+      "lineHeight": "13px",
+      "letterSpacing": "0.78px",
+      "color": "rgb(20, 16, 13)"
+    }
+  ],
+  "spacings": {}
+}

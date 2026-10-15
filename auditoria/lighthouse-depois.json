@@ -1,0 +1,20 @@
+{
+  "home": {
+    "label": "home-depois",
+    "url": "http://localhost:5173/",
+    "perf": 26,
+    "lcp": 37.55,
+    "cls": 0,
+    "fcp": 23.72,
+    "tbt": 3342
+  },
+  "gastronomia": {
+    "label": "gastronomia-depois",
+    "url": "http://localhost:5173/cardapio/gastronomia",
+    "perf": 31,
+    "lcp": 33.83,
+    "cls": 0.004,
+    "fcp": 18.18,
+    "tbt": 1190
+  }
+}

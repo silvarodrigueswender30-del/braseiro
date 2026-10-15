@@ -1,0 +1,92 @@
+[
+  {
+    "rota": "home",
+    "viewport": "375px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "home-375px.png"
+  },
+  {
+    "rota": "cardapio-hub",
+    "viewport": "375px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "cardapio-hub-375px.png"
+  },
+  {
+    "rota": "gastronomia",
+    "viewport": "375px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "gastronomia-375px.png"
+  },
+  {
+    "rota": "drinks",
+    "viewport": "375px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "drinks-375px.png"
+  },
+  {
+    "rota": "executivos",
+    "viewport": "375px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "executivos-375px.png"
+  },
+  {
+    "rota": "home",
+    "viewport": "768px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "home-768px.png"
+  },
+  {
+    "rota": "cardapio-hub",
+    "viewport": "768px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "cardapio-hub-768px.png"
+  },
+  {
+    "rota": "gastronomia",
+    "viewport": "768px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "gastronomia-768px.png"
+  },
+  {
+    "rota": "drinks",
+    "viewport": "768px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "drinks-768px.png"
+  },
+  {
+    "rota": "executivos",
+    "viewport": "768px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "executivos-768px.png"
+  },
+  {
+    "rota": "home",
+    "viewport": "1280px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "home-1280px.png"
+  },
+  {
+    "rota": "cardapio-hub",
+    "viewport": "1280px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "cardapio-hub-1280px.png"
+  },
+  {
+    "rota": "gastronomia",
+    "viewport": "1280px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "gastronomia-1280px.png"
+  },
+  {
+    "rota": "drinks",
+    "viewport": "1280px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "drinks-1280px.png"
+  },
+  {
+    "rota": "executivos",
+    "viewport": "1280px",
+    "overflow": "NÃO (0px)",
+    "arquivo": "executivos-1280px.png"
+  }
+]

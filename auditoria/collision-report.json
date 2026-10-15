@@ -1,0 +1,882 @@
+{
+  "timestamp": "2026-10-15T18:06:09.568Z",
+  "viewportsAudited": [
+    375,
+    390,
+    430,
+    768,
+    1024,
+    1280,
+    1440,
+    1920
+  ],
+  "routesAudited": [
+    "/",
+    "/cardapio",
+    "/cardapio/gastronomia",
+    "/cardapio/drinks",
+    "/cardapio/executivos"
+  ],
+  "summary": {
+    "totalChecks": 40,
+    "totalCollisions": 0,
+    "totalOverflows": 0,
+    "totalContrastFailures": 5
+  },
+  "overflowTable": {
+    "375": {
+      "home": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "hasOverflow": false
+      },
+      "cardapio": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "hasOverflow": false
+      },
+      "gastronomia": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "hasOverflow": false
+      },
+      "drinks": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "hasOverflow": false
+      },
+      "executivos": {
+        "scrollWidth": 375,
+        "clientWidth": 375,
+        "hasOverflow": false
+      }
+    },
+    "390": {
+      "home": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasOverflow": false
+      },
+      "cardapio": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasOverflow": false
+      },
+      "gastronomia": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasOverflow": false
+      },
+      "drinks": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasOverflow": false
+      },
+      "executivos": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasOverflow": false
+      }
+    },
+    "430": {
+      "home": {
+        "scrollWidth": 430,
+        "clientWidth": 430,
+        "hasOverflow": false
+      },
+      "cardapio": {
+        "scrollWidth": 430,
+        "clientWidth": 430,
+        "hasOverflow": false
+      },
+      "gastronomia": {
+        "scrollWidth": 430,
+        "clientWidth": 430,
+        "hasOverflow": false
+      },
+      "drinks": {
+        "scrollWidth": 430,
+        "clientWidth": 430,
+        "hasOverflow": false
+      },
+      "executivos": {
+        "scrollWidth": 430,
+        "clientWidth": 430,
+        "hasOverflow": false
+      }
+    },
+    "768": {
+      "home": {
+        "scrollWidth": 768,
+        "clientWidth": 768,
+        "hasOverflow": false
+      },
+      "cardapio": {
+        "scrollWidth": 768,
+        "clientWidth": 768,
+        "hasOverflow": false
+      },
+      "gastronomia": {
+        "scrollWidth": 768,
+        "clientWidth": 768,
+        "hasOverflow": false
+      },
+      "drinks": {
+        "scrollWidth": 768,
+        "clientWidth": 768,
+        "hasOverflow": false
+      },
+      "executivos": {
+        "scrollWidth": 768,
+        "clientWidth": 768,
+        "hasOverflow": false
+      }
+    },
+    "1024": {
+      "home": {
+        "scrollWidth": 1024,
+        "clientWidth": 1024,
+        "hasOverflow": false
+      },
+      "cardapio": {
+        "scrollWidth": 1024,
+        "clientWidth": 1024,
+        "hasOverflow": false
+      },
+      "gastronomia": {
+        "scrollWidth": 1024,
+        "clientWidth": 1024,
+        "hasOverflow": false
+      },
+      "drinks": {
+        "scrollWidth": 1024,
+        "clientWidth": 1024,
+        "hasOverflow": false
+      },
+      "executivos": {
+        "scrollWidth": 1024,
+        "clientWidth": 1024,
+        "hasOverflow": false
+      }
+    },
+    "1280": {
+      "home": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      },
+      "cardapio": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      },
+      "gastronomia": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      },
+      "drinks": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      },
+      "executivos": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      }
+    },
+    "1440": {
+      "home": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "hasOverflow": false
+      },
+      "cardapio": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "hasOverflow": false
+      },
+      "gastronomia": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "hasOverflow": false
+      },
+      "drinks": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "hasOverflow": false
+      },
+      "executivos": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "hasOverflow": false
+      }
+    },
+    "1920": {
+      "home": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "hasOverflow": false
+      },
+      "cardapio": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "hasOverflow": false
+      },
+      "gastronomia": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "hasOverflow": false
+      },
+      "drinks": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "hasOverflow": false
+      },
+      "executivos": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "hasOverflow": false
+      }
+    }
+  },
+  "resultsByPage": {
+    "home-375px": {
+      "route": "/",
+      "viewport": 375,
+      "overflow": {
+        "windowInnerWidth": 375,
+        "htmlClientWidth": 375,
+        "htmlScrollWidth": 375,
+        "bodyClientWidth": 375,
+        "bodyScrollWidth": 375,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "cardapio-375px": {
+      "route": "/cardapio",
+      "viewport": 375,
+      "overflow": {
+        "windowInnerWidth": 375,
+        "htmlClientWidth": 375,
+        "htmlScrollWidth": 375,
+        "bodyClientWidth": 375,
+        "bodyScrollWidth": 375,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "gastronomia-375px": {
+      "route": "/cardapio/gastronomia",
+      "viewport": 375,
+      "overflow": {
+        "windowInnerWidth": 375,
+        "htmlClientWidth": 375,
+        "htmlScrollWidth": 375,
+        "bodyClientWidth": 375,
+        "bodyScrollWidth": 375,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "drinks-375px": {
+      "route": "/cardapio/drinks",
+      "viewport": 375,
+      "overflow": {
+        "windowInnerWidth": 375,
+        "htmlClientWidth": 375,
+        "htmlScrollWidth": 375,
+        "bodyClientWidth": 375,
+        "bodyScrollWidth": 375,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "executivos-375px": {
+      "route": "/cardapio/executivos",
+      "viewport": 375,
+      "overflow": {
+        "windowInnerWidth": 375,
+        "htmlClientWidth": 375,
+        "htmlScrollWidth": 375,
+        "bodyClientWidth": 375,
+        "bodyScrollWidth": 375,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "home-390px": {
+      "route": "/",
+      "viewport": 390,
+      "overflow": {
+        "windowInnerWidth": 390,
+        "htmlClientWidth": 390,
+        "htmlScrollWidth": 390,
+        "bodyClientWidth": 390,
+        "bodyScrollWidth": 390,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "cardapio-390px": {
+      "route": "/cardapio",
+      "viewport": 390,
+      "overflow": {
+        "windowInnerWidth": 390,
+        "htmlClientWidth": 390,
+        "htmlScrollWidth": 390,
+        "bodyClientWidth": 390,
+        "bodyScrollWidth": 390,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "gastronomia-390px": {
+      "route": "/cardapio/gastronomia",
+      "viewport": 390,
+      "overflow": {
+        "windowInnerWidth": 390,
+        "htmlClientWidth": 390,
+        "htmlScrollWidth": 390,
+        "bodyClientWidth": 390,
+        "bodyScrollWidth": 390,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": [
+        {
+          "text": "A CASA",
+          "fg": "rgb(245, 230, 208)",
+          "bg": "rgba(20, 16, 13, 0.5)",
+          "ratio": 3.1,
+          "required": 4.5
+        },
+        {
+          "text": "O FOGO",
+          "fg": "rgb(245, 230, 208)",
+          "bg": "rgba(20, 16, 13, 0.5)",
+          "ratio": 3.1,
+          "required": 4.5
+        },
+        {
+          "text": "PRATOS",
+          "fg": "rgb(245, 230, 208)",
+          "bg": "rgba(20, 16, 13, 0.5)",
+          "ratio": 3.1,
+          "required": 4.5
+        },
+        {
+          "text": "EVENTOS",
+          "fg": "rgb(245, 230, 208)",
+          "bg": "rgba(20, 16, 13, 0.5)",
+          "ratio": 3.1,
+          "required": 4.5
+        },
+        {
+          "text": "AMBIENTE",
+          "fg": "rgb(245, 230, 208)",
+          "bg": "rgba(20, 16, 13, 0.5)",
+          "ratio": 3.1,
+          "required": 4.5
+        }
+      ]
+    },
+    "drinks-390px": {
+      "route": "/cardapio/drinks",
+      "viewport": 390,
+      "overflow": {
+        "windowInnerWidth": 390,
+        "htmlClientWidth": 390,
+        "htmlScrollWidth": 390,
+        "bodyClientWidth": 390,
+        "bodyScrollWidth": 390,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "executivos-390px": {
+      "route": "/cardapio/executivos",
+      "viewport": 390,
+      "overflow": {
+        "windowInnerWidth": 390,
+        "htmlClientWidth": 390,
+        "htmlScrollWidth": 390,
+        "bodyClientWidth": 390,
+        "bodyScrollWidth": 390,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "home-430px": {
+      "route": "/",
+      "viewport": 430,
+      "overflow": {
+        "windowInnerWidth": 430,
+        "htmlClientWidth": 430,
+        "htmlScrollWidth": 430,
+        "bodyClientWidth": 430,
+        "bodyScrollWidth": 430,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "cardapio-430px": {
+      "route": "/cardapio",
+      "viewport": 430,
+      "overflow": {
+        "windowInnerWidth": 430,
+        "htmlClientWidth": 430,
+        "htmlScrollWidth": 430,
+        "bodyClientWidth": 430,
+        "bodyScrollWidth": 430,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "gastronomia-430px": {
+      "route": "/cardapio/gastronomia",
+      "viewport": 430,
+      "overflow": {
+        "windowInnerWidth": 430,
+        "htmlClientWidth": 430,
+        "htmlScrollWidth": 430,
+        "bodyClientWidth": 430,
+        "bodyScrollWidth": 430,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "drinks-430px": {
+      "route": "/cardapio/drinks",
+      "viewport": 430,
+      "overflow": {
+        "windowInnerWidth": 430,
+        "htmlClientWidth": 430,
+        "htmlScrollWidth": 430,
+        "bodyClientWidth": 430,
+        "bodyScrollWidth": 430,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "executivos-430px": {
+      "route": "/cardapio/executivos",
+      "viewport": 430,
+      "overflow": {
+        "windowInnerWidth": 430,
+        "htmlClientWidth": 430,
+        "htmlScrollWidth": 430,
+        "bodyClientWidth": 430,
+        "bodyScrollWidth": 430,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "home-768px": {
+      "route": "/",
+      "viewport": 768,
+      "overflow": {
+        "windowInnerWidth": 768,
+        "htmlClientWidth": 768,
+        "htmlScrollWidth": 768,
+        "bodyClientWidth": 768,
+        "bodyScrollWidth": 768,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "cardapio-768px": {
+      "route": "/cardapio",
+      "viewport": 768,
+      "overflow": {
+        "windowInnerWidth": 768,
+        "htmlClientWidth": 768,
+        "htmlScrollWidth": 768,
+        "bodyClientWidth": 768,
+        "bodyScrollWidth": 768,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "gastronomia-768px": {
+      "route": "/cardapio/gastronomia",
+      "viewport": 768,
+      "overflow": {
+        "windowInnerWidth": 768,
+        "htmlClientWidth": 768,
+        "htmlScrollWidth": 768,
+        "bodyClientWidth": 768,
+        "bodyScrollWidth": 768,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "drinks-768px": {
+      "route": "/cardapio/drinks",
+      "viewport": 768,
+      "overflow": {
+        "windowInnerWidth": 768,
+        "htmlClientWidth": 768,
+        "htmlScrollWidth": 768,
+        "bodyClientWidth": 768,
+        "bodyScrollWidth": 768,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "executivos-768px": {
+      "route": "/cardapio/executivos",
+      "viewport": 768,
+      "overflow": {
+        "windowInnerWidth": 768,
+        "htmlClientWidth": 768,
+        "htmlScrollWidth": 768,
+        "bodyClientWidth": 768,
+        "bodyScrollWidth": 768,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "home-1024px": {
+      "route": "/",
+      "viewport": 1024,
+      "overflow": {
+        "windowInnerWidth": 1024,
+        "htmlClientWidth": 1024,
+        "htmlScrollWidth": 1024,
+        "bodyClientWidth": 1024,
+        "bodyScrollWidth": 1024,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "cardapio-1024px": {
+      "route": "/cardapio",
+      "viewport": 1024,
+      "overflow": {
+        "windowInnerWidth": 1024,
+        "htmlClientWidth": 1024,
+        "htmlScrollWidth": 1024,
+        "bodyClientWidth": 1024,
+        "bodyScrollWidth": 1024,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "gastronomia-1024px": {
+      "route": "/cardapio/gastronomia",
+      "viewport": 1024,
+      "overflow": {
+        "windowInnerWidth": 1024,
+        "htmlClientWidth": 1024,
+        "htmlScrollWidth": 1024,
+        "bodyClientWidth": 1024,
+        "bodyScrollWidth": 1024,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "drinks-1024px": {
+      "route": "/cardapio/drinks",
+      "viewport": 1024,
+      "overflow": {
+        "windowInnerWidth": 1024,
+        "htmlClientWidth": 1024,
+        "htmlScrollWidth": 1024,
+        "bodyClientWidth": 1024,
+        "bodyScrollWidth": 1024,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "executivos-1024px": {
+      "route": "/cardapio/executivos",
+      "viewport": 1024,
+      "overflow": {
+        "windowInnerWidth": 1024,
+        "htmlClientWidth": 1024,
+        "htmlScrollWidth": 1024,
+        "bodyClientWidth": 1024,
+        "bodyScrollWidth": 1024,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "home-1280px": {
+      "route": "/",
+      "viewport": 1280,
+      "overflow": {
+        "windowInnerWidth": 1280,
+        "htmlClientWidth": 1280,
+        "htmlScrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "cardapio-1280px": {
+      "route": "/cardapio",
+      "viewport": 1280,
+      "overflow": {
+        "windowInnerWidth": 1280,
+        "htmlClientWidth": 1280,
+        "htmlScrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "gastronomia-1280px": {
+      "route": "/cardapio/gastronomia",
+      "viewport": 1280,
+      "overflow": {
+        "windowInnerWidth": 1280,
+        "htmlClientWidth": 1280,
+        "htmlScrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "drinks-1280px": {
+      "route": "/cardapio/drinks",
+      "viewport": 1280,
+      "overflow": {
+        "windowInnerWidth": 1280,
+        "htmlClientWidth": 1280,
+        "htmlScrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "executivos-1280px": {
+      "route": "/cardapio/executivos",
+      "viewport": 1280,
+      "overflow": {
+        "windowInnerWidth": 1280,
+        "htmlClientWidth": 1280,
+        "htmlScrollWidth": 1280,
+        "bodyClientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "home-1440px": {
+      "route": "/",
+      "viewport": 1440,
+      "overflow": {
+        "windowInnerWidth": 1440,
+        "htmlClientWidth": 1440,
+        "htmlScrollWidth": 1440,
+        "bodyClientWidth": 1440,
+        "bodyScrollWidth": 1440,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "cardapio-1440px": {
+      "route": "/cardapio",
+      "viewport": 1440,
+      "overflow": {
+        "windowInnerWidth": 1440,
+        "htmlClientWidth": 1440,
+        "htmlScrollWidth": 1440,
+        "bodyClientWidth": 1440,
+        "bodyScrollWidth": 1440,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "gastronomia-1440px": {
+      "route": "/cardapio/gastronomia",
+      "viewport": 1440,
+      "overflow": {
+        "windowInnerWidth": 1440,
+        "htmlClientWidth": 1440,
+        "htmlScrollWidth": 1440,
+        "bodyClientWidth": 1440,
+        "bodyScrollWidth": 1440,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "drinks-1440px": {
+      "route": "/cardapio/drinks",
+      "viewport": 1440,
+      "overflow": {
+        "windowInnerWidth": 1440,
+        "htmlClientWidth": 1440,
+        "htmlScrollWidth": 1440,
+        "bodyClientWidth": 1440,
+        "bodyScrollWidth": 1440,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "executivos-1440px": {
+      "route": "/cardapio/executivos",
+      "viewport": 1440,
+      "overflow": {
+        "windowInnerWidth": 1440,
+        "htmlClientWidth": 1440,
+        "htmlScrollWidth": 1440,
+        "bodyClientWidth": 1440,
+        "bodyScrollWidth": 1440,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "home-1920px": {
+      "route": "/",
+      "viewport": 1920,
+      "overflow": {
+        "windowInnerWidth": 1920,
+        "htmlClientWidth": 1920,
+        "htmlScrollWidth": 1920,
+        "bodyClientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "cardapio-1920px": {
+      "route": "/cardapio",
+      "viewport": 1920,
+      "overflow": {
+        "windowInnerWidth": 1920,
+        "htmlClientWidth": 1920,
+        "htmlScrollWidth": 1920,
+        "bodyClientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "gastronomia-1920px": {
+      "route": "/cardapio/gastronomia",
+      "viewport": 1920,
+      "overflow": {
+        "windowInnerWidth": 1920,
+        "htmlClientWidth": 1920,
+        "htmlScrollWidth": 1920,
+        "bodyClientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "drinks-1920px": {
+      "route": "/cardapio/drinks",
+      "viewport": 1920,
+      "overflow": {
+        "windowInnerWidth": 1920,
+        "htmlClientWidth": 1920,
+        "htmlScrollWidth": 1920,
+        "bodyClientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    },
+    "executivos-1920px": {
+      "route": "/cardapio/executivos",
+      "viewport": 1920,
+      "overflow": {
+        "windowInnerWidth": 1920,
+        "htmlClientWidth": 1920,
+        "htmlScrollWidth": 1920,
+        "bodyClientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "hasOverflow": false,
+        "excessWidth": 0
+      },
+      "collisions": [],
+      "contrastFailures": []
+    }
+  }
+}
