@@ -420,14 +420,7 @@ export const AboutSection: React.FC = () => {
 
           {/* Informações Práticas com Fio Fino (com peça terracota saindo de trás) */}
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-5 pt-5 border-t border-[#14100D]/15 mb-7">
-            {/* Peça terracota artesanal saindo do cartão de endereço per Prompt v7 */}
-            <BrandShape
-              shape="mancha-c"
-              tone="terracota"
-              size="clamp(220px, 28vw, 380px)"
-              style={{ bottom: '-40px', right: '-30px', zIndex: -1 }}
-              rotate={14}
-            />
+
             <div>
               <span className="block font-text font-semibold uppercase tracking-[0.2em] text-[12px] text-[var(--brasa-creme-texto)] mb-1">
                 HORÁRIO

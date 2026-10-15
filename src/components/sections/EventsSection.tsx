@@ -350,10 +350,13 @@ export const EventsSection: React.FC = () => {
               ref={collageRef}
               className="relative w-full max-w-[560px] aspect-[1/1.02] sm:aspect-[1/0.95]"
             >
-              {/* Nuvem brasa grande atrás das polaroids (Prompt v7) */}
+              {/* Nuvem brasa grande atrás das polaroids (Prompt v7/v8) */}
               <BrandShape
                 shape="nuvem-b"
                 tone="brasa"
+                placement="behind-card"
+                mobilePlacement="hidden"
+                hideOnMobile={true}
                 size="clamp(320px, 44vw, 560px)"
                 style={{ top: '4%', left: '-20%', zIndex: 0 }}
                 flipX={true}

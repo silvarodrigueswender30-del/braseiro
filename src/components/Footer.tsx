@@ -616,7 +616,7 @@ export const Footer: React.FC = () => {
                       ref={(el) => {
                         comandaItemRefs.current[0] = el;
                       }}
-                      className="pb-[14px] mb-[14px] border-b border-dashed border-[#14100D]/45"
+                      className="pb-[14px] mb-[14px] border-b border-dashed border-[#14100D]/45 pr-6 sm:pr-8"
                     >
                       <div
                         className="font-bold uppercase tracking-[0.08em] text-[#14100D]"
@@ -723,12 +723,12 @@ export const Footer: React.FC = () => {
                       </div>
                     )}
 
-                    {/* ITEM 5: OBRIGADO PELA VISITA! (Sem linha tracejada) */}
+                    {/* ITEM 5: OBRIGADO PELA VISITA! (Sem linha tracejada, com respiro à direita para o carimbo) */}
                     <div
                       ref={(el) => {
                         comandaItemRefs.current[4] = el;
                       }}
-                      className="pt-1 text-center"
+                      className="pt-1 text-center pr-10 sm:pr-14"
                     >
                       <div
                         className="font-bold uppercase tracking-[0.08em] text-[#14100D]"
@@ -740,13 +740,13 @@ export const Footer: React.FC = () => {
                   </div>
                 </address>
 
-                {/* CARIMBO SOBREPONDO A BORDA SUPERIOR DIREITA DA COMANDA */}
+                {/* CARIMBO NO CANTO INFERIOR DIREITO DA COMANDA PER PROMPT V8 (Reduzido ~20%, rotação leve) */}
                 <div
                   ref={stampRef}
                   aria-hidden="true"
-                  className="pointer-events-none select-none absolute -top-5 -right-4 sm:-right-7 lg:-right-8 w-[92px] h-[92px] lg:w-[clamp(104px,9vw,132px)] lg:h-[clamp(104px,9vw,132px)] z-20"
+                  className="pointer-events-none select-none absolute -bottom-3 -right-3 sm:-right-5 lg:-right-6 w-[74px] h-[74px] lg:w-[clamp(82px,7.2vw,104px)] lg:h-[clamp(82px,7.2vw,104px)] z-20"
                   style={{
-                    transform: 'rotate(-14deg)',
+                    transform: 'rotate(8deg)',
                     opacity: 0.9,
                     mixBlendMode: 'multiply',
                   }}

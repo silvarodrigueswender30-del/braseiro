@@ -105,29 +105,33 @@ Sistema de formas decorativas em bloco de cor sólida e textura artesanal viva (
 - **`nuvem-b`:** Silhueta horizontal alongada em bloco rochoso com fissuras verticais profundas (proporção `1310 / 733`). Ideal como fundo para polaroids e murais.
 - **`mancha-c`:** Silhueta fluida e dinâmica de fogo orgânico com labareda ascendente (proporção `997 / 739`).
 - **`pincelada-d`:** Faixa horizontal com textura de cerdas ásperas desfiadas nas pontas e fendas de terra no centro (proporção `1489 / 534`).
-- **`faiscas`:** Revoada de partículas e diamantes incandescentes (proporção `2213 / 477`). Ideal para cruzar emendas e pontuar calor.
-- **`selo`:** Emblema circular com anel duplo rústico vazado, chama central e ondas do mar (proporção `879 / 881`). Acoplado aos CTAs finais.
+- **`faiscas`:** Revoada de partículas e diamantes incandescentes (proporção `2213 / 477`). Ideal para pontuar calor em gutters laterais.
+- **`selo`:** Emblema circular com anel duplo rústico vazado, chama central e ondas do mar (proporção `879 / 881`). **Uso exclusivo como divisor discreto centralizado** (`line-selo`) ou carimbo rotacionado no bilhete areia do footer.
 - **`sal`:** Constelação de grãos dispersos de sal marinho grosso artesanal (proporção `683 / 552`).
-- **`chama-traco`:** Labareda artesanal em traço expressivo (proporção `320 / 400`), posicionada junto aos títulos de destaque.
+- **`chama-traco`:** *Aposentada em todo o projeto per Prompt v8*. Títulos de destaque mantêm tipografia limpa sem ornamentos concorrentes.
 
-### 8.2 Diretrizes Cromáticas (Do "Watermark" para "Bloco de Cor")
-1. **Cor Sólida e Saturada (Proibido Opacidade Baixa):**
-   - É **terminantemente proibido** usar `opacity < 0.85` para esmaecer formas. As formas operam como blocos de cor sólidos da paleta editorial.
-   - Para sutileza no fundo escuro (`#14100D`), usa-se o tom sólido **marrom-fogo (`#2A1C14`)**, obtendo sofisticação tom sobre tom sem lavar a textura.
-2. **Distribuição Harmônica 60-30-10 por Página:**
-   - **~60% Fundos:** Carvão (`#14100D`) ou Papel Creme (`#F5E6D0` / `#FBF4E8`).
-   - **~30% Blocos Médios:** Terracota (`#A83A2A`), Areia (`#D9C4A0`) e Marrom-fogo (`#2A1C14`).
-   - **~10% Brasa (`#E8832A`):** Acento focal de máxima energia. No máximo **1 peça grande em brasa por tela (viewport)**.
-3. **Pares Cromáticos Eficazes:**
-   - `terracota` e `brasa` leem bem com contraste garantido tanto no fundo escuro quanto no creme.
-   - `areia` opera exclusivamente em fundos creme.
-   - `marrom-fogo` opera exclusivamente em fundos escuros.
+### 8.2 Taxonomia de Posicionamento e Tolerância Zero a Colisões (Prompt v8)
+1. **Regra Fundamental de Invasão de Conteúdo:** Nenhuma forma de marca pode encostar ou cobrir texto, botão, link, foto, campo de formulário ou indicador de carrossel.
+2. **Classificação Formal de Posicionamento (`placement` e `mobilePlacement`):**
+   - **`padding-band`:** Forma posicionada exclusivamente dentro de faixas seguras de respiro vertical com folga ≥ 32px acima e abaixo.
+   - **`gutter`:** Forma posicionada nos cantos/margens livres externas do grid desktop (≥ 1024px / 1280px).
+   - **`behind-card`:** Forma posicionada rigorosamente atrás de cards ou superfícies 100% opacas (`z-index: 0` sob cartões com `z-index: 10` e fundo sólido).
+   - **`seam`:** Forma sobreposta à divisa de seções em container `.seam` com `overflow-x: clip; pointer-events: none;`.
+   - **`hidden`:** Ocultação mandatória em viewports mobile (≤ 768px) onde não exista faixa de respiro segura.
+3. **Prevenção de Overflow Horizontal:** `html` e `body` possuem `overflow-x: clip; max-width: 100vw;`. Formas de borda e costura operam com contenção e sangria controlada.
 
-### 8.3 Orçamento de Área e Ritmo
-1. **Orçamento de Área:** As formas ocupam **≤ 15–20%** da área de cada seção.
-2. **Composição por Seção:** No máximo **1 peça principal saturada** + **até 1 peça de apoio** (tonal ou menor). Seções com foto full-bleed continuam sem formas.
-3. **Não Competição Visual:** Se o título da seção possui palavra em itálico laranja (`#E8832A`), a forma vizinha é obrigatoriamente terracota, areia ou marrom-fogo. As peças em brasa são posicionadas em áreas neutras, ecoando o tom à distância.
-4. **Camadas e Profundidade (Estilo Bonança):** As formas passam por trás de cartões, polaroids e murais de avaliações, espiando pelas bordas. Os cartões mantêm fundos sólidos e legibilidade intocada.
+---
+
+## 9. Componente Universal de Indicador de Carrossel (`CarouselIndicator`)
+
+Implementado em `src/components/CarouselIndicator.tsx` substituindo scrollbars nativos estilizados e bullets simples em todas as rolagens horizontais:
+- **Geometria dos Segmentos:** Barras estilo "pílula", altura `4px`, largura inativa `28px`, largura ativa ~`44px` (expansão com `transition: width 300ms ease-out`). Espaçamento entre pílulas: `8px`.
+- **Posicionamento:** Centralizado horizontalmente, `20px` abaixo da faixa de cards com touch target expandido invisível de no mínimo `44×44px`.
+- **Paleta Cromática Dinâmica:**
+  - Em fundos claros (`#F5E6D0` / `#FBF4E8`): Pílula ativa em **Terracota (`#A83A2A`)**, inativas em `rgba(20,16,13,0.18)`.
+  - Em fundos escuros (`#14100D`): Pílula ativa em **Laranja-Brasa (`#E8832A`)**, inativas em `rgba(245,230,208,0.20)`.
+- **Acessibilidade:** Elemento `role="tablist"` com botões `role="tab"`, atributos `aria-label`, `aria-selected` e `aria-controls`. Totalmente sincronizado com o scroll bidirecional e com clique direto para rolagem do slide. Setas discretas para desktop.
+
 5. **Emendas entre Seções (`.seam`):** Transições entre blocos escuros e claros utilizam o container `.seam` (`position: relative; height: 0; z-index: 5`) permitindo que uma única peça atravesse a divisa entre dois fundos de maneira limpa.
 6. **Alternância e Ritmo:** Alterne lados (esquerda / direita), escalas e rotações ao longo da página. No máximo 2 usos da mesma peça em toda a home.
 

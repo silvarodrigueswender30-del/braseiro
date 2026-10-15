@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BrandShape } from '@/components/BrandShape';
+import { CarouselIndicator } from '@/components/CarouselIndicator';
 import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -592,7 +593,7 @@ export const AmbianceSection: React.FC = () => {
                 ref={(el) => {
                   mobileCellRefs.current[idx] = el;
                 }}
-                className={`relative shrink-0 snap-center w-[72vw] max-w-[320px] ${
+                className={`relative shrink-0 snap-center w-[82vw] max-w-[340px] ${
                   isFirst ? 'aspect-[3/4]' : 'aspect-[4/5]'
                 } overflow-hidden select-none bg-[#14100D]`}
               >
@@ -628,22 +629,13 @@ export const AmbianceSection: React.FC = () => {
           })}
         </div>
 
-        {/* Indicador de 5 Pontinhos Mobile */}
-        <div className="flex items-center justify-center gap-2 mt-4 select-none">
-          {AMBIENTE_MIDIA.map((item, idx) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => scrollMobileTo(idx)}
-              aria-label={`Ir para foto ${idx + 1}: ${item.legenda}`}
-              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                activeMobileIdx === idx
-                  ? 'bg-[#E8832A] scale-125'
-                  : 'bg-[#F5E6D0]/30 hover:bg-[#F5E6D0]/50'
-              }`}
-            />
-          ))}
-        </div>
+        {/* Indicador segmentado universal per Prompt v8 (Tema Escuro) */}
+        <CarouselIndicator
+          items={AMBIENTE_MIDIA.map((item) => ({ id: item.id, label: item.legenda }))}
+          activeIndex={activeMobileIdx}
+          onChange={scrollMobileTo}
+          theme="dark"
+        />
       </div>
 
       {/* ============================================================== */}

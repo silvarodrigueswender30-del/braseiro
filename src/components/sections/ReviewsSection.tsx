@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChamaIcon } from '@/components/icons/ChamaIcon';
 import { BrandShape } from '@/components/BrandShape';
+import { CarouselIndicator } from '@/components/CarouselIndicator';
 import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -1017,7 +1018,7 @@ export const ReviewsSection: React.FC = () => {
                   ref={(el) => {
                     mobileCardRefs.current[idx] = el;
                   }}
-                  className="relative shrink-0 snap-center w-[76vw] max-w-[330px] flex flex-col justify-between select-none transition-all duration-350 ease-out"
+                  className="relative shrink-0 snap-center w-[82vw] max-w-[340px] flex flex-col justify-between select-none transition-all duration-350 ease-out"
                   style={{
                     backgroundColor: colors.bg,
                     padding: '24px 20px',
@@ -1081,22 +1082,13 @@ export const ReviewsSection: React.FC = () => {
             })}
           </div>
 
-          {/* Indicador de 8 Pontinhos para o Mobile */}
-          <div className="flex items-center justify-center gap-2 mt-5 select-none">
-            {REVIEWS.map((rev, idx) => (
-              <button
-                key={rev.id}
-                type="button"
-                onClick={() => scrollMobileTo(idx)}
-                aria-label={`Ir para avaliação ${idx + 1} de ${rev.nome}`}
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                  activeMobileIdx === idx
-                    ? 'bg-[#E8832A] scale-125'
-                    : 'bg-[#F5E6D0]/30 hover:bg-[#F5E6D0]/50'
-                }`}
-              />
-            ))}
-          </div>
+          {/* Indicador segmentado universal per Prompt v8 (Tema Escuro) */}
+          <CarouselIndicator
+            items={REVIEWS.map((r) => ({ id: String(r.id), label: `avaliação de ${r.nome}` }))}
+            activeIndex={activeMobileIdx}
+            onChange={scrollMobileTo}
+            theme="dark"
+          />
         </div>
 
         {/* ============================================================ */}

@@ -1,4 +1,4 @@
-import { BrandShapeProps } from '@/components/BrandShape';
+import { BrandShapeProps, BrandShapeTone } from '@/components/BrandShape';
 
 export interface SectionFormasConfig {
   id: string;
@@ -7,16 +7,38 @@ export interface SectionFormasConfig {
   shapes: BrandShapeProps[];
 }
 
+export interface SectionDividerConfig {
+  enabled: boolean;
+  type: 'line-selo';
+  size: number;
+  tone: BrandShapeTone;
+}
+
+/**
+ * sectionDividersConfig - Configuração dos divisores visuais discretos (Prompt v8).
+ * Divisor entre seções escuras Diferenciais <-> Ambiente (linha fina + selo carimbo centralizado).
+ * Fácil alternância via flag `enabled: true/false`.
+ */
+export const sectionDividersConfig = {
+  featuresAmbiance: {
+    enabled: true,
+    type: 'line-selo' as const,
+    size: 64, // 56–72px per Prompt v8
+    tone: 'terracota' as BrandShapeTone,
+  },
+};
+
 /**
  * formasLayoutConfig - Catálogo centralizado das formas de marca aplicadas
- * no site Braseiro Caiçara (Home e páginas do Cardápio) conforme Prompt v7:
+ * no site Braseiro Caiçara (Home e páginas do Cardápio) conforme Prompt v7 e v8:
  * 
- * DIRETRIZES FUNDAMENTAIS (Prompt v7):
- * 1. Cor sólida e saturada: Proibido opacity < 0.85. Efeitos sutis usam marrom-fogo sólido no escuro.
- * 2. Regra 60-30-10: ~60% fundos, ~30% terracota/areia/marrom-fogo, ~10% brasa.
- * 3. Orçamento de área: formas cobrem <= 15-20% da área da seção.
- * 4. Ritmo e alternância: alternar lado (esq/dir), escala e rotação; máx 2 usos da mesma peça na home.
- * 5. Não competir com destaques: se o título tem palavra em itálico laranja, a forma vizinha é terracota/areia/marrom.
+ * DIRETRIZES FUNDAMENTAIS (Prompt v8):
+ * 1. Formas nunca cobrem conteúdo: Z-order sempre abaixo de textos, botões, fotos e inputs.
+ * 2. Mobile (<= 767px): apenas em faixas de padding com >= 32px de folga ou sangrando nas bordas sem tocar conteúdo.
+ *    Se não houver faixa segura, a forma é estritamente ocultada no mobile (hideOnMobile / mobilePlacement: 'hidden').
+ * 3. Desktop (>= 1024px): formas posicionadas em gutters livres ou estritamente atrás de cards opacos (behind-card).
+ * 4. Aposentadoria de chama-traco em todo o site.
+ * 5. Selo apenas como divisor centralizado (item D), nunca flutuando solto no formulário de reservas.
  */
 export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
   // ==========================================
@@ -33,46 +55,40 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
       {
         shape: 'nuvem-a',
         tone: 'terracota',
-        size: 'clamp(280px, 36vw, 480px)',
+        placement: 'gutter',
+        mobilePlacement: 'hidden',
+        hideOnMobile: true,
+        size: 'clamp(240px, 26vw, 360px)',
         top: '6%',
-        left: '-12%',
+        left: '-16%',
         rotate: 8,
         className: 'pointer-events-none select-none',
       },
       {
         shape: 'faiscas',
         tone: 'brasa',
-        size: 'clamp(140px, 16vw, 220px)',
-        bottom: '10%',
-        right: '4%',
-        rotate: -10,
+        placement: 'gutter',
+        mobilePlacement: 'hidden',
         hideOnMobile: true,
+        size: 'clamp(110px, 12vw, 160px)',
+        bottom: '10%',
+        right: '-4%',
+        rotate: -10,
         className: 'pointer-events-none select-none',
       },
     ],
   },
 
   // 2. Do mar para a brasa (About) (Fundo Creme #F5E6D0)
-  // Peça principal: terracota atrás/saindo do cartão de endereço | Apoio: grão de sal em areia
+  // Layout 3 colunas full-bleed (video | texto | video): sem forma para evitar colisão com mídia
   'home-about': {
     id: 'home-about',
     page: 'home',
     sectionName: 'AboutSection',
-    shapes: [
-      {
-        shape: 'sal',
-        tone: 'areia',
-        size: 'clamp(120px, 14vw, 180px)',
-        top: '12%',
-        left: '3%',
-        rotate: -8,
-        hideOnMobile: true,
-        className: 'pointer-events-none select-none',
-      },
-    ],
+    shapes: [],
   },
 
-  // 3. FireSection ("A mão na brasa"): Foto full-bleed -> Regra: "Seções com foto full-bleed continuam sem forma"
+  // 3. FireSection ("A mão na brasa"): Foto full-bleed -> Sem forma
   'home-fire': {
     id: 'home-fire',
     page: 'home',
@@ -81,7 +97,7 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
   },
 
   // 4. Sempre cabe mais um (Events) (Fundo Creme #F5E6D0)
-  // Peça principal: nuvem brasa grande montada diretamente atrás da colagem de polaroids
+  // Forma em brasa montada diretamente atrás da colagem no componente (behind-card)
   'home-events': {
     id: 'home-events',
     page: 'home',
@@ -90,7 +106,7 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
   },
 
   // 5. Pratos da casa (SignatureDishes) (Fundo Creme #F5E6D0)
-  // Peça principal: faíscas laranja + chama em traço montadas diretamente junto ao cabeçalho do título
+  // Sem ornamentos perto do título per Prompt v8 (Defeito B)
   'home-signature-dishes': {
     id: 'home-signature-dishes',
     page: 'home',
@@ -99,7 +115,7 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
   },
 
   // 6. Quem já sentou à mesa (Reviews) (Fundo Escuro #14100D)
-  // Peça principal: nuvem terracota atrás do mural | Apoio: nuvem marrom-fogo (tom sobre tom)
+  // Nuvem terracota e marrom-fogo posicionadas atrás dos cards no desktop (behind-card)
   'home-reviews': {
     id: 'home-reviews',
     page: 'home',
@@ -108,18 +124,24 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
       {
         shape: 'nuvem-a',
         tone: 'terracota',
-        size: 'clamp(300px, 36vw, 500px)',
-        top: '20%',
-        left: '-10%',
+        placement: 'behind-card',
+        mobilePlacement: 'hidden',
+        hideOnMobile: true,
+        size: 'clamp(280px, 32vw, 460px)',
+        top: '18%',
+        left: '-8%',
         rotate: 12,
         className: 'pointer-events-none select-none',
       },
       {
         shape: 'nuvem-b',
         tone: 'marrom-fogo',
-        size: 'clamp(280px, 34vw, 460px)',
+        placement: 'behind-card',
+        mobilePlacement: 'hidden',
+        hideOnMobile: true,
+        size: 'clamp(260px, 30vw, 420px)',
         bottom: '8%',
-        right: '-8%',
+        right: '-6%',
         rotate: -12,
         flipX: true,
         className: 'pointer-events-none select-none',
@@ -128,35 +150,16 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
   },
 
   // 7. Ambiente & vida caiçara (Ambiance) (Fundo Escuro #14100D)
-  // Peça principal: faíscas laranja cruzando a emenda superior
+  // Ornamentos de emenda removidos per Prompt v8 (Defeito D: substituídos pelo divisor discreto)
   'home-ambiance': {
     id: 'home-ambiance',
     page: 'home',
     sectionName: 'AmbianceSection',
-    shapes: [
-      {
-        shape: 'pincelada-d',
-        tone: 'marrom-fogo',
-        size: 'clamp(300px, 38vw, 520px)',
-        top: '-40px',
-        left: '-8%',
-        rotate: 4,
-        className: 'pointer-events-none select-none',
-      },
-      {
-        shape: 'faiscas',
-        tone: 'brasa',
-        size: 'clamp(180px, 22vw, 300px)',
-        top: '-20px',
-        right: '4%',
-        rotate: -6,
-        className: 'pointer-events-none select-none',
-      },
-    ],
+    shapes: [],
   },
 
   // 8. Local/Reservas (LocationReservations) (Fundo Escuro #14100D)
-  // Peça principal: nuvem marrom-fogo + selo carimbo brasa acoplado ao CTA
+  // Nuvem marrom-fogo no gutter direito inferior (selo flutuante removido per Defeito E)
   'home-location-reservations': {
     id: 'home-location-reservations',
     page: 'home',
@@ -165,9 +168,12 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
       {
         shape: 'mancha-c',
         tone: 'marrom-fogo',
-        size: 'clamp(320px, 40vw, 540px)',
+        placement: 'gutter',
+        mobilePlacement: 'hidden',
+        hideOnMobile: true,
+        size: 'clamp(220px, 26vw, 340px)',
         bottom: '8%',
-        right: '-10%',
+        right: '-16%',
         rotate: -14,
         className: 'pointer-events-none select-none',
       },
@@ -177,7 +183,6 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
   // ==========================================
   // CARDÁPIO HUB (/cardapio)
   // ==========================================
-  // Fundo creme: 1 nuvem terracota no hero + 1 areia lateral
   'cardapio-hub': {
     id: 'cardapio-hub',
     page: 'cardapio',
@@ -186,20 +191,25 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
       {
         shape: 'nuvem-a',
         tone: 'terracota',
-        size: 'clamp(260px, 32vw, 440px)',
-        top: '-20px',
-        right: '-10%',
+        placement: 'behind-card',
+        mobilePlacement: 'hidden',
+        hideOnMobile: true,
+        size: 'clamp(200px, 22vw, 300px)',
+        top: '520px',
+        right: '-12%',
         rotate: 10,
         className: 'pointer-events-none select-none',
       },
       {
         shape: 'mancha-c',
         tone: 'areia',
-        size: 'clamp(240px, 28vw, 380px)',
-        bottom: '6%',
-        left: '-10%',
-        rotate: -8,
+        placement: 'behind-card',
+        mobilePlacement: 'hidden',
         hideOnMobile: true,
+        size: 'clamp(180px, 20vw, 260px)',
+        bottom: '8%',
+        left: '-12%',
+        rotate: -8,
         className: 'pointer-events-none select-none',
       },
     ],
@@ -208,7 +218,6 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
   // ==========================================
   // GASTRONOMIA (/cardapio/gastronomia)
   // ==========================================
-  // Fundo creme: 1 nuvem terracota no hero + 1 areia lateral (sem forma atrás de preço/foto)
   'cardapio-gastronomia': {
     id: 'cardapio-gastronomia',
     page: 'gastronomia',
@@ -217,8 +226,11 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
       {
         shape: 'nuvem-a',
         tone: 'terracota',
-        size: 'clamp(260px, 32vw, 440px)',
-        top: '25px',
+        placement: 'behind-card',
+        mobilePlacement: 'hidden',
+        hideOnMobile: true,
+        size: 'clamp(200px, 22vw, 300px)',
+        top: '560px',
         right: '-12%',
         rotate: 12,
         className: 'pointer-events-none select-none',
@@ -226,11 +238,13 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
       {
         shape: 'nuvem-b',
         tone: 'areia',
-        size: 'clamp(260px, 30vw, 400px)',
-        top: '46%',
-        left: '-14%',
-        rotate: -10,
+        placement: 'behind-card',
+        mobilePlacement: 'hidden',
         hideOnMobile: true,
+        size: 'clamp(200px, 22vw, 300px)',
+        top: '68%',
+        left: '-12%',
+        rotate: -10,
         className: 'pointer-events-none select-none',
       },
     ],
@@ -239,7 +253,6 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
   // ==========================================
   // DRINKS (/cardapio/drinks)
   // ==========================================
-  // Fundo escuro: nuvem terracota no hero + faíscas laranja + marrom-fogo tonal
   'cardapio-drinks': {
     id: 'cardapio-drinks',
     page: 'drinks',
@@ -248,30 +261,25 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
       {
         shape: 'nuvem-b',
         tone: 'terracota',
-        size: 'clamp(280px, 34vw, 460px)',
-        top: '20px',
-        left: '-10%',
-        rotate: -8,
-        className: 'pointer-events-none select-none',
-      },
-      {
-        shape: 'faiscas',
-        tone: 'brasa',
-        size: 'clamp(180px, 22vw, 300px)',
-        top: '160px',
-        right: '2%',
-        rotate: 6,
+        placement: 'behind-card',
+        mobilePlacement: 'hidden',
         hideOnMobile: true,
+        size: 'clamp(200px, 22vw, 300px)',
+        top: '560px',
+        left: '-12%',
+        rotate: -8,
         className: 'pointer-events-none select-none',
       },
       {
         shape: 'mancha-c',
         tone: 'marrom-fogo',
-        size: 'clamp(260px, 32vw, 420px)',
-        top: '52%',
+        placement: 'behind-card',
+        mobilePlacement: 'hidden',
+        hideOnMobile: true,
+        size: 'clamp(200px, 22vw, 300px)',
+        top: '70%',
         right: '-12%',
         rotate: 14,
-        hideOnMobile: true,
         className: 'pointer-events-none select-none',
       },
     ],
@@ -280,7 +288,6 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
   // ==========================================
   // EXECUTIVOS (/cardapio/executivos)
   // ==========================================
-  // Fundo creme: 1 nuvem terracota no hero + 1 areia lateral
   'cardapio-executivos': {
     id: 'cardapio-executivos',
     page: 'executivos',
@@ -289,20 +296,25 @@ export const formasLayoutConfig: Record<string, SectionFormasConfig> = {
       {
         shape: 'nuvem-a',
         tone: 'terracota',
-        size: 'clamp(260px, 32vw, 420px)',
-        top: '20px',
-        right: '-10%',
+        placement: 'behind-card',
+        mobilePlacement: 'hidden',
+        hideOnMobile: true,
+        size: 'clamp(200px, 22vw, 300px)',
+        top: '540px',
+        right: '-12%',
         rotate: 14,
         className: 'pointer-events-none select-none',
       },
       {
         shape: 'sal',
         tone: 'areia',
-        size: 'clamp(120px, 15vw, 190px)',
-        bottom: '8%',
-        left: '-20px',
-        rotate: 6,
+        placement: 'behind-card',
+        mobilePlacement: 'hidden',
         hideOnMobile: true,
+        size: 'clamp(100px, 12vw, 150px)',
+        bottom: '10%',
+        left: '-12%',
+        rotate: 6,
         className: 'pointer-events-none select-none',
       },
     ],

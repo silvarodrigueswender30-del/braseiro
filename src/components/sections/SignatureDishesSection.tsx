@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BrandShape } from '@/components/BrandShape';
+import { CarouselIndicator } from '@/components/CarouselIndicator';
 import { formasLayoutConfig } from '@/data/formas-layout';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -387,24 +388,6 @@ export const SignatureDishesSection: React.FC = () => {
         {/* CABEÇALHO DA SEÇÃO (EYEBROW + TÍTULO EM 2 LINHAS)            */}
         {/* ============================================================ */}
         <div className="relative flex flex-col items-center text-center">
-          {/* Chama em traço perto do título (Prompt v7) */}
-          <BrandShape
-            shape="chama-traco"
-            tone="terracota"
-            size="clamp(70px, 8vw, 100px)"
-            style={{ top: '15px', right: '-45px' }}
-            rotate={8}
-          />
-          {/* Faíscas laranja suspensas perto do título (Prompt v7) */}
-          <BrandShape
-            shape="faiscas"
-            tone="brasa"
-            size="clamp(120px, 15vw, 180px)"
-            style={{ top: '30px', left: '-50px' }}
-            rotate={-6}
-            hideOnMobile={true}
-          />
-
           {/* Eyebrow: DA BRASA PRA MESA */}
           <span className="eyebrow text-[#14100D] select-none">
             DA BRASA PRA MESA
@@ -461,7 +444,6 @@ export const SignatureDishesSection: React.FC = () => {
                   fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
                   lineHeight: 0.85,
                   marginTop: '-0.06em',
-                  textShadow: '0 4px 24px rgba(20,16,13,0.12)',
                 }}
               >
                 da casa
@@ -650,7 +632,7 @@ export const SignatureDishesSection: React.FC = () => {
                   ref={(el) => {
                     mobileCardRefs.current[idx] = el;
                   }}
-                  className="relative shrink-0 snap-center w-[78vw] max-w-[340px] aspect-[9/16] overflow-hidden shadow-[0_8px_24px_rgba(20,16,13,0.18)] bg-[#14100D] flex flex-col justify-end transition-transform duration-500"
+                  className="relative shrink-0 snap-center w-[82vw] max-w-[340px] aspect-[9/16] overflow-hidden shadow-[0_8px_24px_rgba(20,16,13,0.18)] bg-[#14100D] flex flex-col justify-end transition-transform duration-500"
                   style={{
                     transform: isActive ? 'scale(1)' : 'scale(0.96)',
                     containerType: 'inline-size',
@@ -745,22 +727,13 @@ export const SignatureDishesSection: React.FC = () => {
             })}
           </div>
 
-          {/* Indicador de 3 pontinhos para o mobile */}
-          <div className="flex items-center justify-center gap-2 mt-4 select-none">
-            {MENU_CARDS.map((card, idx) => (
-              <button
-                key={card.id}
-                type="button"
-                onClick={() => scrollMobileTo(idx)}
-                aria-label={`Ir para cardápio ${card.numero}: ${card.titulo}`}
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                  activeMobileIdx === idx
-                    ? 'bg-[#E8832A] scale-125'
-                    : 'bg-[#14100D]/30 hover:bg-[#14100D]/50'
-                }`}
-              />
-            ))}
-          </div>
+          {/* Indicador segmentado universal per Prompt v8 (Tema Claro) */}
+          <CarouselIndicator
+            items={MENU_CARDS.map((c) => ({ id: c.id, label: `${c.numero} ${c.titulo}` }))}
+            activeIndex={activeMobileIdx}
+            onChange={scrollMobileTo}
+            theme="light"
+          />
         </div>
       </div>
     </section>

@@ -112,7 +112,9 @@ export const CardapioHeader: React.FC<CardapioHeaderProps> = ({
                   Cardápio
                 </Link>
                 <span>/</span>
-                <span className="text-[#9C4108] font-semibold capitalize">{paginaAtual}</span>
+                <span className={`font-semibold capitalize ${isDark ? 'text-[#E8832A]' : 'text-[#9C4108]'}`}>
+                  {paginaAtual}
+                </span>
               </>
             )}
           </nav>
@@ -162,7 +164,7 @@ export const CardapioHeader: React.FC<CardapioHeaderProps> = ({
           >
             {tituloParte1}{' '}
             <span
-              className="italic text-[#E8832A]"
+              className={`italic ${isDark ? 'text-[#E8832A]' : 'text-[#9C4108]'}`}
               style={{
                 fontStyle: 'italic',
                 fontVariationSettings: '"SOFT" 100, "WONK" 1, "opsz" 144',
@@ -230,11 +232,11 @@ export const CardapioHeader: React.FC<CardapioHeaderProps> = ({
                       className={`hidden sm:inline text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full ${
                         isActive
                           ? isDark
-                            ? 'bg-[#14100D]/20 text-[#14100D]'
+                            ? 'bg-[#14100D] text-[#E8832A] font-bold'
                             : 'bg-[#9C4108]/10 text-[#9C4108]'
                           : isDark
-                          ? 'bg-[#F5E6D0]/10 text-[#F5E6D0]/60'
-                          : 'bg-[#14100D]/5 text-[#14100D]/60'
+                          ? 'bg-[#F5E6D0]/10 text-[#F5E6D0]/80'
+                          : 'bg-[#14100D]/5 text-[#14100D]/80'
                       }`}
                     >
                       {secao.desc}

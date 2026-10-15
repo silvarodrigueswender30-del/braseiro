@@ -12,6 +12,7 @@ import { FeaturesSection } from '@/components/sections/FeaturesSection';
 import { AmbianceSection } from '@/components/sections/AmbianceSection';
 import { LocationReservationsSection } from '@/components/sections/LocationReservationsSection';
 import { BrandShape } from '@/components/BrandShape';
+import { sectionDividersConfig } from '@/data/formas-layout';
 
 export const HomePage: React.FC = () => {
   return (
@@ -40,13 +41,16 @@ export const HomePage: React.FC = () => {
       {/* Tarefa 3: Pratos Assinatura (Carrossel Horizontal - Creme #F5E6D0) */}
       <SignatureDishesSection />
 
-      {/* Emenda Creme <-> Escuro: Forma de marca cobrindo a divisa */}
+      {/* Emenda Creme <-> Escuro: Forma de marca cobrindo a divisa (apenas desktop) */}
       <div className="seam" aria-hidden="true">
         <BrandShape
           shape="nuvem-b"
           tone="terracota"
-          size="clamp(280px, 34vw, 480px)"
-          style={{ top: '-100px', right: '-8%', transform: 'rotate(-4deg)' }}
+          placement="seam"
+          mobilePlacement="hidden"
+          hideOnMobile={true}
+          size="clamp(220px, 24vw, 340px)"
+          style={{ top: '-40px', right: '-16%', transform: 'rotate(-4deg)' }}
         />
       </div>
 
@@ -56,15 +60,28 @@ export const HomePage: React.FC = () => {
       {/* 6) Por que o Fogo é Diferente */}
       <FeaturesSection />
 
-      {/* Emenda: faíscas laranja cruzando a divisa para Ambiente */}
-      <div className="seam" aria-hidden="true">
-        <BrandShape
-          shape="faiscas"
-          tone="brasa"
-          size="clamp(220px, 26vw, 360px)"
-          style={{ top: '-40px', right: '6%', transform: 'rotate(-6deg)' }}
-        />
-      </div>
+      {/* Divisor discreto Diferenciais <-> Ambiente per Prompt v8 (Defeito D: linha fina + selo 64px terracota) */}
+      {sectionDividersConfig.featuresAmbiance.enabled && (
+        <div
+          className="w-full max-w-[1280px] mx-auto px-6 pt-28 pb-16 flex items-center justify-center relative z-10 select-none pointer-events-none"
+          aria-hidden="true"
+        >
+          <div className="flex-1 h-[1px] bg-[#F5E6D0]/15" />
+          <div className="mx-5 shrink-0 flex items-center justify-center">
+            <BrandShape
+              shape="selo"
+              tone={sectionDividersConfig.featuresAmbiance.tone}
+              size={`${sectionDividersConfig.featuresAmbiance.size}px`}
+              placement="padding-band"
+              mobilePlacement="padding-band"
+              className="relative !static"
+              style={{ position: 'relative' }}
+              reveal={false}
+            />
+          </div>
+          <div className="flex-1 h-[1px] bg-[#F5E6D0]/15" />
+        </div>
+      )}
 
       {/* 7) Ambiente & Vida Caiçara */}
       <AmbianceSection />

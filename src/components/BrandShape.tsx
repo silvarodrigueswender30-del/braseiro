@@ -7,8 +7,7 @@ export type BrandShapeType =
   | 'pincelada-d'
   | 'faiscas'
   | 'selo'
-  | 'sal'
-  | 'chama-traco';
+  | 'sal';
 
 export type BrandShapeTone =
   | 'terracota'
@@ -17,6 +16,8 @@ export type BrandShapeTone =
   | 'creme'
   | 'brasa'
   | 'marrom-fogo';
+
+export type BrandShapePlacement = 'padding-band' | 'gutter' | 'behind-card' | 'seam' | 'hidden';
 
 export interface BrandShapeProps {
   shape: BrandShapeType;
@@ -30,6 +31,8 @@ export interface BrandShapeProps {
   flipX?: boolean;
   opacity?: number;
   hideOnMobile?: boolean;
+  placement?: BrandShapePlacement;
+  mobilePlacement?: BrandShapePlacement;
   parallax?: boolean;
   reveal?: boolean;
   className?: string;
@@ -48,16 +51,12 @@ const SHAPE_ASPECT_RATIOS: Record<BrandShapeType, string> = {
   'faiscas': '2213 / 477',
   'selo': '879 / 881',
   'sal': '683 / 552',
-  'chama-traco': '320 / 400',
 };
 
 /**
- * Determina o caminho da máscara (raster WebP com grão para silhuetas ricas, ou SVG para traços).
+ * Determina o caminho da máscara (raster WebP com grão para silhuetas ricas).
  */
 function getMaskUrl(shape: BrandShapeType): string {
-  if (shape === 'chama-traco') {
-    return 'url(/images/formas/chama-traco.svg)';
-  }
   return `url(/images/formas-raster/${shape}.webp)`;
 }
 
@@ -82,6 +81,8 @@ export const BrandShape: React.FC<BrandShapeProps> = ({
   flipX,
   opacity,
   hideOnMobile = false,
+  placement = 'gutter',
+  mobilePlacement,
   parallax = false,
   reveal = true,
   className = '',
@@ -186,12 +187,23 @@ export const BrandShape: React.FC<BrandShapeProps> = ({
     ...userStyle,
   };
 
-  const responsiveClasses = hideOnMobile ? 'hidden sm:inline-block' : 'inline-block';
+  const effectiveMobilePlacement = mobilePlacement || (hideOnMobile ? 'hidden' : placement);
+  const isMobileHidden = hideOnMobile || effectiveMobilePlacement === 'hidden';
+  let responsiveClasses = 'inline-block';
+  if (isMobileHidden || placement === 'gutter' || placement === 'behind-card' || placement === 'seam') {
+    responsiveClasses = 'hidden lg:inline-block';
+  } else if (effectiveMobilePlacement === 'padding-band') {
+    responsiveClasses = 'inline-block';
+  }
 
   return (
     <span
       ref={elRef}
       aria-hidden="true"
+      data-shape={shape}
+      data-tone={tone}
+      data-placement={placement}
+      data-mobile-placement={effectiveMobilePlacement}
       className={`brand-shape ${responsiveClasses} ${className}`.trim()}
       style={inlineStyle}
     />
