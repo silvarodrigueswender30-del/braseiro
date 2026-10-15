@@ -450,5 +450,101 @@
     "fonte": "wix",
     "confianca": "alta",
     "alt": "Prato executivo de espaguete bolonhesa"
+  },
+  "acomp-arroz-branco": {
+    "arquivo": "/cardapio/fotos/arroz-branco.webp",
+    "arquivo400w": "/cardapio/fotos/arroz-branco-400w.webp",
+    "arquivo800w": "/cardapio/fotos/arroz-branco-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Porção de arroz branco soltinho"
+  },
+  "acomp-feijao": {
+    "arquivo": "/cardapio/fotos/feijao.webp",
+    "arquivo400w": "/cardapio/fotos/feijao-400w.webp",
+    "arquivo800w": "/cardapio/fotos/feijao-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Porção de feijão caseiro bem temperado"
+  },
+  "acomp-vinagrete-tradicional": {
+    "arquivo": "/cardapio/fotos/vinagrete-tradicional.webp",
+    "arquivo400w": "/cardapio/fotos/vinagrete-tradicional-400w.webp",
+    "arquivo800w": "/cardapio/fotos/vinagrete-tradicional-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Vinagrete tradicional fresco da casa"
+  },
+  "acomp-ovo-caipira": {
+    "arquivo": "/cardapio/fotos/ovo-caipira.webp",
+    "arquivo400w": "/cardapio/fotos/ovo-caipira-400w.webp",
+    "arquivo800w": "/cardapio/fotos/ovo-caipira-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Ovo frito caipira com gema mole"
+  },
+  "acomp-camarao-rosa": {
+    "arquivo": "/cardapio/fotos/camarao-na-brasa.webp",
+    "arquivo400w": "/cardapio/fotos/camarao-na-brasa-400w.webp",
+    "arquivo800w": "/cardapio/fotos/camarao-na-brasa-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Camarão rosa grelhado na brasa"
+  },
+  "acomp-pirao-de-peixe": {
+    "arquivo": "/cardapio/fotos/pirao-de-peixe.webp",
+    "arquivo400w": "/cardapio/fotos/pirao-de-peixe-400w.webp",
+    "arquivo800w": "/cardapio/fotos/pirao-de-peixe-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Pirão de peixe caiçara aveludado"
+  },
+  "porcoes-taca-crocante-de-camarao": {
+    "arquivo": "/cardapio/fotos/taca-crocante-de-camarao.webp",
+    "arquivo400w": "/cardapio/fotos/taca-crocante-de-camarao-400w.webp",
+    "arquivo800w": "/cardapio/fotos/taca-crocante-de-camarao-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Taça de camarões empanados crocantes servidos com molho da casa"
+  },
+  "bebidas-refrigerante-lata": {
+    "arquivo": "/cardapio/fotos/refrigerante-lata.webp",
+    "arquivo400w": "/cardapio/fotos/refrigerante-lata-400w.webp",
+    "arquivo800w": "/cardapio/fotos/refrigerante-lata-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Refrigerante em lata bem gelado"
+  },
+  "bebidas-agua": {
+    "arquivo": "/cardapio/fotos/agua.webp",
+    "arquivo400w": "/cardapio/fotos/agua-400w.webp",
+    "arquivo800w": "/cardapio/fotos/agua-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Garrafa de água mineral sem gás 500ml"
+  },
+  "bebidas-agua-com-gas": {
+    "arquivo": "/cardapio/fotos/agua-com-gas.webp",
+    "arquivo400w": "/cardapio/fotos/agua-com-gas-400w.webp",
+    "arquivo800w": "/cardapio/fotos/agua-com-gas-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Garrafa de água mineral com gás 500ml"
+  },
+  "hamburguer-hamburguer-angus-com-bacon-na-brasa": {
+    "arquivo": "/cardapio/fotos/hamburguer-angus-bacon.webp",
+    "arquivo400w": "/cardapio/fotos/hamburguer-angus-bacon-400w.webp",
+    "arquivo800w": "/cardapio/fotos/hamburguer-angus-bacon-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Carne de hambúrguer bovina 100% Angus na brasa com fatias de bacon e queijo derretido"
+  },
+  "hamburguer-cheeseburger-angus-simples": {
+    "arquivo": "/cardapio/fotos/cheeseburger-angus.webp",
+    "arquivo400w": "/cardapio/fotos/cheeseburger-angus-400w.webp",
+    "arquivo800w": "/cardapio/fotos/cheeseburger-angus-800w.webp",
+    "fonte": "ifood",
+    "confianca": "alta",
+    "alt": "Pão brioche, hambúrguer 100% Angus na brasa e queijo do chefe derretido"
   }
 }

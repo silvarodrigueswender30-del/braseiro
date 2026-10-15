@@ -1,11 +1,15 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { CardapioHeader } from '@/components/cardapio/CardapioHeader';
 import { MenuItemCard } from '@/components/cardapio/MenuItemCard';
 import { gastronomia, cardapioMeta, ItemCardapio } from '@/data/cardapio';
-import { Search, X, Flame, Info, ChevronRight, MessageSquare } from 'lucide-react';
+import { Search, X, Flame, Info, ChevronRight, MessageSquare, AlertCircle } from 'lucide-react';
 import { siteConfig } from '@/config';
 
 export const GastronomiaPage: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const isRevisao = searchParams.get('revisao') === '1';
+
   const [busca, setBusca] = useState('');
   const [categoriaAtiva, setCategoriaAtiva] = useState<string>(gastronomia[0]?.id || 'entradas');
 
@@ -19,6 +23,8 @@ export const GastronomiaPage: React.FC = () => {
     gastronomia.forEach((cat) => {
       cat.grupos.forEach((grupo) => {
         grupo.itens.forEach((it) => {
+          if (!isRevisao && it.publicado === false) return;
+
           const matchNome = it.nome.toLowerCase().includes(termo);
           const matchDesc = it.descricao?.toLowerCase().includes(termo);
           const matchDetalhe = it.detalhe?.toLowerCase().includes(termo);
@@ -36,7 +42,7 @@ export const GastronomiaPage: React.FC = () => {
     });
 
     return itensEncontrados;
-  }, [busca]);
+  }, [busca, isRevisao]);
 
   // Scroll spy com IntersectionObserver
   useEffect(() => {
@@ -92,6 +98,20 @@ export const GastronomiaPage: React.FC = () => {
         metaTitulo={cardapioMeta.gastronomia.titulo}
         metaDescricao={cardapioMeta.gastronomia.descricao}
       />
+
+      {/* Banner de Modo de Revisão (?revisao=1) */}
+      {isRevisao && (
+        <aside
+          role="status"
+          aria-label="Aviso de Modo de Revisão"
+          className="bg-[#D9741C] text-white px-4 py-2.5 text-center text-xs sm:text-sm font-semibold tracking-wide flex items-center justify-center gap-2 shadow-sm border-b border-[#B5561C]"
+        >
+          <AlertCircle className="w-4 h-4 shrink-0" />
+          <span>
+            <strong>Modo de Revisão Ativo (?revisao=1):</strong> exibindo itens pendentes de confirmação de preço do salão antes da publicação.
+          </span>
+        </aside>
+      )}
 
       {/* Barra de Filtro de Busca e Categorias Sticky */}
       <nav
@@ -172,14 +192,14 @@ export const GastronomiaPage: React.FC = () => {
                 </p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 {resultadoBusca.map(({ item, categoriaNome }) => (
                   <div key={item.id} className="flex flex-col">
                     <span className="text-[11px] font-bold uppercase tracking-wider text-[#9C4108] mb-1.5 flex items-center gap-1">
                       <span>{categoriaNome}</span>
                       <ChevronRight className="w-3 h-3" />
                     </span>
-                    <MenuItemCard item={item} tema="claro" />
+                    <MenuItemCard item={item} tema="claro" modoRevisao={isRevisao} />
                   </div>
                 ))}
               </div>
@@ -237,28 +257,34 @@ export const GastronomiaPage: React.FC = () => {
 
                 {/* Grupos de Itens */}
                 <div className="space-y-8">
-                  {categoria.grupos.map((grupo, gIdx) => (
-                    <div key={gIdx}>
-                      {grupo.nome && (
-                        <h3 className="font-serif font-bold text-xl sm:text-2xl text-[#14100D] mb-4 pb-2 border-b border-[#14100D]/10 flex items-center gap-2">
-                          <Flame className="w-4 h-4 text-[#9C4108]" />
-                          <span>{grupo.nome}</span>
-                        </h3>
-                      )}
+                  {categoria.grupos.map((grupo, gIdx) => {
+                    const itensExibidos = grupo.itens.filter((item) => isRevisao || item.publicado !== false);
+                    if (itensExibidos.length === 0) return null;
 
-                      {/* Grade com ritmo editorial alternando destaques em 2 colunas */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-                        {grupo.itens.map((item) => (
-                          <MenuItemCard
-                            key={item.id}
-                            item={item}
-                            tema="claro"
-                            destaqueLayout={Boolean(item.assinatura && item.foto)}
-                          />
-                        ))}
+                    return (
+                      <div key={gIdx}>
+                        {grupo.nome && (
+                          <h3 className="font-serif font-bold text-xl sm:text-2xl text-[#14100D] mb-4 pb-2 border-b border-[#14100D]/10 flex items-center gap-2">
+                            <Flame className="w-4 h-4 text-[#9C4108]" />
+                            <span>{grupo.nome}</span>
+                          </h3>
+                        )}
+
+                        {/* Grade alinhada no topo com items-start para não esticar cards sem foto */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 items-start">
+                          {itensExibidos.map((item) => (
+                            <MenuItemCard
+                              key={item.id}
+                              item={item}
+                              tema="claro"
+                              modoRevisao={isRevisao}
+                              destaqueLayout={Boolean(item.assinatura && item.foto)}
+                            />
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {/* Nota de rodapé da categoria */}

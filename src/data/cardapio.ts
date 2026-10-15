@@ -51,6 +51,14 @@ export interface ItemCardapio {
   foto?: Foto;
   indisponivel?: boolean;
   revisar?: boolean;
+  /** Preço registrado na plataforma iFood para fins de conferência/auditoria. */
+  precoIfood?: number;
+  /** Define se o item está publicado para clientes no site (default: true). */
+  publicado?: boolean;
+  /** Indica que o preço necessita de confirmação de salão antes de entrar em produção. */
+  precoConfirmar?: boolean;
+  /** Fonte primária do cadastro do item ('wix' | 'ifood' | 'site'). */
+  fonte?: 'wix' | 'ifood' | 'site';
 }
 
 export interface GrupoItens {
@@ -378,6 +386,24 @@ export const gastronomia: CategoriaCardapio[] = [
               'sanduiche-de-costela',
               'Sanduíche de costela bovina com creme de gorgonzola e batata chips da casa'
             ),
+          },
+          {
+            nome: 'Hambúrguer Angus com Bacon na Brasa',
+            precos: [$(49.0, 1)],
+            detalhe: '180g',
+            descricao: 'Carne de hambúrguer bovina 100% Angus na brasa com fatias de bacon crocante, queijo e pão brioche.',
+            publicado: false,
+            precoConfirmar: true,
+            fonte: 'ifood',
+          },
+          {
+            nome: 'Cheeseburger Angus Simples',
+            precos: [$(44.0, 1)],
+            detalhe: '180g',
+            descricao: 'Pão brioche, hambúrguer 100% Angus preparado no calor da brasa e queijo do chefe derretido.',
+            publicado: false,
+            precoConfirmar: true,
+            fonte: 'ifood',
           },
         ]),
       },

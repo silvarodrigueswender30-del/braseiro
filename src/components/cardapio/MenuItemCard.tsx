@@ -1,21 +1,24 @@
 import React from 'react';
-import { Flame, Leaf, Sparkles, Users, User } from 'lucide-react';
+import { Flame, Leaf, Sparkles, Users, User, AlertCircle } from 'lucide-react';
 import { ItemCardapio, formatarPreco } from '@/data/cardapio';
 
 export interface MenuItemCardProps {
   item: ItemCardapio;
   tema?: 'claro' | 'escuro';
   destaqueLayout?: boolean;
+  modoRevisao?: boolean;
 }
 
 export const MenuItemCard: React.FC<MenuItemCardProps> = ({
   item,
   tema = 'claro',
   destaqueLayout = false,
+  modoRevisao = false,
 }) => {
   const isDark = tema === 'escuro';
   const temFoto = Boolean(item.foto?.src);
   const temMultiplosPrecos = item.precos.length > 1;
+  const isPendente = item.precoConfirmar || item.publicado === false;
 
   return (
     <article
@@ -86,12 +89,18 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
                   Vegetariano
                 </span>
               )}
+              {isPendente && (
+                <span className="inline-flex items-center gap-1 rounded bg-[#D9741C] text-white px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider shadow-md">
+                  <AlertCircle className="w-3 h-3" />
+                  Pendente de confirmação
+                </span>
+              )}
             </div>
           </div>
         )}
 
         {/* Badges no topo quando o card NÃO tem foto */}
-        {!temFoto && (item.assinatura || item.destaque || item.vegetariano) && (
+        {!temFoto && (item.assinatura || item.destaque || item.vegetariano || isPendente) && (
           <div className="flex flex-wrap gap-1.5 mb-2.5">
             {item.assinatura && (
               <span
@@ -121,6 +130,12 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
               <span className="inline-flex items-center gap-1 rounded bg-[#2E9C9B] px-2 py-0.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-white">
                 <Leaf className="w-3 h-3" />
                 Vegetariano
+              </span>
+            )}
+            {isPendente && (
+              <span className="inline-flex items-center gap-1 rounded bg-[#D9741C] text-white px-2 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
+                <AlertCircle className="w-3 h-3" />
+                Pendente de confirmação
               </span>
             )}
           </div>
@@ -162,6 +177,11 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
                   >
                     {formatarPreco(item.precos[0].valor)}
                   </span>
+                  {modoRevisao && isPendente && (
+                    <span className="text-[10px] font-semibold text-[#D9741C] block mt-0.5 sm:text-right">
+                      Valor iFood (a confirmar)
+                    </span>
+                  )}
                   {item.precos[0].serve && (
                     <div
                       className={`flex items-center sm:justify-end gap-1 text-[11px] font-medium mt-0.5 ${
